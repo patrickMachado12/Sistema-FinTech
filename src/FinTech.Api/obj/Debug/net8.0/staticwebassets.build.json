@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "hNM/2S+5KJ+lIbKydGnBiklQdD4AJtUsvLMcUdNalv8=",
+  "Source": "FinTech.Api",
+  "BasePath": "_content/FinTech.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
