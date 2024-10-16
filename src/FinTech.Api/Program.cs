@@ -1,5 +1,13 @@
 using System.Text;
+using AutoMapper;
+using FinTech.Api.AutoMapper;
+using FinTech.Api.Damain.Repository.Classes;
+using FinTech.Api.Damain.Repository.Interfaces;
+using FinTech.Api.Damain.Services.Classes;
+using FinTech.Api.Damain.Services.Interfaces;
+using FinTech.Api.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -18,9 +26,26 @@ app.Run();
 // Metodo que configrua as injeções de dependencia do projeto.
 static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
 {
+    string? connectionString = builder.Configuration.GetConnectionString("PRODUCAO");
+
+    builder.Services.AddDbContext<ApplicationContext>(options => 
+        options.UseNpgsql(connectionString), ServiceLifetime.Transient, ServiceLifetime.Transient);
+
+
+    var config = new MapperConfiguration(cfg => {
+        cfg.AddProfile<UsuarioProfile>();
+        // Aqui colocar outros profiles...
+    });
+
+    IMapper mapper = config.CreateMapper();
+    
     builder.Services
     .AddSingleton(builder.Configuration)
-    .AddSingleton(builder.Environment);
+    .AddSingleton(builder.Environment)
+    .AddSingleton(mapper)
+    .AddScoped<TokenService>()
+    .AddScoped<IUsuarioRepository, UsuarioRepository>()
+    .AddScoped<IUsuarioService, UsuarioService>();
 }
 
 // Configura o serviços da API.
