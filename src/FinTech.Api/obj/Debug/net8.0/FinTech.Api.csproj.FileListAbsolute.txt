@@ -127,3 +127,4 @@ D:\Projeto\SistemaSaas\src\FinTech.Api\obj\Debug\net8.0\refint\FinTech.Api.dll
 D:\Projeto\SistemaSaas\src\FinTech.Api\obj\Debug\net8.0\FinTech.Api.pdb
 D:\Projeto\SistemaSaas\src\FinTech.Api\obj\Debug\net8.0\FinTech.Api.genruntimeconfig.cache
 D:\Projeto\SistemaSaas\src\FinTech.Api\obj\Debug\net8.0\ref\FinTech.Api.dll
+D:\Projeto\SistemaSaas\src\FinTech.Api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll

@@ -205,3 +205,4 @@ D:\Projeto\SistemaSaas\test\FinTech.Test\obj\Debug\net8.0\refint\FinTech.Test.dl
 D:\Projeto\SistemaSaas\test\FinTech.Test\obj\Debug\net8.0\FinTech.Test.pdb
 D:\Projeto\SistemaSaas\test\FinTech.Test\obj\Debug\net8.0\FinTech.Test.genruntimeconfig.cache
 D:\Projeto\SistemaSaas\test\FinTech.Test\obj\Debug\net8.0\ref\FinTech.Test.dll
+D:\Projeto\SistemaSaas\test\FinTech.Test\bin\Debug\net8.0\Swashbuckle.AspNetCore.Annotations.dll
