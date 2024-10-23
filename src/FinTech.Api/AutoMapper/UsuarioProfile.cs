@@ -1,6 +1,6 @@
 using AutoMapper;
 using FinTech.Api.Contract.Usuario;
-using FinTech.Api.Damain.Models;
+using FinTech.Api.Domain.Models;
 
 namespace FinTech.Api.AutoMapper
 {

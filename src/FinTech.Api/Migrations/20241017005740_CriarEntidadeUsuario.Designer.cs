@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinTech.Api.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241016003358_CriarEntidadeUsuario")]
+    [Migration("20241017005740_CriarEntidadeUsuario")]
     partial class CriarEntidadeUsuario
     {
         /// <inheritdoc />
@@ -25,16 +25,13 @@ namespace FinTech.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FinTech.Api.Damain.Models.Usuario", b =>
+            modelBuilder.Entity("FinTech.Api.Domain.Models.Usuario", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Ativo")
-                        .HasColumnType("boolean");
 
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("timestamp");
@@ -49,6 +46,9 @@ namespace FinTech.Api.Migrations
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("VARCHAR");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 

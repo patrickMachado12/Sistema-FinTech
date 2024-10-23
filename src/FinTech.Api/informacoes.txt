@@ -3,7 +3,8 @@ Instalar o dotnet-ef
 
 Criar migrations
     dotnet ef migrations add CriarEntidadeUsuario
-    dotnet ef migrations add CriarEntidadeNaturezaDeLancamento
+    dotnet ef migrations add CriarEntidadeNaturezaLancamento
+    dotnet ef migrations add CriarEntidadePessoa
     dotnet ef migrations add CriarEntidadeApagar
     dotnet ef migrations add CriarEntidadeAreceber
 
@@ -19,7 +20,7 @@ Passo a passo de como criar uma nova entidade:
     5° Executar migrations
 
 Criando o CRUD:
-    1° Modelo / entidade OK
+    1° Modelo / entidade
     2° Repositorio 
     3° Contrato ou DTO 
     4° Serviço 

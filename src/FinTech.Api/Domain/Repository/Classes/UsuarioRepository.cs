@@ -1,9 +1,9 @@
-using FinTech.Api.Damain.Models;
-using FinTech.Api.Damain.Repository.Interfaces;
+using FinTech.Api.Domain.Models;
+using FinTech.Api.Domain.Repository.Interfaces;
 using FinTech.Api.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinTech.Api.Damain.Repository.Classes
+namespace FinTech.Api.Domain.Repository.Classes
 {
     public class UsuarioRepository : IUsuarioRepository
     {

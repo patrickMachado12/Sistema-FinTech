@@ -1,15 +1,17 @@
 using System.Text;
 using AutoMapper;
 using FinTech.Api.AutoMapper;
-using FinTech.Api.Damain.Repository.Classes;
-using FinTech.Api.Damain.Repository.Interfaces;
-using FinTech.Api.Damain.Services.Classes;
-using FinTech.Api.Damain.Services.Interfaces;
+using FinTech.Api.Domain.Repository.Classes;
+using FinTech.Api.Domain.Repository.Interfaces;
+using FinTech.Api.Domain.Services.Classes;
+using FinTech.Api.Domain.Services.Interfaces;
 using FinTech.Api.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using FinTech.Api.Contract.NaturezaLancamento;
+using FinTech.Api.Contract.Pessoa;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +36,8 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
 
     var config = new MapperConfiguration(cfg => {
         cfg.AddProfile<UsuarioProfile>();
+        cfg.AddProfile<NaturezaLancamentoProfile>();
+        cfg.AddProfile<PessoaProfile>();
         // Aqui colocar outros profiles...
     });
 
@@ -45,7 +49,11 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddSingleton(mapper)
     .AddScoped<TokenService>()
     .AddScoped<IUsuarioRepository, UsuarioRepository>()
-    .AddScoped<IUsuarioService, UsuarioService>();
+    .AddScoped<IUsuarioService, UsuarioService>()
+    .AddScoped<INaturezaLancamentoRepository, NaturezaLancamentoRepository>()
+    .AddScoped<IService<NaturezaLancamentoRequestContract, NaturezaLancamentoResponseContract, long>, NaturezaLancamentoService>()
+    .AddScoped<IPessoaRepository, PessoaRepository>()
+    .AddScoped<IPessoaService, PessoaService>();
 }
 
 // Configura o serviços da API.
