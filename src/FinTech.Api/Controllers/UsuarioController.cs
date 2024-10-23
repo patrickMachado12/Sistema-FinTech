@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Authentication;
-using System.Threading.Tasks;
 using ControleFacil.Api.Exceptions;
 using FinTech.Api.Contract.Usuario;
-using FinTech.Api.Damain.Services.Interfaces;
+using FinTech.Api.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 

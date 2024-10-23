@@ -1,10 +1,10 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using FinTech.Api.Damain.Models;
+using FinTech.Api.Domain.Models;
 using Microsoft.IdentityModel.Tokens;
 
-namespace FinTech.Api.Damain.Services.Classes
+namespace FinTech.Api.Domain.Services.Classes
 {
     public class TokenService
     {

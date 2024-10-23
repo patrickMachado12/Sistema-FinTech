@@ -8,6 +8,6 @@ namespace FinTech.Api.Contract.Usuario
     public class UsuarioRequestContract : UsuarioLoginRequestContract
     {
         public DateTime? DataInativacao { get; set; }
-        public bool Ativo { get; set; }
+        public bool Status { get; set; }
     }
 }

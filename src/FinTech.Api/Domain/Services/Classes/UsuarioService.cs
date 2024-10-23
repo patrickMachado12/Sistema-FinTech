@@ -3,11 +3,11 @@ using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
 using FinTech.Api.Contract.Usuario;
-using FinTech.Api.Damain.Models;
-using FinTech.Api.Damain.Repository.Interfaces;
-using FinTech.Api.Damain.Services.Interfaces;
+using FinTech.Api.Domain.Models;
+using FinTech.Api.Domain.Repository.Interfaces;
+using FinTech.Api.Domain.Services.Interfaces;
 
-namespace FinTech.Api.Damain.Services.Classes
+namespace FinTech.Api.Domain.Services.Classes
 {
     public class UsuarioService : IUsuarioService
     {

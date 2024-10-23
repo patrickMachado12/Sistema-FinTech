@@ -1,6 +1,6 @@
-using FinTech.Api.Damain.Models;
+using FinTech.Api.Domain.Models;
 
-namespace FinTech.Api.Damain.Repository.Interfaces
+namespace FinTech.Api.Domain.Repository.Interfaces
 {
     public interface IUsuarioRepository : IRepository<Usuario, long>
     {
