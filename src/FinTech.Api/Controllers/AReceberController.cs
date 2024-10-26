@@ -26,6 +26,7 @@ namespace FinTech.Api.Controllers
         [Authorize]
         public async Task<IActionResult> Adicionar(AReceberRequestContract contrato)
         {
+        
             try
             {
                 _idUsuario = ObterIdUsuarioLogado();
