@@ -28,6 +28,7 @@ namespace FinTech.Api.Controllers
             try
             {  
                 _idUsuario = ObterIdUsuarioLogado();
+                
                 return Created("", await _naturezaLancamentoService.Adicionar(contrato, _idUsuario));
             }
             catch (BadRequestException ex)
@@ -40,15 +41,15 @@ namespace FinTech.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("obterTodas")]
         [SwaggerOperation(Summary = "Obtém uma lista de Naturezas de Lançamento do usuário.", Description = "Este endpoint retornas todas as Naturezas de Lançamento de um usuário.")]
         [Authorize]
-        public async Task<IActionResult> Obter()
+        public async Task<IActionResult> ObterTodos()
         {
             try
             {
                 _idUsuario = ObterIdUsuarioLogado();
-                return Ok(await _naturezaLancamentoService.Obter(_idUsuario));
+                return Ok(await _naturezaLancamentoService.ObterTodos(_idUsuario));
             }
             catch (NotFoundException ex)
             {

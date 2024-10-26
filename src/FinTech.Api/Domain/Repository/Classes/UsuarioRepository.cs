@@ -8,6 +8,7 @@ namespace FinTech.Api.Domain.Repository.Classes
     public class UsuarioRepository : IUsuarioRepository
     {
         private readonly ApplicationContext _contexto;
+
         public UsuarioRepository(ApplicationContext context)
         {
             _contexto = context;
@@ -56,6 +57,13 @@ namespace FinTech.Api.Domain.Repository.Classes
         }
 
         public async Task<Usuario?> Obter(long id)
+        {
+            return await _contexto.Usuario.AsNoTracking()
+                                            .Where(u => u.Id == id)
+                                            .FirstOrDefaultAsync();
+        }
+
+        public async Task<Usuario> ObterPorId(long id)
         {
             return await _contexto.Usuario.AsNoTracking()
                                             .Where(u => u.Id == id)

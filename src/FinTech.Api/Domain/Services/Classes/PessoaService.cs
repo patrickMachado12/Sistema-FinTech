@@ -35,6 +35,7 @@ namespace FinTech.Api.Domain.Services.Classes
         public async Task<PessoaResponseContract> Atualizar(long id, PessoaRequestContract entidade)
         {
             var pessoa = await _pessoaRepository.ObterPorId(id);
+            
             if (pessoa == null)
             {
                 throw new Exception("Pessoa não encontrado para atualização.");

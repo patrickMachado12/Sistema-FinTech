@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ControleFacil.Api.Exceptions;
 using FinTech.Api.Contract.Pessoa;
 using FinTech.Api.Domain.Services.Interfaces;
@@ -63,7 +59,7 @@ namespace FinTech.Api.Controllers
 
         [HttpGet]
         [SwaggerOperation(Summary = "Obtém uma pessoa pelo nome.", Description = "Este endpoint retorna uma pessoa pelo seu nome.")]
-        [Route("nome/{nomePessoa}")]
+        [Route("nome/{nome}")]
         [Authorize]
         public async Task<IActionResult> ObterPorNome(string nome)
         {

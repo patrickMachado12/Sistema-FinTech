@@ -56,7 +56,7 @@ namespace FinTech.Api.Domain.Services.Classes
 
         public async Task<UsuarioResponseContract> Atualizar(long id, UsuarioRequestContract entidade, long idUsuario)
         {
-            _ = await Obter(id) ?? throw new Exception("Usuario não encontrado para atualização.");
+            _ = await Obter(id, idUsuario) ?? throw new Exception("Usuario não encontrado para atualização.");
 
             var usuario = _mapper.Map<Usuario>(entidade);
             usuario.Id = id;
@@ -74,7 +74,7 @@ namespace FinTech.Api.Domain.Services.Classes
             await _usuarioRepository.Deletar(_mapper.Map<Usuario>(usuario));
         }
 
-        public async Task<IEnumerable<UsuarioResponseContract>> Obter(long idUsuario)
+        public async Task<IEnumerable<UsuarioResponseContract>> ObterTodos(long idUsuario)
         {
             var usuarios = await _usuarioRepository.Obter();
 

@@ -22,6 +22,118 @@ namespace FinTech.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("FinTech.Api.Domain.Models.APagar", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("DataEmissao")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime?>("DataExclusao")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime?>("DataPagamento")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime?>("DataReferencia")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime>("DataVencimento")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<long>("IdNaturezaLancamento")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdPessoa")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdUsuario")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<double>("ValorAPagar")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("ValorPago")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdNaturezaLancamento");
+
+                    b.HasIndex("IdPessoa");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("APagar", (string)null);
+                });
+
+            modelBuilder.Entity("FinTech.Api.Domain.Models.AReceber", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("DataBaixa")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime>("DataEmissao")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime?>("DataExclusao")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime?>("DataReferencia")
+                        .HasColumnType("timestamp");
+
+                    b.Property<DateTime>("DataVencimento")
+                        .HasColumnType("timestamp");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<long>("IdNaturezaLancamento")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdPessoa")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdUsuario")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<double>("ValorAReceber")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("ValorBaixado")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdNaturezaLancamento");
+
+                    b.HasIndex("IdPessoa");
+
+                    b.HasIndex("IdUsuario");
+
+                    b.ToTable("AReceber", (string)null);
+                });
+
             modelBuilder.Entity("FinTech.Api.Domain.Models.NaturezaLancamento", b =>
                 {
                     b.Property<long>("Id")
@@ -50,7 +162,7 @@ namespace FinTech.Api.Migrations
 
                     b.HasIndex("IdUsuario");
 
-                    b.ToTable("naturezaLancamento", (string)null);
+                    b.ToTable("NaturezaLancamento", (string)null);
                 });
 
             modelBuilder.Entity("FinTech.Api.Domain.Models.Pessoa", b =>
@@ -77,7 +189,7 @@ namespace FinTech.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("pessoa", (string)null);
+                    b.ToTable("Pessoa", (string)null);
                 });
 
             modelBuilder.Entity("FinTech.Api.Domain.Models.Usuario", b =>
@@ -107,7 +219,61 @@ namespace FinTech.Api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("usuario", (string)null);
+                    b.ToTable("Usuario", (string)null);
+                });
+
+            modelBuilder.Entity("FinTech.Api.Domain.Models.APagar", b =>
+                {
+                    b.HasOne("FinTech.Api.Domain.Models.NaturezaLancamento", "NaturezaLancamento")
+                        .WithMany()
+                        .HasForeignKey("IdNaturezaLancamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinTech.Api.Domain.Models.Pessoa", "Pessoa")
+                        .WithMany()
+                        .HasForeignKey("IdPessoa")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinTech.Api.Domain.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NaturezaLancamento");
+
+                    b.Navigation("Pessoa");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("FinTech.Api.Domain.Models.AReceber", b =>
+                {
+                    b.HasOne("FinTech.Api.Domain.Models.NaturezaLancamento", "NaturezaLancamento")
+                        .WithMany()
+                        .HasForeignKey("IdNaturezaLancamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinTech.Api.Domain.Models.Pessoa", "Pessoa")
+                        .WithMany()
+                        .HasForeignKey("IdPessoa")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinTech.Api.Domain.Models.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("IdUsuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NaturezaLancamento");
+
+                    b.Navigation("Pessoa");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("FinTech.Api.Domain.Models.NaturezaLancamento", b =>
