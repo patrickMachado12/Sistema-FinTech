@@ -11,7 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using FinTech.Api.Contract.NaturezaLancamento;
-using FinTech.Api.Contract.Pessoa;
+using FinTech.Api.Contract.APagar;
+using FinTech.Api.Contract.AReceber;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,9 +36,12 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
 
 
     var config = new MapperConfiguration(cfg => {
+        
         cfg.AddProfile<UsuarioProfile>();
         cfg.AddProfile<NaturezaLancamentoProfile>();
         cfg.AddProfile<PessoaProfile>();
+        cfg.AddProfile<APagarProfile>();
+        cfg.AddProfile<AReceberProfile>();
         // Aqui colocar outros profiles...
     });
 
@@ -53,7 +57,12 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddScoped<INaturezaLancamentoRepository, NaturezaLancamentoRepository>()
     .AddScoped<IService<NaturezaLancamentoRequestContract, NaturezaLancamentoResponseContract, long>, NaturezaLancamentoService>()
     .AddScoped<IPessoaRepository, PessoaRepository>()
-    .AddScoped<IPessoaService, PessoaService>();
+    .AddScoped<IPessoaService, PessoaService>()
+    .AddScoped<IAPagarRepository, APagarRepository>()
+    .AddScoped<IAReceberRepository, AReceberRepository>()
+    .AddScoped<IService<APagarRequestContract, APagarResponseContract, long>, APagarService>()
+    .AddScoped<IService<AReceberRequestContract, AReceberResponseContract, long>, AReceberService>();
+        
 }
 
 // Configura o serviços da API.

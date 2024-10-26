@@ -45,6 +45,7 @@ namespace FinTech.Api.Domain.Repository.Classes
 
         public async Task<IEnumerable<NaturezaLancamento>> Obter()
         {
+            // Aqui verificar uma lógica para fazer uma consulta paginada.
             return await _contexto.NaturezaLancamento.AsNoTracking()
                                             .OrderBy(u => u.Id)
                                             .ToListAsync();

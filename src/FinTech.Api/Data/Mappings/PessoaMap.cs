@@ -8,7 +8,7 @@ namespace FinTech.Api.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Pessoa> builder)
         {
-            builder.ToTable("pessoa")
+            builder.ToTable("Pessoa")
             .HasKey(p => p.Id);
 
             builder.Property(p => p.Nome)

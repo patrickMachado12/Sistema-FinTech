@@ -51,7 +51,7 @@ namespace FinTech.Api.Domain.Services.Classes
             await _naturezaLancamentoRepository.Deletar(naturezaLancamento);
         }
 
-        public async Task<IEnumerable<NaturezaLancamentoResponseContract>> Obter(long idUsuario)
+        public async Task<IEnumerable<NaturezaLancamentoResponseContract>> ObterTodos(long idUsuario)
         {
             var naturezasDeLancamento = await _naturezaLancamentoRepository.ObterPorIdUsuario(idUsuario);
             return naturezasDeLancamento.Select(natureza => _mapper.Map<NaturezaLancamentoResponseContract>(natureza));

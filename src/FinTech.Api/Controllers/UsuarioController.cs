@@ -63,14 +63,14 @@ namespace FinTech.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("obterTodos")]
         [SwaggerOperation(Summary = "Obtém uma lista de usuários.", Description = "Este endpoint retorna todos os usuários disponíveis.")]
         [AllowAnonymous]
-        public async Task<IActionResult> Obter()
+        public async Task<IActionResult> ObterTodos()
         {
-            try
+             try
             {
-                return Ok(await _usuarioService.Obter(0));
+                return Ok(await _usuarioService.ObterTodos(0));
             }
             catch (Exception ex)
             {

@@ -9,6 +9,8 @@ namespace FinTech.Api.Data
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<NaturezaLancamento> NaturezaLancamento { get; set; }
         public DbSet<Pessoa> Pessoa { get; set; }
+        public DbSet<APagar> APagar { get; set; }
+        public DbSet<AReceber> AReceber { get; set; }
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options){}
 
@@ -17,6 +19,8 @@ namespace FinTech.Api.Data
             modelBuilder.ApplyConfiguration(new UsuarioMap());
             modelBuilder.ApplyConfiguration(new NaturezaLancamentoMap());
             modelBuilder.ApplyConfiguration(new PessoaMap());
+            modelBuilder.ApplyConfiguration(new APagarMap());
+            modelBuilder.ApplyConfiguration(new AReceberMap());            
         }
     }
 }

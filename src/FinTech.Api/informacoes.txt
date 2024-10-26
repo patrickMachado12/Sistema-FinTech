@@ -5,8 +5,8 @@ Criar migrations
     dotnet ef migrations add CriarEntidadeUsuario
     dotnet ef migrations add CriarEntidadeNaturezaLancamento
     dotnet ef migrations add CriarEntidadePessoa
-    dotnet ef migrations add CriarEntidadeApagar
-    dotnet ef migrations add CriarEntidadeAreceber
+    dotnet ef migrations add CriarEntidadeAPagar
+    dotnet ef migrations add CriarEntidadeAReceber
 
 Executar migrations
     dotnet ef database update
@@ -15,7 +15,7 @@ Executar migrations
 Passo a passo de como criar uma nova entidade:
     1° Criar o modelo
     2° Criar o mapeamento
-    3° Adicionar mapeamento no applicationContext
+    3° Adicionar mapeamento no applicationContextl
     4° Criar a migration da nova CriarEntidadeUsuario
     5° Executar migrations
 
@@ -25,7 +25,3 @@ Criando o CRUD:
     3° Contrato ou DTO 
     4° Serviço 
     5° Controller 
-
-
-
-dotnet ef migrations add CriarEntidadeAreceber
