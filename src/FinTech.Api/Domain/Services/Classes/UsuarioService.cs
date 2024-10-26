@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Text;
@@ -42,8 +43,14 @@ namespace FinTech.Api.Domain.Services.Classes
                 Token = _tokenService.GerarToken(_mapper.Map<Usuario>(usuario))
             };        
         }
+
         public async Task<UsuarioResponseContract> Adicionar(UsuarioRequestContract entidade, long idUsuario)
         {
+            if (!IsEmail(entidade.Email))
+            {
+                throw new ArgumentException("O e-mail fornecido é inválido.");
+            }
+            
             var usuario = _mapper.Map<Usuario>(entidade);
 
             usuario.Senha = GerarHashSenha(usuario.Senha);
@@ -52,6 +59,19 @@ namespace FinTech.Api.Domain.Services.Classes
             usuario = await _usuarioRepository.Adicionar(usuario);
 
             return _mapper.Map<UsuarioResponseContract>(usuario);
+        }
+
+        private bool IsEmail(string email)
+        {
+            try
+            {
+                var mailAddress = new MailAddress(email);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task<UsuarioResponseContract> Atualizar(long id, UsuarioRequestContract entidade, long idUsuario)

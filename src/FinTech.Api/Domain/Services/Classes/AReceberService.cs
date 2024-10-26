@@ -1,6 +1,8 @@
 using AutoMapper;
 using FinTech.Api.Contract.AReceber;
+using FinTech.Api.Data;
 using FinTech.Api.Domain.Models;
+using FinTech.Api.Domain.Repository.Classes;
 using FinTech.Api.Domain.Repository.Interfaces;
 using FinTech.Api.Domain.Services.Interfaces;
 
@@ -11,34 +13,77 @@ namespace FinTech.Api.Domain.Services.Classes
         private readonly IAReceberRepository _aReceberRepository;
         private readonly IMapper _mapper;
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly ApplicationContext _contexto;
 
-        public AReceberService(IAReceberRepository aReceberRepository, IMapper mapper, IUsuarioRepository usuarioRepository)
+        public AReceberService(IAReceberRepository aReceberRepository, 
+            IMapper mapper, 
+            IUsuarioRepository usuarioRepository, 
+            ApplicationContext contexto)
         {
             _aReceberRepository = aReceberRepository;
             _mapper = mapper;
             _usuarioRepository = usuarioRepository;
+            _contexto = contexto;
         }
 
         public async Task<AReceberResponseContract> Adicionar(AReceberRequestContract entidade, long idUsuario)
         {
-            // Verificar se o usuário existe
+            // Verificar se o Usuário existe
             var usuario = await _usuarioRepository.ObterPorId(idUsuario);
 
             if (usuario == null)
             {
                 throw new Exception($"Usuário não encontrado com id {idUsuario}");
             }
-            AReceber aReceber = _mapper.Map<AReceber>(entidade);
 
+            // Verificar se a Pessoa existe
+            var pessoaRepository = new PessoaRepository(_contexto);
+
+            var pessoa = await pessoaRepository.ObterPorId(entidade.IdPessoa);
+
+            if (pessoa == null)
+            {
+                throw new Exception($"Pessoa não encontrada com id {entidade.IdPessoa}");
+            }
+
+            ValidarCamposObrigatorios(entidade);
+
+            AReceber aReceber = _mapper.Map<AReceber>(entidade);
             aReceber.DataEmissao = DateTime.Now;
             aReceber.IdUsuario = idUsuario;
-
-            // Ter alguma validação para saber se tudo que eu preciso está no contrato.
-            // Colocar uma validação para não poder cadastrar um título com valor negativo.
 
             aReceber = await _aReceberRepository.Adicionar(aReceber);
 
             return _mapper.Map<AReceberResponseContract>(aReceber);
+        }
+
+        private void ValidarCamposObrigatorios(AReceberRequestContract entidade)
+        {
+            string mensagemErro = string.Empty;
+
+            switch (true)
+            {
+                case var _ when entidade.IdPessoa <= 0:
+                    mensagemErro = "O campo IdPessoa é obrigatório.";
+                    break;
+
+                case var _ when entidade.IdNaturezaLancamento <= 0:
+                    mensagemErro = "O campo IdNaturezaLancamento é obrigatório.";
+                    break;
+
+                case var _ when entidade.ValorAReceber == null || entidade.ValorAReceber == 0:
+                    mensagemErro = "O campo ValorAReceber é obrigatório e deve ser maior que zero.";
+                    break;
+
+                case var _ when entidade.ValorAReceber < 0:
+                    mensagemErro = "O valor do título não pode ser negativo.";
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(mensagemErro))
+            {
+                throw new Exception(mensagemErro);
+            }
         }
 
         public async Task<AReceberResponseContract> Atualizar(long id, AReceberRequestContract entidade, long idUsuario)
@@ -49,6 +94,18 @@ namespace FinTech.Api.Domain.Services.Classes
                 throw new KeyNotFoundException("Título a Receber não encontrado.");
 
             _mapper.Map(entidade, aReceber);
+
+            // Verificar se a Pessoa existe
+            var pessoaRepository = new PessoaRepository(_contexto);
+
+            var pessoa = await pessoaRepository.ObterPorId(entidade.IdPessoa);
+
+            if (pessoa == null)
+            {
+                throw new Exception($"Pessoa não encontrada com id {entidade.IdPessoa}");
+            }
+
+            ValidarCamposObrigatorios(entidade);
 
             aReceber.Id = aReceber.Id;
             aReceber.IdUsuario = aReceber.IdUsuario;
