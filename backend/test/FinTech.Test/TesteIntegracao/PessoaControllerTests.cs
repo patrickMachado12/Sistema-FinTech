@@ -6,10 +6,11 @@ using FinTech.Api.Domain.Repository.Interfaces;
 using FinTech.Api.Domain.Models;
 using FinTech.Api.Contract.Pessoa;
 using Microsoft.AspNetCore.Mvc;
+using FinTech.Test.DataBase;
 
 namespace FinTech.Test.TesteUnitario.Controllers
 {
-    public class PessoaControllerTests
+    public class PessoaControllerTests : BaseTest, IAsyncLifetime
     {
         private readonly Mock<IPessoaService> _pessoaServiceMock;
         private readonly PessoaController _pessoaController;

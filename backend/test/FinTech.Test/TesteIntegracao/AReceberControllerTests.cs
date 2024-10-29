@@ -6,10 +6,11 @@ using FinTech.Api.Domain.Repository.Interfaces;
 using FinTech.Api.Domain.Models;
 using FinTech.Api.Contract.AReceber;
 using Microsoft.AspNetCore.Mvc;
+using FinTech.Test.DataBase;
 
 namespace FinTech.Test.TesteUnitario.Controllers
 {
-    public class AReceberControllerTests
+    public class AReceberControllerTests : BaseTest, IAsyncLifetime
     {
         private readonly Mock<IAReceberService> _aReceberServiceMock;
         private readonly AReceberController _aReceberController;

@@ -7,10 +7,11 @@ using Moq;
 using Microsoft.AspNetCore.Mvc;
 using FinTech.Api.Domain.Services.Classes;
 using FinTech.Api.Controllers;
+using FinTech.Test.DataBase;
 
 namespace FinTech.Test.TesteUnitario.Controllers
 {
-    public class APagarControllerTests
+    public class APagarControllerTests : BaseTest, IAsyncLifetime
     {
         private readonly Mock<AReceberService> _aReceberServiceMock;
         private readonly Mock<APagarService> _apagarServiceMock;

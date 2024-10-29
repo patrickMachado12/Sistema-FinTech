@@ -6,10 +6,11 @@ using FinTech.Api.Domain.Repository.Interfaces;
 using FinTech.Api.Domain.Models;
 using FinTech.Api.Contract.Usuario;
 using Microsoft.AspNetCore.Mvc;
+using FinTech.Test.DataBase;
 
 namespace FinTech.Test.TesteUnitario.Controllers
 {
-    public class UsuarioControllerTests
+    public class UsuarioControllerTests : BaseTest, IAsyncLifetime
     {
         private readonly Mock<IUsuarioService> _usuarioServiceMock;
         private readonly UsuarioController _usuarioController;

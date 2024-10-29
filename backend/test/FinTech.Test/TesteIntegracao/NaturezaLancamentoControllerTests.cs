@@ -6,10 +6,11 @@ using FinTech.Api.Domain.Repository.Interfaces;
 using FinTech.Api.Domain.Models;
 using FinTech.Api.Contract.NaturezaLancamento;
 using Microsoft.AspNetCore.Mvc;
+using FinTech.Test.DataBase;
 
 namespace FinTech.Test.TesteUnitario.Controllers
 {
-    public class NaturezaLancamentoControllerTests
+    public class NaturezaLancamentoControllerTests : BaseTest, IAsyncLifetime
     {
         private readonly Mock<INaturezaLancamentoService> _naturezaLancamentoServiceMock;
         private readonly NaturezaLancamentoController _naturezaLancamentoController;

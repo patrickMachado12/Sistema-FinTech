@@ -26,6 +26,13 @@ namespace FinTech.Api.Domain.Services.Classes
             _tokenService = tokenService;
         }
 
+        public UsuarioService(IUsuarioRepository usuarioRepository, TokenService tokenService, IMapper mapper)
+        {
+            _usuarioRepository = usuarioRepository;
+            _tokenService = tokenService;
+            _mapper = mapper;
+        }
+
         public async Task<UsuarioLoginResponseContract> Autenticar(UsuarioLoginRequestContract usuarioLoginRequest)
         {
             UsuarioResponseContract usuario = await Obter(usuarioLoginRequest.Email);
