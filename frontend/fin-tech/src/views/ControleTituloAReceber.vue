@@ -41,6 +41,7 @@
                   <v-text-field
                     v-model="editedItem.idPessoa"
                     label="Pessoa*"
+                    placeholder="Nome da Pessoa"
                   ></v-text-field>
                 </v-col>
 
@@ -48,6 +49,7 @@
                   <v-text-field
                     v-model="editedItem.valorAReceber"
                     label="Valor a Receber*"
+                    placeholder="R$ 0,00"
                   ></v-text-field>
                 </v-col>
 
@@ -55,6 +57,9 @@
                   <v-text-field
                     v-model="editedItem.dataVencimento"
                     label="Data Vencimento*"
+                    placeholder="DD/MM/AAAA"
+                    @input="formatarData($event, 'dataVencimento')"
+                    :rules="[dataRegra]"
                   ></v-text-field>
                 </v-col>
 
@@ -62,6 +67,9 @@
                   <v-text-field
                     v-model="editedItem.dataEmissao"
                     label="Data Emissão*"
+                    placeholder="DD/MM/AAAA"
+                    @input="formatarData($event, 'dataEmissao')"
+                    :rules="[dataRegra]"
                   ></v-text-field>
                 </v-col>
                   
@@ -85,6 +93,9 @@
                   <v-text-field
                     v-model="editedItem.dataReferencia"
                     label="Data Referência"
+                    placeholder="DD/MM/AAAA"
+                    @input="formatarData($event, 'dataReferencia')"
+                    :rules="[dataRegra]"
                   ></v-text-field>
                 </v-col>
 
@@ -92,6 +103,7 @@
                   <v-text-field
                     v-model="editedItem.valorBaixado"
                     label="Valor Baixa*"
+                    placeholder="R$ 0,00"
                   ></v-text-field>
                 </v-col>
 
@@ -99,6 +111,9 @@
                   <v-text-field
                     v-model="editedItem.dataRecebimento"
                     label="Data Baixa"
+                    placeholder="DD/MM/AAAA"
+                    @input="formatarData($event, 'dataRecebimento')"
+                    :rules="[dataRegra]"
                   ></v-text-field>
                 </v-col>
 
@@ -116,14 +131,14 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-primaria)"
               text
               @click="dialog = false"
             >
               Fechar
             </v-btn>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-primaria)"
               text
               @click="gravar"
             >
@@ -171,6 +186,7 @@ import aReceberService from "../services/aReceber-service.js";
 import naturezaLacamentoService from "../services/naturezaLancamento-service.js";
 import NaturezaLancamento from '@/models/NaturezaLancamento.js';
 import moment from "moment";
+import { formatarData, validarData } from '@/utils/conversorData.js';
 
 export default {
   name: "ControleAReceber",
@@ -349,6 +365,19 @@ export default {
           console.log(error)
         })
     },
+
+    formatarData(value, campo) {
+      this.editedItem[campo] = formatarData(value);
+
+      this.date = validarData(this.editedItem[campo]) 
+        ? new Date(`${this.editedItem[campo].substring(6, 10)}-${this.editedItem[campo].substring(3, 5)}-${this.editedItem[campo].substring(0, 2)}`) 
+        : null;
+    },
+
+    dataRegra(value) {
+      return validarData(value) || 'Data inválida';
+    },
+
   },
 };
 </script>

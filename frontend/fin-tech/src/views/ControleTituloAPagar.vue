@@ -41,6 +41,7 @@
                   <v-text-field
                     v-model="editedItem.idPessoa"
                     label="Pessoa*"
+                    placeholder="Nome da Pessoa"
                   ></v-text-field>
                 </v-col>
                   
@@ -48,6 +49,7 @@
                   <v-text-field
                     v-model="editedItem.valorAPagar"
                     label="Valor a Pagar*"
+                    placeholder="R$ 0,00"
                   ></v-text-field>
                 </v-col>
 
@@ -55,6 +57,9 @@
                   <v-text-field
                     v-model="editedItem.dataEmissao"
                     label="Data Emissão*"
+                    placeholder="DD/MM/AAAA"
+                    @input="formatarData($event, 'dataEmissao')"
+                    :rules="[dataRegra]"
                   ></v-text-field>
                 </v-col>
 
@@ -62,6 +67,9 @@
                   <v-text-field
                     v-model="editedItem.dataVencimento"
                     label="Data Vencimento*"
+                    placeholder="DD/MM/AAAA"
+                    @input="formatarData($event, 'dataVencimento')"
+                    :rules="[dataRegra]"
                   ></v-text-field>
                 </v-col>
 
@@ -85,6 +93,9 @@
                   <v-text-field
                     v-model="editedItem.dataReferencia"
                     label="Data Referência"
+                    placeholder="DD/MM/AAAA"
+                    @input="formatarData($event, 'dataReferencia')"
+                    :rules="[dataRegra]"
                   ></v-text-field>
                 </v-col>
 
@@ -92,6 +103,7 @@
                   <v-text-field
                     v-model="editedItem.valorPago"
                     label="Valor Baixa"
+                    placeholder="R$ 0,00"
                   ></v-text-field>
                 </v-col>
 
@@ -99,6 +111,9 @@
                   <v-text-field
                     v-model="editedItem.dataPagamento"
                     label="Data Baixa"
+                    placeholder="DD/MM/AAAA"
+                    @input="formatarData($event, 'dataPagamento')"
+                    :rules="[dataRegra]"
                   ></v-text-field>
                 </v-col>
 
@@ -116,14 +131,14 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-primaria)"
               text
               @click="dialog = false"
             >
               Fechar
             </v-btn>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-primaria)"
               text
               @click="gravar"
             >
@@ -134,8 +149,6 @@
       </v-dialog>
     </v-row>
 
-
-    
     <v-row>
       <v-col cols="12" sm="12" md="12">
         <v-data-table
@@ -165,11 +178,12 @@
 </template>
 
 <script>
-import APagar from "../models/APagar.js";
-import aPagarService from "../services/apagar-service.js";
-import naturezaLacamentoService from "../services/naturezaLancamento-service.js";
+import APagar from "@/models/APagar.js";
+import aPagarService from "@/services/apagar-service.js";
+import naturezaLacamentoService from "@/services/naturezaLancamento-service.js";
 import NaturezaLancamento from '@/models/NaturezaLancamento.js';
 import moment from "moment";
+import { formatarData, validarData } from '@/utils/conversorData.js';
 
 export default {
   name: "ControleAPagar",
@@ -257,6 +271,7 @@ export default {
   },
 
   methods: {
+
     obterTitulos() {
       aPagarService
         .obterTodos()
@@ -347,7 +362,20 @@ export default {
         .catch((error) => {
           console.log(error)
         })
-    },  
+    },
+    
+    formatarData(value, campo) {
+      this.editedItem[campo] = formatarData(value);
+
+      this.date = validarData(this.editedItem[campo]) 
+        ? new Date(`${this.editedItem[campo].substring(6, 10)}-${this.editedItem[campo].substring(3, 5)}-${this.editedItem[campo].substring(0, 2)}`) 
+        : null;
+    },
+
+    dataRegra(value) {
+      return validarData(value) || 'Data inválida';
+    },
+    
   },
 };
 </script>

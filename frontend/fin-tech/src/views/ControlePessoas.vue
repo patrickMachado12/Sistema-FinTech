@@ -51,14 +51,6 @@
                     label="Telefone"
                   ></v-text-field>
                 </v-col>
-
-                <!-- <v-col cols="12">
-                  <v-text-field
-                    v-model="editedItem.email"
-                    label="Email"
-                  ></v-text-field>
-                </v-col> -->
-                
                 
               </v-row>
             </v-container>
@@ -67,14 +59,14 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-secundaria)"
               text
               @click="dialog = false"
             >
               Fechar
             </v-btn>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-secundaria)"
               text
               @click="gravar"
             >

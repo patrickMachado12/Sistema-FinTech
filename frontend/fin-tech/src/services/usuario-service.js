@@ -16,11 +16,27 @@ function logout() {
   });
 }
 
-function cadastrarUsuario(email, senha) {
+function cadastrar(email, senha) {
   return new Promise((resolve, reject) => {
-    return api.post(`/usuario`, { email, senha })
+    return api.post(`/usuario`,  email, senha)
       .then((response) => resolve(response))
       .catch((error) => reject(error));
+  });
+}
+
+function atualizar(usuario){
+  return new Promise((resolve, reject) => {
+      return api.put(`/usuario/${usuario.id}`, usuario)
+      .then(response => resolve(response))
+      .catch(error => reject(error));
+  });
+}
+
+function deletar(id){
+  return new Promise((resolve, reject) => {
+      return api.delete(`/usuario/${id}`)
+      .then(response => resolve(response))
+      .catch(error => reject(error));
   });
 }
 
@@ -43,7 +59,9 @@ function obterPorId(id) {
 export default {
   login,
   logout,
-  cadastrarUsuario,
+  cadastrar,
+  atualizar,
   obterTodos,
   obterPorId,
+  deletar,
 };

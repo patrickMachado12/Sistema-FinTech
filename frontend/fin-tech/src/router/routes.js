@@ -16,6 +16,13 @@ const routes = [
     },
     {
         path: '/',
+        name: 'Login',
+        component: Login,
+        title: 'Login',
+        meta: { requiredAuth: false }
+    },
+    {
+        path: '/dashboard',
         name: 'Dashboard',
         component: Dashboard,
         title: 'Dashboard',
