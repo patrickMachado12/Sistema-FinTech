@@ -74,6 +74,11 @@ ScaffoldingReadMe.txt
 # StyleCop
 StyleCopReport.xml
 
+# Ignorar pastas bin/ e obj/ em qualquer diretório
+bin/
+obj/
+
+
 # Files built by Visual Studio
 *_i.c
 *_p.c
