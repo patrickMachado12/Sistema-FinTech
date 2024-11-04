@@ -25,7 +25,6 @@ namespace FinTech.Api.Domain.Models
         [Required(ErrorMessage = "O campo de Valor é obrigatório.")]
         public double ValorAPagar { get; set; }
 
-        [Required(ErrorMessage = "O campo de Valor é obrigatório.")]
         public double ValorPago { get; set; }
 
         [Required(ErrorMessage = "O campo de Descrição é obrigatório.")]
@@ -40,8 +39,6 @@ namespace FinTech.Api.Domain.Models
         public DateTime? DataPagamento { get; set; }
 
         public DateTime? DataReferencia { get; set; }
-
-        public DateTime? DataExclusao { get; set; }
 
         public string? Observacao { get; set; } = string.Empty;
     }

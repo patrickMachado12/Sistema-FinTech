@@ -4,9 +4,8 @@ export default class NaturezaLancamento {
 
     this.id = obj.id;
     this.idUsuario = obj.idUsuario;
-    this.descricao = obj.descricao;
-    this.observacao = obj.observacao;
-    this.dataCadastro = obj.dataCadastro;
-    this.dataInativacao = obj.dataInativacao;
+    this.descricao = obj.descricao || null;
+    this.observacao = obj.observacao || null;
+    this.dataCadastro = obj.dataCadastro || null;
   }
 }

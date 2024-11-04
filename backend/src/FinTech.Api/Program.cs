@@ -59,10 +59,10 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddScoped<IPessoaRepository, PessoaRepository>()
     .AddScoped<IPessoaService, PessoaService>()
     .AddScoped<IAPagarRepository, APagarRepository>()
+    .AddScoped<ITituloService<APagarRequestContract, APagarResponseContract, long>, APagarService>()
     .AddScoped<IAReceberRepository, AReceberRepository>()
-    .AddScoped<IService<APagarRequestContract, APagarResponseContract, long>, APagarService>()
-    .AddScoped<IService<AReceberRequestContract, AReceberResponseContract, long>, AReceberService>();
-        
+    .AddScoped<ITituloService<AReceberRequestContract, AReceberResponseContract, long>, AReceberService>();
+
 }
 
 // Configura o serviços da API.

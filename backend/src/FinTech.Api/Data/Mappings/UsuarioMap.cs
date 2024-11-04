@@ -25,10 +25,6 @@ namespace FinTech.Api.Data.Mappings
 
             builder.Property(p => p.DataInativacao)
             .HasColumnType("timestamp");
-
-            builder.Property(p => p.Status)
-            .HasColumnType("boolean")
-            .IsRequired();
         }
     }
 }

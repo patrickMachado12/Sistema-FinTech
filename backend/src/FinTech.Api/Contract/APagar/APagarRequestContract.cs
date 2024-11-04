@@ -15,10 +15,12 @@ namespace FinTech.Api.Contract.APagar
 
         public double ValorPago { get; set; }
 
-        public string Descricao { get; set; } = string.Empty;
+        [Required(ErrorMessage = "O campo r é obrigatório.")]
+        public string Descricao { get; set; }
 
         public string Observacao { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "O campo DataEmissao é obrigatório.")]
         public DateTime DataEmissao { get; set; }
 
         public DateTime DataVencimento { get; set; }

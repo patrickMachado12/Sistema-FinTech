@@ -8,7 +8,7 @@ using FinTech.Api.Domain.Services.Interfaces;
 
 namespace FinTech.Api.Domain.Services.Classes
 {
-    public class APagarService : IService<APagarRequestContract, APagarResponseContract, long>
+    public class APagarService : ITituloService<APagarRequestContract, APagarResponseContract, long>
     {
         private readonly IAPagarRepository _aPagarRepository;
         private readonly IMapper _mapper;
@@ -49,7 +49,6 @@ namespace FinTech.Api.Domain.Services.Classes
             ValidarCamposObrigatorios(entidade);
 
             APagar aPagar = _mapper.Map<APagar>(entidade);
-            aPagar.DataEmissao = DateTime.Now;
             aPagar.IdUsuario = idUsuario;
 
             aPagar = await _aPagarRepository.Adicionar(aPagar);
@@ -110,7 +109,6 @@ namespace FinTech.Api.Domain.Services.Classes
             aPagar.Id = aPagar.Id;
             aPagar.IdUsuario = aPagar.IdUsuario;
             aPagar.DataEmissao = aPagar.DataEmissao;
-            aPagar.DataExclusao = aPagar.DataExclusao;
 
             aPagar = await _aPagarRepository.Atualizar(aPagar);
 
@@ -135,7 +133,7 @@ namespace FinTech.Api.Domain.Services.Classes
 
             if (aPagar is null)
             {
-                throw new Exception($"Não foi encontrado nenhum título a Receber pelo id {id}");
+                throw new Exception($"Não foi encontrado nenhum título a pagar pelo id {id}");
             }
 
             return _mapper.Map<APagarResponseContract>(aPagar);
@@ -171,5 +169,19 @@ namespace FinTech.Api.Domain.Services.Classes
 
             return _mapper.Map<List<APagarResponseContract>>(aPagar);
         }
+
+        public async Task<IEnumerable<APagarResponseContract>> ObterPorPeriodo(DateTime dataInicial, DateTime dataFinal, long idUsuario)
+        {
+            var aPagar = await _aPagarRepository.ObterPorPeriodo(dataInicial, dataFinal, idUsuario);
+            return _mapper.Map<IEnumerable<APagarResponseContract>>(aPagar);
+        }
+
+        //Mudar o nome do método na interface ITituloService e aqui.
+        public async Task<IEnumerable<APagarResponseContract>> ObterTituloPorId(int id)
+        {
+            var aPagar = await _aPagarRepository.ObterPorId(id);
+            return _mapper.Map<IEnumerable<APagarResponseContract>>(aPagar);
+        }
+
     }
 }

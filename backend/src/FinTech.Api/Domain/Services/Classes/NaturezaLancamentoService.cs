@@ -23,8 +23,8 @@ namespace FinTech.Api.Domain.Services.Classes
         {
             NaturezaLancamento naturezaLancamento = _mapper.Map<NaturezaLancamento>(entidade);
 
-            naturezaLancamento.DataCadastro = DateTime.Now;
             naturezaLancamento.IdUsuario = idUsuario;
+            naturezaLancamento.DataCadastro = DateTime.Now;
 
             naturezaLancamento = await _naturezaLancamentoRepository.Adicionar(naturezaLancamento);
 

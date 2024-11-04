@@ -1,6 +1,7 @@
 using AutoMapper;
 using ControleFacil.Api.Exceptions;
 using FinTech.Api.Contract.AReceber;
+using FinTech.Api.Domain.Services.Classes;
 using FinTech.Api.Domain.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,10 @@ namespace FinTech.Api.Controllers
     [Route("AReceber")]
     public class AReceberController : BaseController
     {
-        private readonly IService<AReceberRequestContract, AReceberResponseContract, long> _aReceberService;
+        private readonly ITituloService<AReceberRequestContract, AReceberResponseContract, long> _aReceberService;
         private readonly IMapper _mapper;
-
-        public AReceberController(
-            IService<AReceberRequestContract, AReceberResponseContract, long> aReceberService)
+        
+        public AReceberController(ITituloService<AReceberRequestContract, AReceberResponseContract, long> aReceberService)
         {
             _aReceberService = aReceberService;
         }
@@ -136,5 +136,29 @@ namespace FinTech.Api.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [HttpGet("periodo")]
+        [SwaggerOperation(Summary = "Consulta títulos a receber por período de emissão.", Description = "Este endpoint retorna os títulos a receber dentro de um período de emissão específico.")]
+        [Authorize]
+        public async Task<IActionResult> ObterPorPeriodo([FromQuery] DateTime dataInicial, [FromQuery] DateTime dataFinal)
+        {
+            try
+            {
+                if (dataInicial > dataFinal)
+                {
+                    return BadRequest("A data inicial não pode ser maior que a data final.");
+                }
+
+                _idUsuario = ObterIdUsuarioLogado(); // Obter ID do usuário logado
+                var aReceber = await _aReceberService.ObterPorPeriodo(dataInicial, dataFinal, _idUsuario);
+
+                return Ok(aReceber);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
     }
 }

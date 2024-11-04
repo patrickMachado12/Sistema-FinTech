@@ -8,7 +8,7 @@ using FinTech.Api.Domain.Services.Interfaces;
 
 namespace FinTech.Api.Domain.Services.Classes
 {
-    public class AReceberService : IService<AReceberRequestContract, AReceberResponseContract, long>
+    public class AReceberService : ITituloService<AReceberRequestContract, AReceberResponseContract, long>
     {
         private readonly IAReceberRepository _aReceberRepository;
         private readonly IMapper _mapper;
@@ -49,7 +49,6 @@ namespace FinTech.Api.Domain.Services.Classes
             ValidarCamposObrigatorios(entidade);
 
             AReceber aReceber = _mapper.Map<AReceber>(entidade);
-            aReceber.DataEmissao = DateTime.Now;
             aReceber.IdUsuario = idUsuario;
 
             aReceber = await _aReceberRepository.Adicionar(aReceber);
@@ -110,7 +109,6 @@ namespace FinTech.Api.Domain.Services.Classes
             aReceber.Id = aReceber.Id;
             aReceber.IdUsuario = aReceber.IdUsuario;
             aReceber.DataEmissao = aReceber.DataEmissao;
-            aReceber.DataExclusao = aReceber.DataExclusao;
 
             aReceber = await _aReceberRepository.Atualizar(aReceber);
 
@@ -172,5 +170,34 @@ namespace FinTech.Api.Domain.Services.Classes
             return _mapper.Map<AReceberResponseContract>(aReceber);
         }
 
+        public async Task<IEnumerable<AReceberResponseContract>> ObterPorPeriodo(DateTime dataInicial, DateTime dataFinal, long idUsuario)
+        {
+            var aReceber = await _aReceberRepository.ObterPorPeriodo(dataInicial, dataFinal, idUsuario);
+            return _mapper.Map<IEnumerable<AReceberResponseContract>>(aReceber);
+        }
+
+        public async Task<IEnumerable<AReceberResponseContract>> ObterTituloPorId(int id)
+        {
+            var aReceber = await _aReceberRepository.ObterPorId(id);
+            return _mapper.Map<IEnumerable<AReceberResponseContract>>(aReceber);
+        }
+
+        // public async Task<AReceberResponseContract> GetAReceberByIdAsync(int id)
+        // {
+        //     var aReceber = await _aReceberRepository.GetByIdAsync(id);
+        //     return _mapper.Map<AReceberResponseContract>(aReceber);
+        // }
+
+        // Task<AReceberResponse> ITituloService<AReceberRequestContract, AReceberResponseContract, long>.GetAReceberByIdAsync(int id)
+        // {
+        //     var aReceber = await _aReceberRepository.GetByIdAsync(id);
+        //     return _mapper.Map<AReceberResponseContract>(aReceber);
+        // }
+
+        // Task<IEnumerable<AReceberResponseContract>> ITituloService<AReceberRequestContract, AReceberResponseContract, long>.GetAReceberByIdAsync(int id)
+        // {
+        //     var aReceber = await _aReceberRepository.GetByIdAsync(id);
+        //     return _mapper.Map<AReceberResponseContract>(aReceber);
+        // }
     }
 }

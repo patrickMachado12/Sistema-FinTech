@@ -3,6 +3,7 @@ using System;
 using FinTech.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinTech.Api.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20241103213338_CriarEntidadeUsuario")]
+    partial class CriarEntidadeUsuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,10 +86,10 @@ namespace FinTech.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime>("DataEmissao")
+                    b.Property<DateTime?>("DataRecebimento")
                         .HasColumnType("timestamp");
 
-                    b.Property<DateTime?>("DataRecebimento")
+                    b.Property<DateTime>("DataEmissao")
                         .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("DataReferencia")

@@ -1,43 +1,51 @@
 import api from './api';
 
 function obterTodos(){
-    return new Promise((resolve, reject) => {
-        return api.get('/APagar/obterTodos')
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+    return api.get('/APagar/obterTodos')
+        .then(response => (response))
+        .catch(error => {
+            throw error;
+        });
 }
 
 function obterPorId(id){
-    return new Promise((resolve, reject) => {
-        return api.get(`/APagar/${id}`)
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+    return api.get(`/APagar/id/${id}`)
+        .then(response => (response))
+        .catch(error => {
+            throw error;
+        });
 }
 
 function cadastrar(aPagar){
-    return new Promise((resolve, reject) => {
-        return api.post(`/APagar`, aPagar)
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+    return api.post(`/APagar`, aPagar)
+        .then(response => (response))
+        .catch(error => {
+            throw error;
+        });
 }
 
 function atualizar(aPagar){
-    return new Promise((resolve, reject) => {
-        return api.put(`/APagar/${aPagar.id}`, aPagar)
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+    return api.put(`/APagar/${aPagar.id}`, aPagar)
+        .then(response => (response))
+        .catch(error => {
+            throw error;
+        });
 }
 
 function deletar(id){
-    return new Promise((resolve, reject) => {
-        return api.delete(`/APagar/${id}`)
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+    return api.delete(`/APagar/${id}`)
+        .then(response => (response))
+        .catch(error => {
+            throw error;
+        });  
+}
+
+function obterPorPeriodo(dataInicial, datafinal) {
+    return api.get(`/APagar/periodo?dataInicial=${dataInicial}&dataFinal=${datafinal}`)
+        .then(response => (response))
+        .catch(error => {
+            throw error;
+        });
 }
 
 export default {
@@ -45,5 +53,6 @@ export default {
     obterPorId,
     cadastrar,
     atualizar,
-    deletar
+    deletar,
+    obterPorPeriodo,
 }

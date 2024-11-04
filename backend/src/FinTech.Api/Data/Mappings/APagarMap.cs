@@ -32,8 +32,7 @@ namespace FinTech.Api.Data.Mappings
             .IsRequired();
 
             builder.Property(p => p.ValorPago)
-            .HasColumnType("double precision")
-            .IsRequired();
+            .HasColumnType("double precision");
 
             builder.Property(p => p.DataEmissao)
             .HasColumnType("timestamp")
@@ -47,9 +46,6 @@ namespace FinTech.Api.Data.Mappings
             .HasColumnType("timestamp");
 
             builder.Property(p => p.DataReferencia)
-            .HasColumnType("timestamp");
-
-            builder.Property(p => p.DataExclusao)
             .HasColumnType("timestamp");
 
             builder.Property(p => p.Observacao)

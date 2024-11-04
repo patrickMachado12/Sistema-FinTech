@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FinTech.Api.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241025020430_CriarEntidadeAReceber")]
-    partial class CriarEntidadeAReceber
+    [Migration("20241103213410_CriarEntidadeAPagar")]
+    partial class CriarEntidadeAPagar
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,9 +34,6 @@ namespace FinTech.Api.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("DataEmissao")
-                        .HasColumnType("timestamp");
-
-                    b.Property<DateTime?>("DataExclusao")
                         .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("DataPagamento")
@@ -89,13 +86,10 @@ namespace FinTech.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime?>("DataBaixa")
+                    b.Property<DateTime?>("DataRecebimento")
                         .HasColumnType("timestamp");
 
                     b.Property<DateTime>("DataEmissao")
-                        .HasColumnType("timestamp");
-
-                    b.Property<DateTime?>("DataExclusao")
                         .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("DataReferencia")
@@ -148,9 +142,6 @@ namespace FinTech.Api.Migrations
                     b.Property<DateTime>("DataCadastro")
                         .HasColumnType("timestamp");
 
-                    b.Property<DateTime?>("DataInativacao")
-                        .HasColumnType("timestamp");
-
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("VARCHAR");
@@ -183,9 +174,6 @@ namespace FinTech.Api.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("VARCHAR");
@@ -216,9 +204,6 @@ namespace FinTech.Api.Migrations
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("VARCHAR");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 

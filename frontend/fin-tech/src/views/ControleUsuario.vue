@@ -144,8 +144,7 @@ export default {
       editedIndex: -1,
       editedItem: {
         email: "",
-        senha: "",
-        status: true
+        senha: ""
       },
 
       headers: [
@@ -158,7 +157,6 @@ export default {
         { text: "E-mail", value: "email" },
         { text: "Data Cadastro", value: "dataCadastro" },
         { text: "Data Exclusão", value: "dataInativacao" },
-        { text: "Status", value: "status" },
         { text: "Ações", value: "actions", sortable: false },
       ],
     };
@@ -242,7 +240,7 @@ export default {
 
     deleteItem(item) {
       const index = this.usuarios.indexOf(item);
-      confirm("Deseja excluir está usuario?") &&
+      confirm("Deseja excluir este usuario?") &&
         this.usuarios.splice(index, 1);
 
       usuarioService

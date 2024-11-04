@@ -37,9 +37,14 @@ namespace FinTech.Api.Domain.Repository.Classes
         }
 
         public async Task Deletar(Usuario entidade)
-        {
-           _contexto.Entry(entidade).State = EntityState.Deleted;
-           await _contexto.SaveChangesAsync();
+        {  
+           // Deletar logíco, só altero a data de inativação.
+            entidade.DataInativacao = DateTime.Now;
+
+            _contexto.Attach(entidade);
+            _contexto.Entry(entidade).Property(e => e.DataInativacao).IsModified = true;
+
+            await _contexto.SaveChangesAsync();
         }
 
         public async Task<Usuario?> Obter(string email)

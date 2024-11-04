@@ -18,8 +18,5 @@ namespace FinTech.Api.Domain.Models
 
         public DateTime? DataInativacao { get; set; }
         
-        [Required]
-        [Range(0, 1)]
-        public Boolean Status { get; set; }
     }
 }

@@ -42,6 +42,7 @@
                   <v-text-field
                     v-model="editedItem.descricao"
                     label="Descrição*"
+                    :rules="[descricaoError]"
                   ></v-text-field>
                 </v-col>
                   
@@ -142,8 +143,8 @@ export default {
       dialog: false,
       editedIndex: -1,
       editedItem: {
-        nome: "",
-        telefone: "",
+        descricao: "",
+        observacao: "",
       
       },
 
@@ -158,12 +159,11 @@ export default {
           text: "Usuário",
           align: "start",
           sortable: true,
-          value: "id",
+          value: "idUsuario",
         },
         { text: "Descrição", value: "descricao" },
         { text: "Observação", value: "observacao" },
         { text: "Data Cadastro", value: "dataCadastro" },
-        { text: "Data Exclusão", value: "dataInativacao" },
         { text: "Ações", value: "actions", sortable: false },
       ],
     };

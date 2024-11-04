@@ -38,7 +38,7 @@ namespace FinTech.Api.Domain.Repository.Classes
         public async Task Deletar(Pessoa entidade)
         {
             _contexto.Entry(entidade).State = EntityState.Deleted;
-           await _contexto.SaveChangesAsync();
+            await _contexto.SaveChangesAsync();
         }
 
         public async Task<Pessoa> ObterPorId(long id)
