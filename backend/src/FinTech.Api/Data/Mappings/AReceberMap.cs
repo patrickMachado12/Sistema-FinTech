@@ -43,13 +43,10 @@ namespace FinTech.Api.Data.Mappings
             .HasColumnType("timestamp")
             .IsRequired();           
 
-            builder.Property(p => p.DataBaixa)
+            builder.Property(p => p.DataRecebimento)
             .HasColumnType("timestamp");
 
             builder.Property(p => p.DataReferencia)
-            .HasColumnType("timestamp");
-
-            builder.Property(p => p.DataExclusao)
             .HasColumnType("timestamp");
 
             builder.Property(p => p.Observacao)

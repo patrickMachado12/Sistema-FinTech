@@ -49,9 +49,6 @@ namespace FinTech.Api.Data.Mappings
             builder.Property(p => p.DataReferencia)
             .HasColumnType("timestamp");
 
-            builder.Property(p => p.DataExclusao)
-            .HasColumnType("timestamp");
-
             builder.Property(p => p.Observacao)
             .HasColumnType("VARCHAR"); 
         }

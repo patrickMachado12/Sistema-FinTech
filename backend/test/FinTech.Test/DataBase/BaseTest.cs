@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using FinTech.Api.AutoMapper;
 using FinTech.Api.Data;
-using FinTech.Api.Domain.Models;
 using FinTech.Api.Domain.Repository.Classes;
 using FinTech.Api.Domain.Repository.Interfaces;
 using FinTech.Api.Domain.Services.Classes;
@@ -68,8 +63,8 @@ namespace FinTech.Test.DataBase
             _aReceberService = new AReceberService(_aReceberRepository, _mapper, _usuarioRepository, _context);
             _naturezaLancamentoRepository = new NaturezaLancamentoRepository(_context);
             _naturezaLancamentoService = new NaturezaLancamentoService(_naturezaLancamentoRepository, _mapper);
-            
-            
+
+
         }
     }
 }

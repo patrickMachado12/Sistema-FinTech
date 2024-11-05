@@ -13,6 +13,5 @@ namespace FinTech.Api.Contract.AReceber
         public DateTime DataVencimento { get; set; }
         public DateTime? DataRecebimento { get; set; }
         public DateTime? DataReferencia { get; set; }
-        public DateTime? DataExclusao { get; set; }
     }
 }

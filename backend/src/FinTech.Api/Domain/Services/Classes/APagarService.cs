@@ -110,7 +110,6 @@ namespace FinTech.Api.Domain.Services.Classes
             aPagar.Id = aPagar.Id;
             aPagar.IdUsuario = aPagar.IdUsuario;
             aPagar.DataEmissao = aPagar.DataEmissao;
-            aPagar.DataExclusao = aPagar.DataExclusao;
 
             aPagar = await _aPagarRepository.Atualizar(aPagar);
 

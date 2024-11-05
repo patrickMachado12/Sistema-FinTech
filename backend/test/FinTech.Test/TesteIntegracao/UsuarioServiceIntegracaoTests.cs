@@ -11,7 +11,6 @@ namespace FinTech.Test.DataBase
         [Fact]
         public async Task Deve_Criar_Usuario_Com_Sucesso()
         {
-            // Arrange
             var usuarioRequestContract = new UsuarioRequestContract
             {
                 Email = "testuser@gmail.com",
@@ -19,7 +18,7 @@ namespace FinTech.Test.DataBase
             };
 
             var resultado = await _usuarioService.Adicionar(usuarioRequestContract, 1);
-            // Assert
+
             Assert.NotNull(resultado);
             Assert.Equal("testuser@gmail.com", resultado.Email);
         }
@@ -27,7 +26,6 @@ namespace FinTech.Test.DataBase
         [Fact]
         public async Task Deve_Obter_Usuario_Por_Id()
         {
-            // Arrange
             var usuarioRequestContract = new UsuarioRequestContract
             {
                 Email = "testuser@gmail.com",
@@ -36,7 +34,6 @@ namespace FinTech.Test.DataBase
 
             var resultado = await _usuarioService.Adicionar(usuarioRequestContract, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(resultado.Id, resultado.Id);
         }
@@ -44,7 +41,6 @@ namespace FinTech.Test.DataBase
         [Fact]
         public async Task Deve_Atualizar_Usuario_Com_Sucesso()
         {
-            // Arrange
             var usuarioRequestContract = new UsuarioRequestContract
             {
                 Email = "testuser@gmail.com",
@@ -53,7 +49,6 @@ namespace FinTech.Test.DataBase
 
             var usuario = await _usuarioService.Adicionar(usuarioRequestContract, 1);
 
-            // Act - Atualiza o email do usuário
             var usuarioAtualizado = new UsuarioRequestContract
             {
                 Email = "testeAtualizado@gmail.com",
@@ -63,7 +58,6 @@ namespace FinTech.Test.DataBase
             await _usuarioService.Atualizar(usuario.Id, usuarioAtualizado, 1);
             var resultado = await _usuarioService.Obter(usuario.Id.ToString());
 
-            // Assert
             Assert.Equal("testeAtualizado@gmail.com", resultado.Email);
         }
 
@@ -71,7 +65,6 @@ namespace FinTech.Test.DataBase
         [Fact]
         public async Task Deve_Deletar_Usuario_Com_Sucesso()
         {
-            // Arrange
             var usuarioRequestContract = new UsuarioRequestContract
             {
                 Email = "testuser@gmail.com",
@@ -80,11 +73,9 @@ namespace FinTech.Test.DataBase
 
             var usuario = await _usuarioService.Adicionar(usuarioRequestContract, 1);
 
-            // Act
             await _usuarioService.Inativar(usuario.Id, 1);
             var resultado = await _usuarioService.Obter(usuario.Id.ToString());
 
-            // Assert
             Assert.Null(resultado);
         }
     }

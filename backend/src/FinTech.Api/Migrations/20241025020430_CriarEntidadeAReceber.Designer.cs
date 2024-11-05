@@ -36,9 +36,6 @@ namespace FinTech.Api.Migrations
                     b.Property<DateTime>("DataEmissao")
                         .HasColumnType("timestamp");
 
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("timestamp");
-
                     b.Property<DateTime?>("DataPagamento")
                         .HasColumnType("timestamp");
 
@@ -89,13 +86,10 @@ namespace FinTech.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime?>("DataBaixa")
+                    b.Property<DateTime?>("DataRecebimento")
                         .HasColumnType("timestamp");
 
                     b.Property<DateTime>("DataEmissao")
-                        .HasColumnType("timestamp");
-
-                    b.Property<DateTime?>("DataExclusao")
                         .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("DataReferencia")

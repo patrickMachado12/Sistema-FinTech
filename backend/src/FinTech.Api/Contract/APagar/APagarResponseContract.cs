@@ -13,6 +13,5 @@ namespace FinTech.Api.Contract.APagar
         public DateTime DataVencimento { get; set; }
         public DateTime? DataPagamento { get; set; }
         public DateTime? DataReferencia { get; set; }
-        public DateTime? DataExclusao { get; set; }
     }
 }

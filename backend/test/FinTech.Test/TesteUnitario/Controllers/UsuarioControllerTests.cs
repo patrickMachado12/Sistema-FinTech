@@ -5,8 +5,6 @@ using FinTech.Api.Domain.Services.Interfaces;
 using FinTech.Api.Domain.Models;
 using FinTech.Api.Contract.Usuario;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace FinTech.Test.TesteUnitario.Controllers
 {
@@ -24,7 +22,6 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve retornar uma lista de usuários.")]
         public async Task Get_DeveRetornarListaDeUsuarios_QuandoUsuariosExistem()
         {
-            // Arrange
             var usuariosResponseContracts = new List<UsuarioResponseContract>
             {
                 new UsuarioResponseContract { Id = 1, Email = "joao@email.com" },
@@ -33,10 +30,8 @@ namespace FinTech.Test.TesteUnitario.Controllers
 
             _usuarioServiceMock.Setup(s => s.ObterTodos(It.IsAny<int>())).ReturnsAsync(usuariosResponseContracts);
 
-            // Act
             var resultado = await _usuarioController.ObterTodos();
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(resultado);
             var usuariosRetornados = Assert.IsAssignableFrom<List<UsuarioResponseContract>>(okResult.Value);
             Assert.Equal(usuariosResponseContracts.Count, usuariosRetornados.Count);
@@ -49,15 +44,12 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve retornar um usuário por ID.")]
         public async Task Get_DeveRetornarUsuario_QuandoUsuarioExiste()
         {
-            // Arrange
             var usuarioResponseContract = new UsuarioResponseContract { Id = 1, Email = "joao@email.com" };
 
             _usuarioServiceMock.Setup(s => s.Obter("1")).ReturnsAsync(usuarioResponseContract);
 
-            // Act
             var resultado = await _usuarioController.Obter(1);
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(resultado);
             var usuarioRetornado = Assert.IsAssignableFrom<UsuarioResponseContract>(okResult.Value);
             Assert.Equal(usuarioResponseContract.Id, usuarioRetornado.Id);
@@ -67,16 +59,13 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve criar um novo usuário.")]
         public async Task Post_DeveCriarUsuario_QuandoUsuarioEhValido()
         {
-            // Arrange
             var usuarioRequestContract = new UsuarioRequestContract { Email = "joao@email.com" };
             var usuarioResponseContract = new UsuarioResponseContract { Id = 1, Email = "joao@email.com" };
 
             _usuarioServiceMock.Setup(s => s.Adicionar(usuarioRequestContract, It.IsAny<int>())).ReturnsAsync(usuarioResponseContract);
 
-            // Act
             var resultado = await _usuarioController.Adicionar(usuarioRequestContract);
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(resultado);
             var usuarioRetornado = Assert.IsAssignableFrom<UsuarioResponseContract>(okResult.Value);
             Assert.Equal(usuarioResponseContract.Id, usuarioRetornado.Id);
@@ -86,17 +75,14 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve atualizar um usuário existente.")]
         public async Task Put_DeveAtualizarUsuario_QuandoUsuarioExiste()
         {
-            // Arrange
             var usuarioRequestContract = new UsuarioRequestContract { Email = "joao@email.com" };
             var usuarioResponseContract = new UsuarioResponseContract { Id = 1, Email = "joao@email.com" };
 
             _usuarioServiceMock.Setup(s => s.Obter("1")).ReturnsAsync(usuarioResponseContract);
             _usuarioServiceMock.Setup(s => s.Atualizar(1, usuarioRequestContract, It.IsAny<int>())).ReturnsAsync(usuarioResponseContract);
 
-            // Act
             var resultado = await _usuarioController.Atualizar(1, usuarioRequestContract);
 
-            // Assert
             var okResult = Assert.IsType<OkObjectResult>(resultado);
             var usuarioRetornado = Assert.IsAssignableFrom<UsuarioResponseContract>(okResult.Value);
             Assert.Equal(usuarioResponseContract.Id, usuarioRetornado.Id);
@@ -106,16 +92,13 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve deletar um usuário existente.")]
         public async Task Delete_DeveDeletarUsuario_QuandoUsuarioExiste()
         {
-            // Arrange
             var usuario = new Usuario { Email = "joao@email.com" };
 
             _usuarioServiceMock.Setup(s => s.Obter("1")).ReturnsAsync(new UsuarioResponseContract { Id = 1, Email = "joao@email.com" });
             _usuarioServiceMock.Setup(s => s.Inativar(1, It.IsAny<int>())).Returns(Task.CompletedTask);
 
-            // Act
             var resultado = await _usuarioController.Deletar(1);
 
-            // Assert
             Assert.IsType<OkResult>(resultado);
         }
     }

@@ -22,7 +22,7 @@ namespace FinTech.Test.TesteUnitario.Services
         {
             _usuarioRepositoryMock = new Mock<IUsuarioRepository>();
             var mapperMock = new Mock<IMapper>();
-            //var tokenServiceMock = new Mock<TokenService>();
+
             var tokenServiceMock = CreateTokenServiceMock();
             _usuarioService = new UsuarioService(_usuarioRepositoryMock.Object, mapperMock.Object, tokenServiceMock);
         }
@@ -39,15 +39,12 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve realizar o cadastro de um novo usuário.")]
         public async Task Cadastrar_DeveRetornarTrue_QuandoUsuarioEhValido()
         {
-            // Arrange
             var usuario = new Usuario { Email = "joao@email.com", Senha = "123456" };
             var usuarioRequestContract = ToRequestContract(usuario);
             _usuarioRepositoryMock.Setup(r => r.Adicionar(usuario)).ReturnsAsync(new Usuario { Id = 1, Email = "joao@email.com", Senha = "123456" });
 
-            // Act
             var resultado = await _usuarioService.Adicionar(usuarioRequestContract, 1);
 
-            // Assert
             Assert.NotNull(resultado);
         }
 
@@ -55,30 +52,24 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Não deve realizar o cadastro de um novo usuário.")]
         public async Task Cadastrar_DeveRetornarFalse_QuandoUsuarioEhInvalido()
         {
-            // Arrange
             var usuario = new Usuario { Email = string.Empty, Senha = string.Empty };
             var usuarioRequestContract = ToRequestContract(usuario);
             _usuarioRepositoryMock.Setup(r => r.Adicionar(usuario)).ReturnsAsync((Usuario)null);
 
-            // Act
             var resultado = await _usuarioService.Adicionar(usuarioRequestContract, 1);
 
-            // Assert
             Assert.Null(resultado);
         }
 
         [Fact(DisplayName = "Deve obter um usuário por ID.")]
         public void ObterPorId_DeveRetornarUsuario_QuandoIdEhValido()
         {
-            // Arrange
             var id = 1;
             var usuario = new Usuario { Id = id, Email = "joao@email.com", Senha = "123456",};
             _usuarioRepositoryMock.Setup(r => r.ObterPorId(id)).ReturnsAsync(usuario);
 
-            // Act
             var resultado = _usuarioService.Obter(id, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(id, resultado.Id);
         }
@@ -86,22 +77,18 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Não deve obter um usuário por ID.")]
         public void ObterPorId_DeveRetornarNull_QuandoIdEhInvalido()
         {
-            // Arrange
             var id = 0;
             var usuario = new Usuario { Id = id, Email = "joao@email.com", Senha = "123456",};
             _usuarioRepositoryMock.Setup(r => r.ObterPorId(id)).ReturnsAsync(usuario);
 
-            // Act
             var resultado = _usuarioService.Obter(id, 0);
 
-            // Assert
             Assert.Null(resultado);
         }
 
         [Fact(DisplayName = "Deve obter uma lista de usuários.")]
         public void ObterTodos_DeveRetornarListaDeUsuarios()
         {
-            // Arrange
             var usuarios = new List<Usuario>
             {
                 new Usuario { Id = 1, Email = "joao@email.com", Senha = "123456",},
@@ -110,10 +97,8 @@ namespace FinTech.Test.TesteUnitario.Services
             var idUsuario = 1;
             _usuarioRepositoryMock.Setup(r => r.Obter()).ReturnsAsync(usuarios);
 
-            // Act
             var resultado = _usuarioService.ObterTodos(idUsuario).Result;
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.NotEmpty(resultado);
         }
@@ -122,13 +107,10 @@ namespace FinTech.Test.TesteUnitario.Services
         public void ObterTodos_DeveRetornarListaVazia()
         {
             var idUsuario = 0;
-            // Arrange
             _usuarioRepositoryMock.Setup(r => r.Obter()).Returns(Task.FromResult(Enumerable.Empty<Usuario>()));
 
-            // Act
             var resultado = _usuarioService.ObterTodos(idUsuario).Result;;
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Empty(resultado);
         }

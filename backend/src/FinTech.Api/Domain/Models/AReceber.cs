@@ -37,11 +37,9 @@ namespace FinTech.Api.Domain.Models
         [Required(ErrorMessage = "O campo DataVencimento é obrigatório.")]
         public DateTime DataVencimento { get; set; }
 
-        public DateTime? DataBaixa { get; set; }
+        public DateTime? DataRecebimento { get; set; }
 
         public DateTime? DataReferencia { get; set; }
-
-        public DateTime? DataExclusao { get; set; }
 
         public string? Observacao { get; set; } = string.Empty;
     }

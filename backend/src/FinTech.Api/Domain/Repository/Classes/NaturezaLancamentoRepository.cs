@@ -39,8 +39,8 @@ namespace FinTech.Api.Domain.Repository.Classes
         public async Task Deletar(NaturezaLancamento entidade)
         {   
             // Deletar logíco, só altero a data de inativação.
-            entidade.DataInativacao = DateTime.Now;
-            await Atualizar(entidade);
+            _contexto.Entry(entidade).State = EntityState.Deleted;
+           await _contexto.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<NaturezaLancamento>> Obter()

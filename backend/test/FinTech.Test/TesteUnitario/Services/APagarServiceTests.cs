@@ -15,7 +15,7 @@ namespace FinTech.Test.TesteUnitario.Services
         private readonly Mock<IPessoaRepository> _pessoaRepositoryMock;
         private readonly Mock<IUsuarioRepository> _usuarioRepositoryMock;
         private readonly Mock<IMapper> _mapperMock;
-        private readonly Mock<ApplicationContext> _applicationContextMock; // Adicione isso
+        private readonly Mock<ApplicationContext> _applicationContextMock;
         private readonly APagarService _aPagarService;
 
         public APagarServiceTests()
@@ -24,14 +24,13 @@ namespace FinTech.Test.TesteUnitario.Services
             _pessoaRepositoryMock = new Mock<IPessoaRepository>();
             _usuarioRepositoryMock = new Mock<IUsuarioRepository>();
             _mapperMock = new Mock<IMapper>();
-            _applicationContextMock = new Mock<ApplicationContext>(); // Adicione isso
+            _applicationContextMock = new Mock<ApplicationContext>();
             _aPagarService = new APagarService(_aPagarRepositoryMock.Object, _mapperMock.Object, _usuarioRepositoryMock.Object, _applicationContextMock.Object);
         }
 
         [Fact(DisplayName = "Deve realizar o cadastro de um novo a pagar.")]
         public async Task Adicionar_DeveRetornarAPagarResponseContract_QuandoAPagarEhValido()
         {
-            // Arrange
             var aPagarRequestContract = new APagarRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
             var aPagar = new APagar { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
             var aPagarResponseContract = new APagarResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
@@ -40,10 +39,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aPagarRepositoryMock.Setup(r => r.Adicionar(aPagar)).Returns(Task.FromResult(aPagar));
             _mapperMock.Setup(m => m.Map<APagarResponseContract>(aPagar)).Returns(aPagarResponseContract);
 
-            // Act
             var resultado = await _aPagarService.Adicionar(aPagarRequestContract, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aPagarResponseContract.Id, resultado.Id);
             Assert.Equal(aPagarResponseContract.IdPessoa, resultado.IdPessoa);
@@ -54,7 +51,6 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve atualizar um a pagar existente.")]
         public async Task Atualizar_DeveRetornarAPagarResponseContract_QuandoAPagarEhValido()
         {
-            // Arrange
             var id = 1;
             var aPagarRequestContract = new APagarRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
             var aPagar = new APagar { Id = id, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
@@ -64,10 +60,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aPagarRepositoryMock.Setup(r => r.Atualizar(aPagar)).Returns(Task.FromResult(aPagar));
             _mapperMock.Setup(m => m.Map<APagarResponseContract>(aPagar)).Returns(aPagarResponseContract);
 
-            // Act
             var resultado = await _aPagarService.Atualizar(1, aPagarRequestContract, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aPagarResponseContract.Id, resultado.Id);
             Assert.Equal(aPagarResponseContract.IdPessoa, resultado.IdPessoa);
@@ -78,7 +72,6 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve deletar um a pagar existente.")]
         public async Task Deletar_DeveRetornarAPagarResponseContract_QuandoAPagarEhValido()
         {
-            // Arrange
             var id = 1;
             var aPagar = new APagar { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
             var aPagarResponseContract = new APagarResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
@@ -87,10 +80,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aPagarRepositoryMock.Setup(r => r.Deletar(aPagar)).Returns(Task.FromResult(true));
             _mapperMock.Setup(m => m.Map<APagarResponseContract>(aPagar)).Returns(aPagarResponseContract);
 
-            // Act
             var resultado = _aPagarService.Inativar(1, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aPagarResponseContract.Id, resultado.Id);
         }
@@ -98,7 +89,6 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve obter um a pagar por ID.")]
         public async Task ObterPorId_DeveRetornarAPagarResponseContract_QuandoAPagarEhValido()
         {
-            // Arrange
             var id = 1;
             var aPagar = new APagar { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
             var aPagarResponseContract = new APagarResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
@@ -106,10 +96,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aPagarRepositoryMock.Setup(r => r.ObterPorId(id)).Returns(Task.FromResult(aPagar));
             _mapperMock.Setup(m => m.Map<APagarResponseContract>(aPagar)).Returns(aPagarResponseContract);
 
-            // Act
             var resultado = await _aPagarService.Obter(1, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aPagarResponseContract.Id, resultado.Id);
             Assert.Equal(aPagarResponseContract.IdPessoa, resultado.IdPessoa);
@@ -120,7 +108,6 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve retornar uma lista de a pagar.")]
         public async Task ObterTodos_DeveRetornarListaDeAPagarResponseContract_QuandoAPagarExistem()
         {
-            // Arrange
             var aPagar = new List<APagar>
             {
                 new APagar { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 },
@@ -135,10 +122,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aPagarRepositoryMock.Setup(r => r.ObterTodos()).Returns(Task.FromResult((IEnumerable<APagar>)aPagar));
             _mapperMock.Setup(m => m.Map<List<APagarResponseContract>>(aPagar)).Returns(aPagarResponseContract);
 
-            // Act
             var resultado = (await _aPagarService.ObterTodos(1)).ToList();
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aPagarResponseContract.Count, resultado.Count());
             Assert.Equal(aPagarResponseContract[0].Id, resultado[0].Id);

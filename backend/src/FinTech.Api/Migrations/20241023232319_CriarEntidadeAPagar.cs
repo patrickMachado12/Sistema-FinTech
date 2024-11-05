@@ -76,7 +76,6 @@ namespace FinTech.Api.Migrations
                     DataVencimento = table.Column<DateTime>(type: "timestamp", nullable: false),
                     DataPagamento = table.Column<DateTime>(type: "timestamp", nullable: true),
                     DataReferencia = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    DataExclusao = table.Column<DateTime>(type: "timestamp", nullable: true),
                     Observacao = table.Column<string>(type: "VARCHAR", nullable: true)
                 },
                 constraints: table =>

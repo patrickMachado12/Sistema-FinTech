@@ -46,7 +46,9 @@ namespace FinTech.Test.DataBase
             });
             var pessoa = await _pessoaService.Adicionar(pessoaRequestContract);
             pessoaRequestContract.Nome = "Pessoa Atualizada";
+
             await _pessoaService.Atualizar(pessoa.Id, pessoaRequestContract);
+
             var resultado = await _pessoaService.ObterPorId(pessoa.Id);
             Assert.Equal("Pessoa Atualizada", resultado.Nome);
         }
@@ -60,7 +62,9 @@ namespace FinTech.Test.DataBase
                 Telefone = "123456789"
             });
             var pessoa = await _pessoaService.Adicionar(pessoaRequestContract);
+
             await _pessoaService.Deletar(pessoa.Id, pessoaRequestContract);
+            
             var resultado = await _pessoaService.ObterPorId(pessoa.Id);
             Assert.Null(resultado);
         }

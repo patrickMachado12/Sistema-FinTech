@@ -15,7 +15,7 @@ namespace FinTech.Test.TesteUnitario.Services
         private readonly Mock<IPessoaRepository> _pessoaRepositoryMock;
         private readonly Mock<IUsuarioRepository> _usuarioRepositoryMock;
         private readonly Mock<IMapper> _mapperMock;
-        private readonly Mock<ApplicationContext> _applicationContextMock; // Adicione isso
+        private readonly Mock<ApplicationContext> _applicationContextMock;
         private readonly AReceberService _aReceberService;
 
         public AReceberServiceTests()
@@ -24,14 +24,13 @@ namespace FinTech.Test.TesteUnitario.Services
             _pessoaRepositoryMock = new Mock<IPessoaRepository>();
             _usuarioRepositoryMock = new Mock<IUsuarioRepository>();
             _mapperMock = new Mock<IMapper>();
-            _applicationContextMock = new Mock<ApplicationContext>(); // Adicione isso
+            _applicationContextMock = new Mock<ApplicationContext>();
             _aReceberService = new AReceberService(_aReceberRepositoryMock.Object, _mapperMock.Object, _usuarioRepositoryMock.Object, _applicationContextMock.Object);
         }
 
         [Fact(DisplayName = "Deve realizar o cadastro de um novo a receber.")]
         public async Task Adicionar_DeveRetornarAReceberResponseContract_QuandoAReceberEhValido()
         {
-            // Arrange
             var aReceberRequestContract = new AReceberRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
             var aReceber = new AReceber { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
             var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
@@ -40,10 +39,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aReceberRepositoryMock.Setup(r => r.Adicionar(aReceber)).Returns(Task.FromResult(aReceber));
             _mapperMock.Setup(m => m.Map<AReceberResponseContract>(aReceber)).Returns(aReceberResponseContract);
 
-            // Act
             var resultado = await _aReceberService.Adicionar(aReceberRequestContract, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Id, resultado.Id);
             Assert.Equal(aReceberResponseContract.IdPessoa, resultado.IdPessoa);
@@ -54,7 +51,6 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve atualizar um a receber existente.")]
         public async Task Atualizar_DeveRetornarAReceberResponseContract_QuandoAReceberEhValido()
         {
-            // Arrange
             var id = 1;
             var aReceberRequestContract = new AReceberRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
             var aReceber = new AReceber { Id = id, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
@@ -64,10 +60,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aReceberRepositoryMock.Setup(r => r.Atualizar(aReceber)).Returns(Task.FromResult(aReceber));
             _mapperMock.Setup(m => m.Map<AReceberResponseContract>(aReceber)).Returns(aReceberResponseContract);
 
-            // Act
             var resultado = await _aReceberService.Atualizar(1, aReceberRequestContract, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Id, resultado.Id);
             Assert.Equal(aReceberResponseContract.IdPessoa, resultado.IdPessoa);
@@ -78,7 +72,6 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve deletar um a receber existente.")]
         public async Task Deletar_DeveRetornarAReceberResponseContract_QuandoAReceberEhValido()
         {
-            // Arrange
             var id = 1;
             var aReceber = new AReceber { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
             var aReceberResponseContract = new AReceberResponseContract { Id = id, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
@@ -87,10 +80,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aReceberRepositoryMock.Setup(r => r.Deletar(aReceber)).Returns(Task.FromResult(true));
             _mapperMock.Setup(m => m.Map<AReceberResponseContract>(aReceber)).Returns(aReceberResponseContract);
 
-            // Act
             var resultado = _aReceberService.Inativar(1, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Id, resultado.Id);
         }
@@ -98,7 +89,6 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve obter um a receber por ID.")]
         public async Task ObterPorId_DeveRetornarAReceberResponseContract_QuandoAReceberEhValido()
         {
-            // Arrange
             var id = 1;
             var aReceber = new AReceber { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
             var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
@@ -106,10 +96,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aReceberRepositoryMock.Setup(r => r.ObterPorId(id)).Returns(Task.FromResult(aReceber));
             _mapperMock.Setup(m => m.Map<AReceberResponseContract>(aReceber)).Returns(aReceberResponseContract);
 
-            // Act
             var resultado = await _aReceberService.Obter(1, 1);
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Id, resultado.Id);
             Assert.Equal(aReceberResponseContract.IdPessoa, resultado.IdPessoa);
@@ -120,7 +108,6 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve retornar uma lista de a receber.")]
         public async Task ObterTodos_DeveRetornarListaDeAReceberResponseContract_QuandoAReceberExistem()
         {
-            // Arrange
             var aReceber = new List<AReceber>
             {
                 new AReceber { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 },
@@ -135,10 +122,8 @@ namespace FinTech.Test.TesteUnitario.Services
             _aReceberRepositoryMock.Setup(r => r.ObterTodos()).Returns(Task.FromResult((IEnumerable<AReceber>)aReceber));
             _mapperMock.Setup(m => m.Map<List<AReceberResponseContract>>(aReceber)).Returns(aReceberResponseContract);
 
-            // Act
             var resultado = (await _aReceberService.ObterTodos(1)).ToList();
 
-            // Assert
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Count, resultado.Count());
             Assert.Equal(aReceberResponseContract[0].Id, resultado[0].Id);

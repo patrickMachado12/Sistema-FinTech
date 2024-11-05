@@ -41,8 +41,6 @@ namespace FinTech.Api.Domain.Models
 
         public DateTime? DataReferencia { get; set; }
 
-        public DateTime? DataExclusao { get; set; }
-
         public string? Observacao { get; set; } = string.Empty;
     }
 }

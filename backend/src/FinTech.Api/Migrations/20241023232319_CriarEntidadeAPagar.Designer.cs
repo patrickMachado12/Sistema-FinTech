@@ -36,9 +36,6 @@ namespace FinTech.Api.Migrations
                     b.Property<DateTime>("DataEmissao")
                         .HasColumnType("timestamp");
 
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("timestamp");
-
                     b.Property<DateTime?>("DataPagamento")
                         .HasColumnType("timestamp");
 

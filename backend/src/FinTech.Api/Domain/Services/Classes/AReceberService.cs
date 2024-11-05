@@ -110,7 +110,6 @@ namespace FinTech.Api.Domain.Services.Classes
             aReceber.Id = aReceber.Id;
             aReceber.IdUsuario = aReceber.IdUsuario;
             aReceber.DataEmissao = aReceber.DataEmissao;
-            aReceber.DataExclusao = aReceber.DataExclusao;
 
             aReceber = await _aReceberRepository.Atualizar(aReceber);
 
