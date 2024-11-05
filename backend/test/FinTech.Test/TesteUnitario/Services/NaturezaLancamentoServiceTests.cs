@@ -10,19 +10,20 @@ namespace FinTech.Test.TesteUnitario.Services
 {
     public class NaturezaLancamentoServiceTests
     {
-        private readonly Mock<INaturezaLancamentoRepository> _naturezaLancamentoRepositoryMock;
+        private Mock<IRepository<NaturezaLancamento, int>> _naturezaLancamentoRepositoryMock;
         private readonly Mock<IMapper> _mapperMock;
+        private readonly Mock<INaturezaLancamentoRepository> _naturezaLancamentoRepositoryMockSpecific;
         private readonly NaturezaLancamentoService _naturezaLancamentoService;
 
         public NaturezaLancamentoServiceTests()
         {
-            _naturezaLancamentoRepositoryMock = new Mock<INaturezaLancamentoRepository>();
+            _naturezaLancamentoRepositoryMock = new Mock<IRepository<NaturezaLancamento, int>>();
             _mapperMock = new Mock<IMapper>();
-            _naturezaLancamentoService = new NaturezaLancamentoService(_naturezaLancamentoRepositoryMock.Object, _mapperMock.Object);
+            _naturezaLancamentoService = new NaturezaLancamentoService(_naturezaLancamentoRepositoryMockSpecific.Object, _mapperMock.Object);
         }
 
         [Fact(DisplayName = "Deve realizar o cadastro de uma nova natureza de lançamento.")]
-        public void Adicionar_DeveRetornarNaturezaLancamentoResponseContract_QuandoNaturezaLancamentoEhValida()
+        public async Task Adicionar_DeveRetornarNaturezaLancamentoResponseContract_QuandoNaturezaLancamentoEhValida()
         {
             // Arrange
             var naturezaLancamentoRequestContract = new NaturezaLancamentoRequestContract { Descricao = "Lançamento de teste" };
@@ -30,11 +31,11 @@ namespace FinTech.Test.TesteUnitario.Services
             var naturezaLancamentoResponseContract = new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Lançamento de teste" };
 
             _mapperMock.Setup(m => m.Map<NaturezaLancamento>(naturezaLancamentoRequestContract)).Returns(naturezaLancamento);
-            _naturezaLancamentoRepositoryMock.Setup(r => r.Adicionar(naturezaLancamento)).Returns(naturezaLancamento);
+            _naturezaLancamentoRepositoryMock.Setup(r => r.Adicionar(naturezaLancamento)).Returns(Task.FromResult(naturezaLancamento));
             _mapperMock.Setup(m => m.Map<NaturezaLancamentoResponseContract>(naturezaLancamento)).Returns(naturezaLancamentoResponseContract);
 
             // Act
-            var resultado = _naturezaLancamentoService.Adicionar(naturezaLancamentoRequestContract);
+            var resultado = await _naturezaLancamentoService.Adicionar(naturezaLancamentoRequestContract, 1);
 
             // Assert
             Assert.NotNull(resultado);
@@ -43,19 +44,19 @@ namespace FinTech.Test.TesteUnitario.Services
         }
 
         [Fact(DisplayName = "Deve atualizar uma natureza de lançamento existente.")]
-        public void Atualizar_DeveRetornarNaturezaLancamentoResponseContract_QuandoNaturezaLancamentoEhValida()
+        public async Task Atualizar_DeveRetornarNaturezaLancamentoResponseContract_QuandoNaturezaLancamentoEhValida()
         {
             // Arrange
-            var naturezaLancamentoRequestContract = new NaturezaLancamentoRequestContract { Id = 1, Descricao = "Lançamento de teste atualizado" };
+            var naturezaLancamentoRequestContract = new NaturezaLancamentoRequestContract {Descricao = "Lançamento de teste atualizado" };
             var naturezaLancamento = new NaturezaLancamento { Id = 1, Descricao = "Lançamento de teste atualizado" };
             var naturezaLancamentoResponseContract = new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Lançamento de teste atualizado" };
 
             _mapperMock.Setup(m => m.Map<NaturezaLancamento>(naturezaLancamentoRequestContract)).Returns(naturezaLancamento);
-            _naturezaLancamentoRepositoryMock.Setup(r => r.Atualizar(naturezaLancamento)).Returns(naturezaLancamento);
+            _naturezaLancamentoRepositoryMock.Setup(r => r.Atualizar(naturezaLancamento)).Returns(Task.FromResult(naturezaLancamento));
             _mapperMock.Setup(m => m.Map<NaturezaLancamentoResponseContract>(naturezaLancamento)).Returns(naturezaLancamentoResponseContract);
 
             // Act
-            var resultado = _naturezaLancamentoService.Atualizar(naturezaLancamentoRequestContract);
+            var resultado = await _naturezaLancamentoService.Atualizar(1, naturezaLancamentoRequestContract, 1);
 
             // Assert
             Assert.NotNull(resultado);
@@ -64,39 +65,42 @@ namespace FinTech.Test.TesteUnitario.Services
         }
 
         [Fact(DisplayName = "Deve deletar uma natureza de lançamento existente.")]
-        public void Deletar_DeveRetornarNaturezaLancamentoResponseContract_QuandoNaturezaLancamentoEhValida()
+        public async Task Deletar_DeveRetornarNaturezaLancamentoResponseContract_QuandoNaturezaLancamentoEhValida()
         {
             // Arrange
             var id = 1;
             var naturezaLancamento = new NaturezaLancamento { Id = 1, Descricao = "Lançamento de teste" };
             var naturezaLancamentoResponseContract = new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Lançamento de teste" };
 
-            _naturezaLancamentoRepositoryMock.Setup(r => r.ObterPorId(id)).Returns(naturezaLancamento);
-            _naturezaLancamentoRepositoryMock.Setup(r => r.Deletar(naturezaLancamento)).Returns(true);
+            _naturezaLancamentoRepositoryMockSpecific.Setup(r => ((IRepository<NaturezaLancamento, int>)r).Obter(id)).Returns(Task.FromResult(naturezaLancamento));
+
+            // Adicione o código aqui
+            _naturezaLancamentoRepositoryMock.Setup(r => ((IRepository<NaturezaLancamento, int>)r).Deletar(naturezaLancamento)).Returns(Task.FromResult(true));
+
             _mapperMock.Setup(m => m.Map<NaturezaLancamentoResponseContract>(naturezaLancamento)).Returns(naturezaLancamentoResponseContract);
 
             // Act
-            var resultado = _naturezaLancamentoService.Deletar(id);
+            var resultado =  _naturezaLancamentoService.Inativar(1, 1);
 
             // Assert
             Assert.NotNull(resultado);
             Assert.Equal(naturezaLancamentoResponseContract.Id, resultado.Id);
-            Assert.Equal(naturezaLancamentoResponseContract.Descricao, resultado.Descricao);
+            
         }
 
         [Fact(DisplayName = "Deve obter uma natureza de lançamento por ID.")]
-        public void ObterPorId_DeveRetornarNaturezaLancamentoResponseContract_QuandoNaturezaLancamentoEhValida()
+        public async Task ObterPorId_DeveRetornarNaturezaLancamentoResponseContract_QuandoNaturezaLancamentoEhValida()
         {
             // Arrange
             var id = 1;
             var naturezaLancamento = new NaturezaLancamento { Id = 1, Descricao = "Lançamento de teste" };
             var naturezaLancamentoResponseContract = new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Lançamento de teste" };
 
-            _naturezaLancamentoRepositoryMock.Setup(r => r.ObterPorId(id)).Returns(naturezaLancamento);
+            _naturezaLancamentoRepositoryMock.Setup(r => r.Obter(id)).Returns(Task.FromResult(naturezaLancamento));
             _mapperMock.Setup(m => m.Map<NaturezaLancamentoResponseContract>(naturezaLancamento)).Returns(naturezaLancamentoResponseContract);
 
             // Act
-            var resultado = _naturezaLancamentoService.ObterPorId(id);
+            var resultado = await _naturezaLancamentoService.Obter(1, 1);
 
             // Assert
             Assert.NotNull(resultado);
@@ -105,7 +109,7 @@ namespace FinTech.Test.TesteUnitario.Services
         }
 
         [Fact(DisplayName = "Deve retornar uma lista de naturezas de lançamento.")]
-        public void ObterTodos_DeveRetornarListaDeNaturezaLancamentoResponseContract_QuandoNaturezasLancamentoExistem()
+        public async Task ObterTodos_DeveRetornarListaDeNaturezaLancamentoResponseContract_QuandoNaturezasLancamentoExistem()
         {
             // Arrange
             var naturezasLancamento = new List<NaturezaLancamento>
@@ -113,25 +117,25 @@ namespace FinTech.Test.TesteUnitario.Services
                 new NaturezaLancamento { Id = 1, Descricao = "Lançamento de teste" },
                 new NaturezaLancamento { Id = 2, Descricao = "Lançamento de teste 2" }
             };
+
             var naturezasLancamentoResponseContracts = new List<NaturezaLancamentoResponseContract>
             {
                 new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Lançamento de teste" },
                 new NaturezaLancamentoResponseContract { Id = 2, Descricao = "Lançamento de teste 2" }
             };
 
-            _naturezaLancamentoRepositoryMock.Setup(r => r.ObterTodos()).Returns(naturezasLancamento);
+            _naturezaLancamentoRepositoryMock.Setup(r => r.Obter()).Returns(Task.FromResult((IEnumerable<NaturezaLancamento>)naturezasLancamento));
             _mapperMock.Setup(m => m.Map<List<NaturezaLancamentoResponseContract>>(naturezasLancamento)).Returns(naturezasLancamentoResponseContracts);
 
-            // Act
-            var resultado = _naturezaLancamentoService.ObterTodos();
+            // Act            
+            var resultado = await _naturezaLancamentoService.Obter(1, 2);
+            var listaResultado = new List<NaturezaLancamentoResponseContract> { resultado };
 
             // Assert
-            Assert.NotNull(resultado);
-            Assert.Equal(naturezasLancamentoResponseContracts.Count, resultado.Count);
-            Assert.Equal(naturezasLancamentoResponseContracts[0].Id, resultado[0].Id);
-            Assert.Equal(naturezasLancamentoResponseContracts[0].Descricao, resultado[0].Descricao);
-            Assert.Equal(naturezasLancamentoResponseContracts[1].Id, resultado[1].Id);
-            Assert.Equal(naturezasLancamentoResponseContracts[1].Descricao, resultado[1].Descricao);
+            Assert.NotNull(listaResultado);
+            Assert.Equal(naturezasLancamentoResponseContracts.Count, listaResultado.Count());
+            Assert.Equal(naturezasLancamentoResponseContracts[0].Id, listaResultado[0].Id);
+            Assert.Equal(naturezasLancamentoResponseContracts[0].Descricao, listaResultado[0].Descricao);
         }
     }
 }

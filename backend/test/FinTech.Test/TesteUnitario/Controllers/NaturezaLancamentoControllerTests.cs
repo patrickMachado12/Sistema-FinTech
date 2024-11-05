@@ -1,23 +1,23 @@
 using Xunit;
 using Moq;
 using FinTech.Api.Controllers;
-using FinTech.Api.Domain.Services.Classes;
-using FinTech.Api.Domain.Repository.Interfaces;
-using FinTech.Api.Domain.Models;
+using FinTech.Api.Domain.Services.Interfaces;
 using FinTech.Api.Contract.NaturezaLancamento;
 using Microsoft.AspNetCore.Mvc;
-using FinTech.Test.DataBase;
+using FinTech.Api.Domain.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FinTech.Test.TesteUnitario.Controllers
 {
-    public class NaturezaLancamentoControllerTests : BaseTest, IAsyncLifetime
+    public class NaturezaLancamentoControllerTests
     {
-        private readonly Mock<INaturezaLancamentoService> _naturezaLancamentoServiceMock;
+        private readonly Mock<IService<NaturezaLancamentoRequestContract, NaturezaLancamentoResponseContract, long>> _naturezaLancamentoServiceMock;
         private readonly NaturezaLancamentoController _naturezaLancamentoController;
 
         public NaturezaLancamentoControllerTests()
         {
-            _naturezaLancamentoServiceMock = new Mock<INaturezaLancamentoService>();
+            _naturezaLancamentoServiceMock = new Mock<IService<NaturezaLancamentoRequestContract, NaturezaLancamentoResponseContract, long>>();
             _naturezaLancamentoController = new NaturezaLancamentoController(_naturezaLancamentoServiceMock.Object);
         }
 
@@ -25,56 +25,40 @@ namespace FinTech.Test.TesteUnitario.Controllers
         public async Task Get_DeveRetornarListaDeNaturezasDeLancamento_QuandoNaturezasDeLancamentoExistem()
         {
             // Arrange
-            var naturezasDeLancamento = new List<NaturezaLancamento>
-            {
-                new NaturezaLancamento { Id = 1, Descricao = "Natureza de lançamento 1" },
-                new NaturezaLancamento { Id = 2, Descricao = "Natureza de lançamento 2" }
-            };
-            var naturezaLancamentoResponseContract = new List<NaturezaLancamentoResponseContract>
+            var naturezasDeLancamentoResponseContract = new List<NaturezaLancamentoResponseContract>
             {
                 new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Natureza de lançamento 1" },
                 new NaturezaLancamentoResponseContract { Id = 2, Descricao = "Natureza de lançamento 2" }
             };
 
-            _naturezaLancamentoServiceMock.Setup(s => s.ObterTodos()).ReturnsAsync(naturezasDeLancamento);
+            _naturezaLancamentoServiceMock.Setup(s => s.ObterTodos(1)).ReturnsAsync(naturezasDeLancamentoResponseContract);
 
             // Act
-            var resultado = await _naturezaLancamentoController.Get();
+            var resultado = await _naturezaLancamentoController.ObterTodos();
 
             // Assert
             Assert.NotNull(resultado);
             Assert.IsType<OkObjectResult>(resultado);
             var okResult = resultado as OkObjectResult;
-            Assert.NotNull(okResult);
-            var naturezasDeLancamentoRetornadas = okResult.Value as List<NaturezaLancamentoResponseContract>;
-            Assert.NotNull(naturezasDeLancamentoRetornadas);
-            Assert.Equal(naturezaLancamentoResponseContract.Count, naturezasDeLancamentoRetornadas.Count);
-            Assert.Equal(naturezaLancamentoResponseContract[0].Id, naturezasDeLancamentoRetornadas[0].Id);
-            Assert.Equal(naturezaLancamentoResponseContract[0].Descricao, naturezasDeLancamentoRetornadas[0].Descricao);
-            Assert.Equal(naturezaLancamentoResponseContract[1].Id, naturezasDeLancamentoRetornadas[1].Id);
-            Assert.Equal(naturezaLancamentoResponseContract[1].Descricao, naturezasDeLancamentoRetornadas[1].Descricao);
+            Assert.Equal(naturezasDeLancamentoResponseContract, okResult.Value);
         }
 
         [Fact(DisplayName = "Deve retornar uma natureza de lançamento por ID.")]
         public async Task Get_DeveRetornarNaturezaDeLancamento_QuandoNaturezaDeLancamentoExiste()
         {
             // Arrange
-            var id = 1;
-            var naturezaDeLancamento = new NaturezaLancamento { Id = 1, Descricao = "Natureza de lançamento 1" };
             var naturezaLancamentoResponseContract = new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Natureza de lançamento 1" };
 
-            _naturezaLancamentoServiceMock.Setup(s => s.ObterPorId(id)).ReturnsAsync(naturezaDeLancamento);
+            _naturezaLancamentoServiceMock.Setup(s => s.Obter(1, 1)).ReturnsAsync(naturezaLancamentoResponseContract);
 
             // Act
-            var resultado = await _naturezaLancamentoController.Get(id);
+            var resultado = await _naturezaLancamentoController.Obter(1);
 
             // Assert
             Assert.NotNull(resultado);
             Assert.IsType<OkObjectResult>(resultado);
             var okResult = resultado as OkObjectResult;
-            Assert.NotNull(okResult);
             var naturezaDeLancamentoRetornada = okResult.Value as NaturezaLancamentoResponseContract;
-            Assert.NotNull(naturezaDeLancamentoRetornada);
             Assert.Equal(naturezaLancamentoResponseContract.Id, naturezaDeLancamentoRetornada.Id);
             Assert.Equal(naturezaLancamentoResponseContract.Descricao, naturezaDeLancamentoRetornada.Descricao);
         }
@@ -84,21 +68,18 @@ namespace FinTech.Test.TesteUnitario.Controllers
         {
             // Arrange
             var naturezaLancamentoRequestContract = new NaturezaLancamentoRequestContract { Descricao = "Natureza de lançamento 1" };
-            var naturezaDeLancamento = new NaturezaLancamento { Id = 1, Descricao = "Natureza de lançamento 1" };
             var naturezaLancamentoResponseContract = new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Natureza de lançamento 1" };
 
-            _naturezaLancamentoServiceMock.Setup(s => s.Adicionar(naturezaLancamentoRequestContract)).ReturnsAsync(naturezaDeLancamento);
+            _naturezaLancamentoServiceMock.Setup(s => s.Adicionar(naturezaLancamentoRequestContract, 1)).ReturnsAsync(naturezaLancamentoResponseContract);
 
             // Act
-            var resultado = await _naturezaLancamentoController.Post(naturezaLancamentoRequestContract);
+            var resultado = await _naturezaLancamentoController.Adicionar(naturezaLancamentoRequestContract);
 
             // Assert
             Assert.NotNull(resultado);
             Assert.IsType<OkObjectResult>(resultado);
             var okResult = resultado as OkObjectResult;
-            Assert.NotNull(okResult);
             var naturezaDeLancamentoRetornada = okResult.Value as NaturezaLancamentoResponseContract;
-            Assert.NotNull(naturezaDeLancamentoRetornada);
             Assert.Equal(naturezaLancamentoResponseContract.Id, naturezaDeLancamentoRetornada.Id);
             Assert.Equal(naturezaLancamentoResponseContract.Descricao, naturezaDeLancamentoRetornada.Descricao);
         }
@@ -108,23 +89,19 @@ namespace FinTech.Test.TesteUnitario.Controllers
         {
             // Arrange
             var id = 1;
-            var naturezaLancamentoRequestContract = new NaturezaLancamentoRequestContract { Descricao = "Natureza de lançamento 1" };
-            var naturezaDeLancamento = new NaturezaLancamento { Id = 1, Descricao = "Natureza de lançamento 1" };
-            var naturezaLancamentoResponseContract = new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Natureza de lançamento 1" };
+            var naturezaLancamentoRequestContract = new NaturezaLancamentoRequestContract { Descricao = "Natureza de lançamento atualizada" };
+            var naturezaLancamentoResponseContract = new NaturezaLancamentoResponseContract { Id = 1, Descricao = "Natureza de lançamento atualizada" };
 
-            _naturezaLancamentoServiceMock.Setup(s => s.ObterPorId(id)).ReturnsAsync(naturezaDeLancamento);
-            _naturezaLancamentoServiceMock.Setup(s => s.Atualizar(naturezaLancamentoRequestContract)).ReturnsAsync(naturezaDeLancamento);
+            _naturezaLancamentoServiceMock.Setup(s => s.Atualizar(id, naturezaLancamentoRequestContract, 1)).ReturnsAsync(naturezaLancamentoResponseContract);
 
             // Act
-            var resultado = await _naturezaLancamentoController.Put(id, naturezaLancamentoRequestContract);
+            var resultado = await _naturezaLancamentoController.Atualizar(id, naturezaLancamentoRequestContract);
 
             // Assert
             Assert.NotNull(resultado);
             Assert.IsType<OkObjectResult>(resultado);
             var okResult = resultado as OkObjectResult;
-            Assert.NotNull(okResult);
             var naturezaDeLancamentoRetornada = okResult.Value as NaturezaLancamentoResponseContract;
-            Assert.NotNull(naturezaDeLancamentoRetornada);
             Assert.Equal(naturezaLancamentoResponseContract.Id, naturezaDeLancamentoRetornada.Id);
             Assert.Equal(naturezaLancamentoResponseContract.Descricao, naturezaDeLancamentoRetornada.Descricao);
         }
@@ -134,13 +111,10 @@ namespace FinTech.Test.TesteUnitario.Controllers
         {
             // Arrange
             var id = 1;
-            var naturezaDeLancamento = new NaturezaLancamento { Id = 1, Descricao = "Natureza de lançamento 1" };
-
-            _naturezaLancamentoServiceMock.Setup(s => s.ObterPorId(id)).ReturnsAsync(naturezaDeLancamento);
-            _naturezaLancamentoServiceMock.Setup(s => s.Deletar(naturezaDeLancamento)).ReturnsAsync(true);
+            _naturezaLancamentoServiceMock.Setup(s => s.Inativar(id, 1)).Returns(Task.CompletedTask);
 
             // Act
-            var resultado = await _naturezaLancamentoController.Delete(id);
+            var resultado = await _naturezaLancamentoController.Deletar(id);
 
             // Assert
             Assert.NotNull(resultado);

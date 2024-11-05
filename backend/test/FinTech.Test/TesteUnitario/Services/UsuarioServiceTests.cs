@@ -108,7 +108,7 @@ namespace FinTech.Test.TesteUnitario.Services
                 new Usuario { Id = 2, Email = "maria@email.com", Senha = "123456",},
             };
             var idUsuario = 1;
-            _usuarioRepositoryMock.Setup(r => r.ObterTodos()).ReturnsAsync(usuarios);
+            _usuarioRepositoryMock.Setup(r => r.Obter()).ReturnsAsync(usuarios);
 
             // Act
             var resultado = _usuarioService.ObterTodos(idUsuario).Result;
@@ -123,7 +123,7 @@ namespace FinTech.Test.TesteUnitario.Services
         {
             var idUsuario = 0;
             // Arrange
-            _usuarioRepositoryMock.Setup(r => r.ObterTodos()).Returns(Task.FromResult(new List<Usuario>()));
+            _usuarioRepositoryMock.Setup(r => r.Obter()).Returns(Task.FromResult(Enumerable.Empty<Usuario>()));
 
             // Act
             var resultado = _usuarioService.ObterTodos(idUsuario).Result;;

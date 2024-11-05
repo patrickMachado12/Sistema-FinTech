@@ -32,7 +32,7 @@ namespace FinTech.Test.DataBase
         protected NaturezaLancamentoService _naturezaLancamentoService;
 
 
-        protected string emailUsuarioAutenticado = "teste@gmail.com";
+        protected string emailUsuarioAutenticado = "admin@gmail.com";
 
         private readonly string _connectionString = "User ID=postgres;Password=123456;Host=localhost;Port=5432;Database=FinTech;Pooling=true;";
 
