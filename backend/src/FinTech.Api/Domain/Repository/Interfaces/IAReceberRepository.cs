@@ -11,6 +11,7 @@ namespace FinTech.Api.Domain.Repository.Interfaces
         Task<AReceber> ObterPorIdUsuario(long idUsuario);
         Task<AReceber> ObterPorIdPessoa(long idPessoa);
         Task<IEnumerable<AReceber>> ObterTodos();
+        Task<IEnumerable<AReceber>> ObterPorPeriodo(DateTime dataInicial, DateTime dataFinal, long idUsuario);
         
     }
 }

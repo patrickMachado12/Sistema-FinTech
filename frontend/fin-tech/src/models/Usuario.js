@@ -6,10 +6,8 @@ export default class Usuario {
         this.id = obj.id;
         this.email = obj.email;
         this.senha = obj.senha;
-        this.dataCadastro = obj.dataCadastro;
-        this.dataInativacao = obj.dataInativacao;
-        this.status = obj.status;
-
+        this.dataCadastro = obj.dataCadastro || null;
+        this.dataInativacao = obj.dataInativacao || null;
     }
 
     modeloValidoLogin(){

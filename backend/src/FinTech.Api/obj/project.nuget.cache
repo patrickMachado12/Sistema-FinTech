@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "cT5BhganYeM=",
   "success": true,
   "projectFilePath": "d:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj",
+=======
+  "dgSpecHash": "0e+c3Z8lLTQ=",
+  "success": true,
+  "projectFilePath": "D:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj",
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
   "expectedPackageFiles": [
     "C:\\Users\\tiko\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\tiko\\.nuget\\packages\\fluentvalidation\\10.4.0\\fluentvalidation.10.4.0.nupkg.sha512",

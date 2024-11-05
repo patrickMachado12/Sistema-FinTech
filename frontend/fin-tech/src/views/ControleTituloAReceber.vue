@@ -6,22 +6,9 @@
       <v-btn dark text absolute @click="snackbarAlter(false)"> 
         <v-icon>mdi-close</v-icon>
       </v-btn>
-    </v-snackbar> 
-
-    <!-- <v-row>
-      <v-col cols="12" sm="12" md="12">
-        <h2>Contas a Receber</h2>
-        <v-divider></v-divider>
-      </v-col>
-      <template>
-        <v-btn id="btn-cadastrar" dark class="mb-2">
-          Cadastrar
-        </v-btn>
-      </template>
-    </v-row> -->
+    </v-snackbar>
 
     <v-row>
-      <!-- Título da pagina./ -->
       <v-col cols="12" sm="12" md="12">
         <h2 class="titulo">Contas a Receber</h2>
         <v-divider></v-divider>
@@ -31,7 +18,7 @@
       <v-dialog
       v-model="dialog"
       persistent
-      max-width="600px">
+      max-width="1100px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn 
             id="btn-cadastrar" 
@@ -49,91 +36,119 @@
           <v-card-text>
             <v-container>
               <v-row>
-                <v-col cols="12">
-                  <v-text-field
+
+                <v-col cols="6">
+                  <v-autocomplete
                     v-model="editedItem.idPessoa"
+                    :items="filteredPessoas"
                     label="Pessoa*"
-                  ></v-text-field>
+                    placeholder="Nome da Pessoa"
+                    item-text="nome"
+                    item-value="id" 
+                    return-object 
+                    @input="onPessoaSelect" 
+                    :search-input.sync="searchQuey"
+                    no-data-text="Nenhuma pessoa encontrada"
+                  >
+                    <template v-slot:no-data>
+                      <v-list-item>
+                        <v-list-item-title>Nenhuma pessoa encontrada</v-list-item-title>
+                      </v-list-item>
+                    </template>
+                  </v-autocomplete>
                 </v-col>
 
-                <v-col cols="12">
-                  <v-text-field
+                <v-col cols="2">
+                  <CampoMonetario
                     v-model="editedItem.valorAReceber"
                     label="Valor a Receber*"
-                  ></v-text-field>
+                    type="number"
+                    @input="formatarValor('valorAReceber')"/>
                 </v-col>
 
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="editedItem.dataVencimento"
-                    label="Data Vencimento*"
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12">
-                  <v-text-field
+                <v-col cols="2">
+                  <CampoData
                     v-model="editedItem.dataEmissao"
                     label="Data Emissão*"
-                  ></v-text-field>
-                </v-col>
-                  
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="editedItem.idNaturezaLancamento"
-                    label="Natureza de Lançamento*"
-                  ></v-text-field>
+                    @input="formatarData($event, 'dataEmissao')"
+                    :rules="[dataRegra]"
+                  />
                 </v-col>
 
-                <v-col cols="12">
+                <v-col cols="2">
+                  <CampoData
+                    v-model="editedItem.dataVencimento"
+                    label="Data Vencimento*"
+                    @input="formatarData($event, 'dataVencimento')"
+                    :rules="[dataRegra]"
+                  />
+                </v-col>
+
+                <v-col cols="6">
                   <v-text-field
                     v-model="editedItem.descricao"
                     label="Descrição*"
                   ></v-text-field>
                 </v-col>
+                  
+                <v-col cols="4">
+                  <v-select
+                    :items="naturezasLancamento"
+                    v-model="editedItem.idNaturezaLancamento"
+                    label="Natureza de Lançamento*"
+                    required
+                  ></v-select>
+                </v-col>
 
-                <v-col cols="12">
-                  <v-text-field
+                <v-col cols="2">
+                  <CampoData
                     v-model="editedItem.dataReferencia"
                     label="Data Referência"
-                  ></v-text-field>
+                    @input="formatarData($event, 'dataReferencia')"
+                    :rules="[dataRegra]"
+                  />
                 </v-col>
 
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="editedItem.valorBaixado"
-                    label="Valor Baixa*"
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12">
-                  <v-text-field
-                    v-model="editedItem.dataRecebimento"
-                    label="Data Baixa"
-                  ></v-text-field>
-                </v-col>
-
-                <v-col cols="12">
+                <v-col cols="8">
                   <v-text-field
                     v-model="editedItem.observacao"
                     label="Observação"
                   ></v-text-field>
                 </v-col>
+
+                <v-col cols="2">
+                  <CampoMonetario
+                    v-model="editedItem.valorBaixado"
+                    label="Valor Baixa*"
+                    type="number"
+                    @input="formatarValor('valorBaixado')"
+                  />
+                </v-col>
+
+                <v-col cols="2">
+                  <CampoData
+                    v-model="editedItem.dataRecebimento"
+                    label="Data Baixa"
+                    @input="formatarData($event, 'dataRecebimento')"
+                    :rules="[dataRegra]"
+                  />
+                </v-col>
                 
               </v-row>
             </v-container>
-            <small>*Indica campos obrigatórios</small>
+            <small>* Indica campos obrigatórios</small>
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-primaria)"
               text
               @click="dialog = false"
             >
               Fechar
             </v-btn>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-primaria)"
               text
               @click="gravar"
             >
@@ -143,7 +158,6 @@
         </v-card>
       </v-dialog>
     </v-row>
-
     
     <!-- Tabela de contas a receber. -->
     <v-row>
@@ -153,6 +167,12 @@
           :items="titulosAReceber"
           :items-per-page="5"
           class="elevation-1">
+          <template #[`item.valorAReceber`]="{ item: { valorAReceber } }">
+            {{ valorAReceber | currency }}
+          </template>
+          <template #[`item.valorBaixado`]="{ item: { valorBaixado } }">
+            {{ valorBaixado | currency }}
+          </template>
           <template #[`item.dataRecebimento`]="{ item: { dataRecebimento } }">
             {{dataRecebimento | dataFormatada}}
           </template>
@@ -171,25 +191,40 @@
         </v-data-table>        
       </v-col>
     </v-row>
-
   </v-container>
 </template>
 
 <script>
 import AReceber from "../models/AReceber.js";
 import aReceberService from "../services/aReceber-service.js";
+import naturezaLacamentoService from "../services/naturezaLancamento-service.js";
+import NaturezaLancamento from '@/models/NaturezaLancamento.js';
+import Pessoa from '@/models/Pessoa.js';
+import pessoaService from '@/services/pessoa-service.js';
 import moment from "moment";
+import { validarData } from '@/utils/conversorData.js';
+import CampoMonetario from '@/components/monetario/campoMonetario.vue';
+import CampoData from '@/components/date/CampoData.vue';
 
 export default {
   name: "ControleAReceber",
-
-  components: {},
+  components: {
+    CampoMonetario,
+    CampoData,
+  },
 
   filters: {
-    dataFormatada(data) {
-      if (!data) return '';
-      return moment(data).format("DD/MM/YYYY");
-    }
+    currency(value) {
+      if (value == null) return '-';
+      return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(value);
+    },
+    dataFormatada(value) {
+      if (!value) return '';
+      return moment(value).format("DD/MM/YYYY");
+    },
   },
 
   data() {
@@ -197,18 +232,21 @@ export default {
       items: [
         {
           text: "Controle a receber",
-          disabled: true,
+          disabled: false,
           href: "controle-areceber",
         },
       ],
+      naturezasLancamento: [],
       titulosAReceber: [],
+      pessoas: [],
+      searchQuery: '',
       dialog: false,
       editedIndex: -1,
       editedItem: {
-        idPessoa: "",
-        idNaturezaLancamento: "",
-        valorAReceber: "",
-        valorBaixado: "",
+        idPessoa: 0,
+        idNaturezaLancamento: 0,
+        valorAReceber: 0,
+        valorBaixado: 0,
         descricao: "",
         observacao: "",
         dataEmissao: "",
@@ -228,21 +266,18 @@ export default {
           text: "Pessoa",
           align: "start",
           sortable: true,
-          value: "id",
+          value: "pessoa.nome",
         },
         { text: "Valor", value: "valorAReceber" },
-        { text: "Data vencimento", value: "dataVencimento" },
+        { text: "Descrição", value: "descricao" },
+        { text: "Data Emissão", value: "dataEmissao" },
         {
           text: "Natureza de Lançamento",
           align: "start",
           sortable: true,
-          value: "id",
+          value: "naturezaLancamento.descricao",
         },
-        { text: "Descrição", value: "descricao" },
-        { text: "Valor baixado", value: "valorBaixado" },
-        { text: "Data Recebimento", value: "dataRecebimento" },
-        { text: "Data Emissão", value: "dataEmissao" },
-        { text: "Observação", value: "observacao" },
+        { text: "Data vencimento", value: "dataVencimento" },
         { text: "Ações", value: "actions", sortable: false },
       ],
     };
@@ -250,21 +285,47 @@ export default {
 
   mounted() {
     this.obterTitulos();
+    this.obterNaturezasLacamento();
+    this.obterPessoas();
   },
 
   computed: {
     formTitulo() {
       return this.editedIndex === -1 ? "Cadastro" : "Edição";
     },
+
+    filteredPessoas() {
+      return this.pessoas.filter(pessoa => {
+        const nome = pessoa.nome || '';
+        return nome.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+    },
   },
 
   watch: {
     dialog(val) {
-      val || this.close();
+      val || this.fechar();
     },
   },
 
   methods: {
+    obterPessoas() {
+      pessoaService
+        .obterTodos()
+        .then((response) => {
+          this.pessoas = response.data.map((p) => new Pessoa(p));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    onPessoaSelect(selected) {
+      if (selected) {
+        this.editedItem.idPessoa = selected.id;
+      }
+    },
+  
     obterTitulos() {
       aReceberService
         .obterTodos()
@@ -277,42 +338,59 @@ export default {
     },
 
     gravar() {
+      const sucessoHandler = (mensagem) => {
+        this.snackbar = true;
+        this.messagem = mensagem;
+        this.color = "success";
+        this.fechar();
+        this.atualizarListaTitulosAReceber();
+      };
+
+      const erroHandler = (erro) => {
+        console.error(erro);
+      };
+
       if (this.editedIndex > -1) {
-        aReceberService
-          .atualizar(this.editedItem)
-          .then(() => {
-            Object.assign(this.titulosAReceber[this.editedIndex], this.editedItem);
-            this.snackbar = true;
-            this.messagem = "Título a Receber editada com sucesso!";
-            this.color = "success";
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          // Atualizar item existente
+          aReceberService.atualizar(this.editedItem)
+              .then(() => {
+                Object.assign(this.titulosAReceber[this.editedIndex], this.editedItem);
+                sucessoHandler("Título a Receber editado com sucesso!");
+              })
+              .catch(erroHandler);
       } else {
-        aReceberService
-          .cadastrar(this.editedItem)
-          .then((response) => {
-            this.snackbar = true;
-            this.titulosAReceber.push(response.data);
-            this.messagem = "Título a Receber cadastrada com sucesso!";
-            this.color = "success";
-            this.close();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+          // Cadastrar novo item
+          aReceberService.cadastrar(this.editedItem)
+              .then((response) => {
+                this.titulosAReceber.push(response.data);
+                sucessoHandler("Título a Receber cadastrado com sucesso!");
+              })
+              .catch(erroHandler);
       }
-      this.close();
+    },
+
+    atualizarListaTitulosAReceber() {
+      aReceberService.obterTodos()
+        .then(response => {
+          this.titulosAReceber = response.data;
+        })
+        .catch(erro => {
+          console.error(erro);
+        });
     },
 
     editItem(item) {
       this.editedIndex = this.titulosAReceber.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
+      // Chama o serviço para obter os detalhes do item a ser editado
+      aReceberService.obterPorId(item.id)
+        .then(response => {
+          this.editedItem = new AReceber(response.data);
+          this.dialog = true;
+        });
     },
+    
 
-    close() {
+    fechar() {
       this.dialog = false;
       setTimeout(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
@@ -335,12 +413,41 @@ export default {
           this.snackbar = true;
           this.messagem = "Título excluído com sucesso!";
           this.color = "success";
-          this.close();
+          this.fechar();
         })
         .catch((error) => {
           console.log(error);
         });
     },
+
+    obterNaturezasLacamento() {
+      naturezaLacamentoService
+        .obterTodas()
+        .then((response) => {
+          this.naturezaLancamento = response.data.map((p) => new NaturezaLancamento(p));
+          this.naturezasLancamento = response.data.map((p) => ({
+            text: p.descricao,
+            value: p.id,
+          }))
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+
+    formatarData(event, campo) {
+      this.editedItem[campo] = event;
+
+      this.date = validarData(this.editedItem[campo]) 
+        ? new Date(`${this.editedItem[campo].substring(6, 10)}-${this.editedItem[campo].substring(3, 5)}-${this.editedItem[campo].substring(0, 2)}`) 
+        : null;
+    },
+
+    dataRegra(value) {
+      if (!value) return true;
+      return validarData(value) || 'Data inválida';
+    },
+    
   },
 };
 </script>

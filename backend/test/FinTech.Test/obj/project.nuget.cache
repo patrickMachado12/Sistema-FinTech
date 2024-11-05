@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "y3XOJnmoTiI=",
   "success": true,
   "projectFilePath": "d:\\Projeto\\SistemaSaas\\backend\\test\\FinTech.Test\\FinTech.Test.csproj",
+=======
+  "dgSpecHash": "NIf6Tgn2bK4=",
+  "success": true,
+  "projectFilePath": "D:\\Projeto\\SistemaSaas\\backend\\test\\FinTech.Test\\FinTech.Test.csproj",
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
   "expectedPackageFiles": [
     "C:\\Users\\tiko\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\tiko\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",

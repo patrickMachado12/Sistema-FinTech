@@ -13,5 +13,6 @@ namespace FinTech.Api.Domain.Services.Interfaces
         Task<RS> Adicionar(RQ entidade, I idUsuario);
         Task<RS> Atualizar(I id, RQ entidade, I idUsuario);
         Task Inativar(I id, I idUsuario);
+      
     }
 }

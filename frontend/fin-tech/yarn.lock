@@ -5913,6 +5913,11 @@
   "resolved" "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   "version" "8.3.2"
 
+"v-money2@^0.0.1":
+  "integrity" "sha512-GbZ4R6Tfi8WkgNPstr/tXfs5fHuOIJyhCZ7hckd8h7PC6VterZW4G7OSSyz6luflK/mXRac5qk4YV7teaCvs2g=="
+  "resolved" "https://registry.npmjs.org/v-money2/-/v-money2-0.0.1.tgz"
+  "version" "0.0.1"
+
 "v8-compile-cache@^2.0.3":
   "integrity" "sha512-ocyWc3bAHBB/guyqJQVI5o4BZkPhznPYUG2ea80Gond/BgNWpap8TOmLSeeQG7bnh2KMISxskdADG59j7zruhw=="
   "resolved" "https://registry.npmjs.org/v8-compile-cache/-/v8-compile-cache-2.4.0.tgz"
@@ -5992,6 +5997,11 @@
   "integrity" "sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw=="
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
+
+"vue-the-mask@^0.11.1":
+  "integrity" "sha512-UquSfnSWejD0zAfcD+3jJ1chUAkOAyoxya9Lxh9acCRtrlmGcAIvd0cQYraWqKenbuZJUdum+S174atv2AuEHQ=="
+  "resolved" "https://registry.npmjs.org/vue-the-mask/-/vue-the-mask-0.11.1.tgz"
+  "version" "0.11.1"
 
 "vue@*", "vue@^2 || ^3.2.13", "vue@^2.6.14", "vue@^2.6.4", "vue@^2.7.2":
   "integrity" "sha512-4gCtFXaAA3zYZdTp5s4Hl2sozuySsgz4jy1EnpBHNfpMa9dK1ZCG7viqBPCwXtmgc8nHqUsAu3G4gtmXkkY3Sw=="

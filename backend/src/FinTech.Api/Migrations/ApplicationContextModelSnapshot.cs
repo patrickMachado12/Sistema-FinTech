@@ -83,10 +83,10 @@ namespace FinTech.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime?>("DataRecebimento")
+                    b.Property<DateTime>("DataEmissao")
                         .HasColumnType("timestamp");
 
-                    b.Property<DateTime>("DataEmissao")
+                    b.Property<DateTime?>("DataRecebimento")
                         .HasColumnType("timestamp");
 
                     b.Property<DateTime?>("DataReferencia")
@@ -137,9 +137,6 @@ namespace FinTech.Api.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("timestamp");
-
-                    b.Property<DateTime?>("DataInativacao")
                         .HasColumnType("timestamp");
 
                     b.Property<string>("Descricao")

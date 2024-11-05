@@ -25,7 +25,6 @@ namespace FinTech.Api.Domain.Models
         [Required(ErrorMessage = "O campo de Valor é obrigatório.")]
         public double ValorAPagar { get; set; }
 
-        [Required(ErrorMessage = "O campo de Valor é obrigatório.")]
         public double ValorPago { get; set; }
 
         [Required(ErrorMessage = "O campo de Descrição é obrigatório.")]

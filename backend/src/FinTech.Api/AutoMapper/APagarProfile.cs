@@ -10,6 +10,8 @@ namespace FinTech.Api.AutoMapper
         {
             CreateMap<APagar, APagarRequestContract>().ReverseMap();
             CreateMap<APagar, APagarResponseContract>().ReverseMap();
+            CreateMap<Pessoa, PessoaResponse>();
+            CreateMap<NaturezaLancamento, NaturezaLancamentoResponse>();
         }
     }
 }

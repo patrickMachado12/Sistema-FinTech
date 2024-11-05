@@ -11,6 +11,5 @@ namespace FinTech.Api.Contract.Pessoa
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public DateTime DataCadastro { get; set; }
-        public DateTime? DataInativacao { get; set; }
     }
 }

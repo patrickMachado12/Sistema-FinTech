@@ -7,8 +7,6 @@
         <v-icon>mdi-close</v-icon>
       </v-btn>
     </v-snackbar> 
-
-    
     <v-row>
       <!-- Título da pagina./ -->
       <v-col cols="12" sm="12" md="12">
@@ -49,16 +47,9 @@
                   <v-text-field
                     v-model="editedItem.telefone"
                     label="Telefone"
+                    v-mask="'(##) ####-####'"
                   ></v-text-field>
                 </v-col>
-
-                <!-- <v-col cols="12">
-                  <v-text-field
-                    v-model="editedItem.email"
-                    label="Email"
-                  ></v-text-field>
-                </v-col> -->
-                
                 
               </v-row>
             </v-container>
@@ -67,14 +58,14 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-secundaria)"
               text
               @click="dialog = false"
             >
               Fechar
             </v-btn>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-secundaria)"
               text
               @click="gravar"
             >
@@ -152,7 +143,7 @@ export default {
       editedItem: {
         nome: "",
         telefone: "",
-        //email: "",
+        dataCadastro: new Date(),
       },
 
       headers: [
@@ -164,7 +155,6 @@ export default {
         },
         { text: "Nome", value: "nome" },
         { text: "Telefone", value: "telefone" },
-        //{ text: "E-mail", value: "email" },
         { text: "Data Cadastro", value: "dataCadastro" },
         { text: "Data Exclusão", value: "dataInativacao" },
         { text: "Ações", value: "actions", sortable: false },

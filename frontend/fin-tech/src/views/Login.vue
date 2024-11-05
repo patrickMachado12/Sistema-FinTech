@@ -15,7 +15,7 @@
       justify-content="center"
       aling-items="center">
       <v-col cols="12" sm="8" md="6" lg="9">
-        <v-card class="pa-5 text-center">
+        <v-card class="pa-12 text-center">
           <v-card-title>
             <h2>Login</h2>
           </v-card-title>
@@ -89,7 +89,7 @@ export default {
         LocalStorage.salvarUsuarioNaStorage(this.usuario);
         LocalStorage.salvarTokenNaStorage(response.data.token);
 
-        this.$router.push({name: 'Dashboard'});
+        this.$router.push({name: 'FluxoCaixa'});
       })
       .catch(error => {
         console.log(error);
@@ -107,7 +107,7 @@ export default {
   width: 100vw;
 }
 
-.col-login {
+.row-login {
   background-color: rgba(78, 192, 160, 0.2);
 }
 

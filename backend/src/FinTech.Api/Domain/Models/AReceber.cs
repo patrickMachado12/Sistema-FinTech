@@ -22,14 +22,14 @@ namespace FinTech.Api.Domain.Models
 
         public NaturezaLancamento NaturezaLancamento { get; set; }
 
-        [Required(ErrorMessage = "O campo de Valor é obrigatório.")]
-        public double ValorAReceber { get; set; }
 
         [Required(ErrorMessage = "O campo de Valor é obrigatório.")]
+        public double ValorAReceber { get; set; }
+        
         public double ValorBaixado { get; set; }
 
         [Required(ErrorMessage = "O campo de Descrição é obrigatório.")]
-        public string Descricao { get; set; } = string.Empty;
+        public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O campo DataEmissao é obrigatório.")]
         public DateTime DataEmissao { get; set; }

@@ -3,6 +3,7 @@
     "name": ".NETCoreApp,Version=v8.0",
     "signature": ""
   },
+<<<<<<< HEAD
   "compilationOptions": {
     "defines": [
       "TRACE",
@@ -32,11 +33,15 @@
     "xmlDoc": false,
     "debugType": "portable"
   },
+=======
+  "compilationOptions": {},
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
   "targets": {
     ".NETCoreApp,Version=v8.0": {
       "FinTech.Test/1.0.0": {
         "dependencies": {
           "FinTech.Api": "1.0.0",
+<<<<<<< HEAD
           "Microsoft.AspNetCore.Mvc.Testing": "8.0.10",
           "Microsoft.Extensions.Configuration.Json": "8.0.1",
           "Microsoft.NET.Test.Sdk": "17.8.0",
@@ -335,6 +340,15 @@
         },
         "compile": {
           "FinTech.Test.dll": {}
+=======
+          "Microsoft.NET.Test.Sdk": "17.8.0",
+          "coverlet.collector": "6.0.0",
+          "xunit": "2.5.3",
+          "xunit.runner.visualstudio": "2.5.3"
+        },
+        "runtime": {
+          "FinTech.Test.dll": {}
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "AutoMapper/12.0.1": {
@@ -346,6 +360,7 @@
             "assemblyVersion": "12.0.0.0",
             "fileVersion": "12.0.1.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard2.1/AutoMapper.dll": {}
@@ -363,6 +378,8 @@
         },
         "compile": {
           "lib/net6.0/Castle.Core.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "coverlet.collector/6.0.0": {},
@@ -372,9 +389,12 @@
             "assemblyVersion": "9.0.0.0",
             "fileVersion": "10.4.0.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/FluentValidation.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "FluentValidation.AspNetCore/10.4.0": {
@@ -387,9 +407,12 @@
             "assemblyVersion": "9.0.0.0",
             "fileVersion": "10.4.0.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/FluentValidation.AspNetCore.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "FluentValidation.DependencyInjectionExtensions/10.4.0": {
@@ -402,9 +425,12 @@
             "assemblyVersion": "9.0.0.0",
             "fileVersion": "10.4.0.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Humanizer.Core/2.14.1": {
@@ -413,9 +439,12 @@
             "assemblyVersion": "2.14.0.0",
             "fileVersion": "2.14.1.48190"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/Humanizer.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.AspNetCore.Authentication/2.2.0": {
@@ -452,9 +481,12 @@
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.1024.46804"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/2.2.0": {},
@@ -476,7 +508,11 @@
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.Server.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
+<<<<<<< HEAD
           "Microsoft.Extensions.Hosting.Abstractions": "8.0.1"
+=======
+          "Microsoft.Extensions.Hosting.Abstractions": "2.2.0"
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.AspNetCore.Hosting.Server.Abstractions/2.2.0": {
@@ -503,7 +539,11 @@
       "Microsoft.AspNetCore.Http.Extensions/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
+<<<<<<< HEAD
           "Microsoft.Extensions.FileProviders.Abstractions": "8.0.0",
+=======
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0",
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
           "Microsoft.Net.Http.Headers": "2.2.0",
           "System.Buffers": "4.5.0"
         }
@@ -523,9 +563,12 @@
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.1024.46804"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.JsonPatch.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson/8.0.10": {
@@ -539,6 +582,7 @@
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.1024.46804"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {}
@@ -558,6 +602,8 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.Mvc.Testing.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.AspNetCore.OpenApi/8.0.7": {
@@ -569,6 +615,7 @@
             "assemblyVersion": "8.0.7.0",
             "fileVersion": "8.0.724.31402"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.OpenApi.dll": {}
@@ -586,6 +633,8 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.AspNetCore.TestHost.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.AspNetCore.WebUtilities/2.2.0": {
@@ -600,9 +649,12 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.21.52210"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.CodeAnalysis.Analyzers/3.3.3": {},
@@ -660,9 +712,12 @@
           "lib/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.resources.dll": {
             "locale": "zh-Hant"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netcoreapp3.1/Microsoft.CodeAnalysis.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.CodeAnalysis.CSharp/4.5.0": {
@@ -715,9 +770,12 @@
           "lib/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.CSharp.resources.dll": {
             "locale": "zh-Hant"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces/4.5.0": {
@@ -773,9 +831,12 @@
           "lib/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll": {
             "locale": "zh-Hant"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netcoreapp3.1/Microsoft.CodeAnalysis.CSharp.Workspaces.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.CodeAnalysis.Workspaces.Common/4.5.0": {
@@ -784,7 +845,11 @@
           "Microsoft.Bcl.AsyncInterfaces": "6.0.0",
           "Microsoft.CodeAnalysis.Common": "4.5.0",
           "System.Composition": "6.0.0",
+<<<<<<< HEAD
           "System.IO.Pipelines": "8.0.0",
+=======
+          "System.IO.Pipelines": "6.0.3",
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
           "System.Threading.Channels": "6.0.0"
         },
         "runtime": {
@@ -833,9 +898,12 @@
           "lib/netcoreapp3.1/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll": {
             "locale": "zh-Hant"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netcoreapp3.1/Microsoft.CodeAnalysis.Workspaces.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.CodeCoverage/17.8.0": {
@@ -844,9 +912,12 @@
             "assemblyVersion": "15.0.0.0",
             "fileVersion": "17.800.623.45702"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netcoreapp3.1/Microsoft.VisualStudio.CodeCoverage.Shim.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.CSharp/4.7.0": {},
@@ -862,9 +933,12 @@
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.1024.46708"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.EntityFrameworkCore.Abstractions/8.0.10": {
@@ -873,9 +947,12 @@
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.1024.46708"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.EntityFrameworkCore.Analyzers/8.0.10": {},
@@ -892,9 +969,12 @@
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.1024.46708"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Design.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/8.0.10": {
@@ -907,9 +987,12 @@
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.1024.46708"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.EntityFrameworkCore.Tools/8.0.10": {
@@ -936,6 +1019,7 @@
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.1024.46610"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Caching.Memory.dll": {}
@@ -945,6 +1029,8 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
           "Microsoft.Extensions.Primitives": "8.0.0"
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
@@ -952,6 +1038,7 @@
           "Microsoft.Extensions.Primitives": "8.0.0"
         }
       },
+<<<<<<< HEAD
       "Microsoft.Extensions.Configuration.Binder/8.0.2": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0"
@@ -1024,6 +1111,8 @@
           "lib/net8.0/Microsoft.Extensions.Configuration.UserSecrets.dll": {}
         }
       },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
       "Microsoft.Extensions.DependencyInjection/8.0.1": {
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
@@ -1033,9 +1122,12 @@
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.1024.46610"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
@@ -1044,9 +1136,12 @@
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.1024.46610"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.Extensions.DependencyModel/8.0.2": {
@@ -1055,6 +1150,7 @@
             "assemblyVersion": "8.0.0.2",
             "fileVersion": "8.0.1024.46610"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.DependencyModel.dll": {}
@@ -1092,10 +1188,16 @@
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
+=======
+        }
+      },
+      "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         "dependencies": {
           "Microsoft.Extensions.Primitives": "8.0.0"
         }
       },
+<<<<<<< HEAD
       "Microsoft.Extensions.FileProviders.Physical/8.0.0": {
         "dependencies": {
           "Microsoft.Extensions.FileProviders.Abstractions": "8.0.0",
@@ -1155,6 +1257,14 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Hosting.Abstractions.dll": {}
+=======
+      "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2",
+          "Microsoft.Extensions.FileProviders.Abstractions": "2.2.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.Extensions.Logging/8.0.1": {
@@ -1168,9 +1278,12 @@
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.1024.46610"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Logging.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.Extensions.Logging.Abstractions/8.0.2": {
@@ -1182,6 +1295,7 @@
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.1024.46610"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
@@ -1276,6 +1390,8 @@
         },
         "compile": {
           "lib/net8.0/Microsoft.Extensions.Logging.EventSource.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.Extensions.ObjectPool/2.2.0": {},
@@ -1291,6 +1407,7 @@
           }
         }
       },
+<<<<<<< HEAD
       "Microsoft.Extensions.Options.ConfigurationExtensions/8.0.0": {
         "dependencies": {
           "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
@@ -1300,6 +1417,8 @@
           "Microsoft.Extensions.Primitives": "8.0.0"
         }
       },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
       "Microsoft.Extensions.Primitives/8.0.0": {},
       "Microsoft.Extensions.WebEncoders/2.2.0": {
         "dependencies": {
@@ -1314,9 +1433,12 @@
             "assemblyVersion": "7.1.2.0",
             "fileVersion": "7.1.2.41121"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Abstractions.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.IdentityModel.JsonWebTokens/7.1.2": {
@@ -1328,9 +1450,12 @@
             "assemblyVersion": "7.1.2.0",
             "fileVersion": "7.1.2.41121"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.JsonWebTokens.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.IdentityModel.Logging/7.1.2": {
@@ -1342,9 +1467,12 @@
             "assemblyVersion": "7.1.2.0",
             "fileVersion": "7.1.2.41121"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Logging.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.IdentityModel.Protocols/7.1.2": {
@@ -1357,9 +1485,12 @@
             "assemblyVersion": "7.1.2.0",
             "fileVersion": "7.1.2.41121"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Protocols.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.IdentityModel.Protocols.OpenIdConnect/7.1.2": {
@@ -1372,9 +1503,12 @@
             "assemblyVersion": "7.1.2.0",
             "fileVersion": "7.1.2.41121"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.IdentityModel.Tokens/7.1.2": {
@@ -1386,9 +1520,12 @@
             "assemblyVersion": "7.1.2.0",
             "fileVersion": "7.1.2.41121"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Microsoft.IdentityModel.Tokens.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.Net.Http.Headers/2.2.0": {
@@ -1411,9 +1548,12 @@
             "assemblyVersion": "1.6.14.0",
             "fileVersion": "1.6.14.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.TestPlatform.ObjectModel/17.8.0": {
@@ -1514,11 +1654,14 @@
           "lib/netcoreapp3.1/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll": {
             "locale": "zh-Hant"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CoreUtilities.dll": {},
           "lib/netcoreapp3.1/Microsoft.TestPlatform.PlatformAbstractions.dll": {},
           "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.TestPlatform.TestHost/17.8.0": {
@@ -1666,6 +1809,7 @@
           "lib/netcoreapp3.1/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll": {
             "locale": "zh-Hant"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netcoreapp3.1/Microsoft.TestPlatform.CommunicationUtilities.dll": {},
@@ -1676,6 +1820,8 @@
           "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.Common.dll": {},
           "lib/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll": {},
           "lib/netcoreapp3.1/testhost.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Microsoft.Win32.Primitives/4.3.0": {
@@ -1700,6 +1846,7 @@
             "assemblyVersion": "2.2.0.0",
             "fileVersion": "2.2.1.1"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard2.0/Mono.TextTemplating.dll": {}
@@ -1717,6 +1864,8 @@
         },
         "compile": {
           "lib/net6.0/Moq.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "NETStandard.Library/1.6.1": {
@@ -1773,9 +1922,12 @@
             "assemblyVersion": "13.0.0.0",
             "fileVersion": "13.0.3.27908"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/Newtonsoft.Json.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Newtonsoft.Json.Bson/1.0.2": {
@@ -1787,9 +1939,12 @@
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.2.22727"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Npgsql/8.0.2": {
@@ -1801,9 +1956,12 @@
             "assemblyVersion": "8.0.2.0",
             "fileVersion": "8.0.2.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Npgsql.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Npgsql.EntityFrameworkCore.PostgreSQL/8.0.2": {
@@ -1818,9 +1976,12 @@
             "assemblyVersion": "8.0.2.0",
             "fileVersion": "8.0.2.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "NuGet.Frameworks/6.5.0": {
@@ -1829,9 +1990,12 @@
             "assemblyVersion": "6.5.0.154",
             "fileVersion": "6.5.0.154"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard2.0/NuGet.Frameworks.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -1899,9 +2063,12 @@
             "assemblyVersion": "6.9.0.0",
             "fileVersion": "6.9.0.799"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Swashbuckle.AspNetCore.Annotations.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Swashbuckle.AspNetCore.Swagger/6.9.0": {
@@ -1913,9 +2080,12 @@
             "assemblyVersion": "6.9.0.0",
             "fileVersion": "6.9.0.799"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Swashbuckle.AspNetCore.Swagger.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Swashbuckle.AspNetCore.SwaggerGen/6.9.0": {
@@ -1927,9 +2097,12 @@
             "assemblyVersion": "6.9.0.0",
             "fileVersion": "6.9.0.799"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "Swashbuckle.AspNetCore.SwaggerUI/6.5.0": {
@@ -1938,9 +2111,12 @@
             "assemblyVersion": "6.5.0.0",
             "fileVersion": "6.5.0.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net7.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.AppContext/4.3.0": {
@@ -1955,9 +2131,12 @@
             "assemblyVersion": "4.0.0.0",
             "fileVersion": "4.6.25519.3"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "ref/netstandard2.0/System.CodeDom.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.Collections/4.3.0": {
@@ -2001,9 +2180,12 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.21.52210"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/System.Composition.AttributedModel.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.Composition.Convention/6.0.0": {
@@ -2015,9 +2197,12 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.21.52210"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/System.Composition.Convention.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.Composition.Hosting/6.0.0": {
@@ -2029,9 +2214,12 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.21.52210"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/System.Composition.Hosting.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.Composition.Runtime/6.0.0": {
@@ -2040,9 +2228,12 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.21.52210"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/System.Composition.Runtime.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.Composition.TypedParts/6.0.0": {
@@ -2056,9 +2247,12 @@
             "assemblyVersion": "6.0.0.0",
             "fileVersion": "6.0.21.52210"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net6.0/System.Composition.TypedParts.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.Console/4.3.0": {
@@ -2086,6 +2280,7 @@
           "System.Threading": "4.3.0"
         }
       },
+<<<<<<< HEAD
       "System.Diagnostics.EventLog/8.0.1": {
         "runtime": {
           "lib/net8.0/System.Diagnostics.EventLog.dll": {
@@ -2105,6 +2300,8 @@
           "lib/net8.0/System.Diagnostics.EventLog.dll": {}
         }
       },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
       "System.Diagnostics.Tools/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "2.0.0",
@@ -2154,9 +2351,12 @@
             "assemblyVersion": "7.1.2.0",
             "fileVersion": "7.1.2.41121"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/net8.0/System.IdentityModel.Tokens.Jwt.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.IO/4.3.0": {
@@ -2217,7 +2417,11 @@
           "System.Runtime": "4.3.0"
         }
       },
+<<<<<<< HEAD
       "System.IO.Pipelines/8.0.0": {},
+=======
+      "System.IO.Pipelines/6.0.3": {},
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
       "System.Linq/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -2558,9 +2762,12 @@
             "assemblyVersion": "4.0.1.0",
             "fileVersion": "4.6.26515.6"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "ref/netstandard2.0/System.Security.Permissions.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "System.Security.Principal.Windows/4.5.0": {
@@ -2670,9 +2877,12 @@
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.0.0.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard2.0/xunit.abstractions.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "xunit.analyzers/1.4.0": {},
@@ -2685,9 +2895,12 @@
             "assemblyVersion": "2.5.3.0",
             "fileVersion": "2.5.3.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard1.1/xunit.assert.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "xunit.core/2.5.3": {
@@ -2706,9 +2919,12 @@
             "assemblyVersion": "2.5.3.0",
             "fileVersion": "2.5.3.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard1.1/xunit.core.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "xunit.extensibility.execution/2.5.3": {
@@ -2721,9 +2937,12 @@
             "assemblyVersion": "2.5.3.0",
             "fileVersion": "2.5.3.0"
           }
+<<<<<<< HEAD
         },
         "compile": {
           "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         }
       },
       "xunit.runner.visualstudio/2.5.3": {},
@@ -2744,6 +2963,7 @@
         },
         "runtime": {
           "FinTech.Api.dll": {}
+<<<<<<< HEAD
         },
         "compile": {
           "FinTech.Api.dll": {}
@@ -4452,6 +4672,9 @@
           "WindowsBase.dll": {}
         },
         "compileOnly": true
+=======
+        }
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
       }
     }
   },
@@ -4468,6 +4691,7 @@
       "path": "automapper/12.0.1",
       "hashPath": "automapper.12.0.1.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Castle.Core/5.1.1": {
       "type": "package",
       "serviceable": true,
@@ -4475,6 +4699,8 @@
       "path": "castle.core/5.1.1",
       "hashPath": "castle.core.5.1.1.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "coverlet.collector/6.0.0": {
       "type": "package",
       "serviceable": true,
@@ -4615,6 +4841,7 @@
       "path": "microsoft.aspnetcore.mvc.newtonsoftjson/8.0.10",
       "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.8.0.10.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.AspNetCore.Mvc.Testing/8.0.10": {
       "type": "package",
       "serviceable": true,
@@ -4622,6 +4849,8 @@
       "path": "microsoft.aspnetcore.mvc.testing/8.0.10",
       "hashPath": "microsoft.aspnetcore.mvc.testing.8.0.10.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "Microsoft.AspNetCore.OpenApi/8.0.7": {
       "type": "package",
       "serviceable": true,
@@ -4629,6 +4858,7 @@
       "path": "microsoft.aspnetcore.openapi/8.0.7",
       "hashPath": "microsoft.aspnetcore.openapi.8.0.7.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.AspNetCore.TestHost/8.0.10": {
       "type": "package",
       "serviceable": true,
@@ -4636,6 +4866,8 @@
       "path": "microsoft.aspnetcore.testhost/8.0.10",
       "hashPath": "microsoft.aspnetcore.testhost.8.0.10.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "Microsoft.AspNetCore.WebUtilities/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -4762,6 +4994,7 @@
       "path": "microsoft.extensions.caching.memory/8.0.1",
       "hashPath": "microsoft.extensions.caching.memory.8.0.1.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.Extensions.Configuration/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -4769,6 +5002,8 @@
       "path": "microsoft.extensions.configuration/8.0.0",
       "hashPath": "microsoft.extensions.configuration.8.0.0.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -4776,6 +5011,7 @@
       "path": "microsoft.extensions.configuration.abstractions/8.0.0",
       "hashPath": "microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.Extensions.Configuration.Binder/8.0.2": {
       "type": "package",
       "serviceable": true,
@@ -4818,6 +5054,8 @@
       "path": "microsoft.extensions.configuration.usersecrets/8.0.1",
       "hashPath": "microsoft.extensions.configuration.usersecrets.8.0.1.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "Microsoft.Extensions.DependencyInjection/8.0.1": {
       "type": "package",
       "serviceable": true,
@@ -4839,6 +5077,7 @@
       "path": "microsoft.extensions.dependencymodel/8.0.2",
       "hashPath": "microsoft.extensions.dependencymodel.8.0.2.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.Extensions.Diagnostics/8.0.1": {
       "type": "package",
       "serviceable": true,
@@ -4887,6 +5126,21 @@
       "sha512": "sha512-nHwq9aPBdBPYXPti6wYEEfgXddfBrYC+CQLn+qISiwQq5tpfaqDZSKOJNxoe9rfQxGf1c+2wC/qWFe1QYJPYqw==",
       "path": "microsoft.extensions.hosting.abstractions/8.0.1",
       "hashPath": "microsoft.extensions.hosting.abstractions.8.0.1.nupkg.sha512"
+=======
+    "Microsoft.Extensions.FileProviders.Abstractions/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EcnaSsPTqx2MGnHrmWOD0ugbuuqVT8iICqSqPzi45V5/MA1LjUNb0kwgcxBGqizV1R+WeBK7/Gw25Jzkyk9bIw==",
+      "path": "microsoft.extensions.fileproviders.abstractions/2.2.0",
+      "hashPath": "microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Hosting.Abstractions/2.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+k4AEn68HOJat5gj1TWa6X28WlirNQO9sPIIeQbia+91n03esEtMSSoekSTpMjUzjqtJWQN3McVx0GvSPFHF/Q==",
+      "path": "microsoft.extensions.hosting.abstractions/2.2.0",
+      "hashPath": "microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512"
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     },
     "Microsoft.Extensions.Logging/8.0.1": {
       "type": "package",
@@ -4902,6 +5156,7 @@
       "path": "microsoft.extensions.logging.abstractions/8.0.2",
       "hashPath": "microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.Extensions.Logging.Configuration/8.0.1": {
       "type": "package",
       "serviceable": true,
@@ -4937,6 +5192,8 @@
       "path": "microsoft.extensions.logging.eventsource/8.0.1",
       "hashPath": "microsoft.extensions.logging.eventsource.8.0.1.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "Microsoft.Extensions.ObjectPool/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -4951,6 +5208,7 @@
       "path": "microsoft.extensions.options/8.0.2",
       "hashPath": "microsoft.extensions.options.8.0.2.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Microsoft.Extensions.Options.ConfigurationExtensions/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -4958,6 +5216,8 @@
       "path": "microsoft.extensions.options.configurationextensions/8.0.0",
       "hashPath": "microsoft.extensions.options.configurationextensions.8.0.0.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "Microsoft.Extensions.Primitives/8.0.0": {
       "type": "package",
       "serviceable": true,
@@ -5084,6 +5344,7 @@
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Moq/4.20.72": {
       "type": "package",
       "serviceable": true,
@@ -5091,6 +5352,8 @@
       "path": "moq/4.20.72",
       "hashPath": "moq.4.20.72.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "NETStandard.Library/1.6.1": {
       "type": "package",
       "serviceable": true,
@@ -5385,6 +5648,7 @@
       "path": "system.diagnostics.diagnosticsource/4.3.0",
       "hashPath": "system.diagnostics.diagnosticsource.4.3.0.nupkg.sha512"
     },
+<<<<<<< HEAD
     "System.Diagnostics.EventLog/8.0.1": {
       "type": "package",
       "serviceable": true,
@@ -5392,6 +5656,8 @@
       "path": "system.diagnostics.eventlog/8.0.1",
       "hashPath": "system.diagnostics.eventlog.8.0.1.nupkg.sha512"
     },
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     "System.Diagnostics.Tools/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -5469,12 +5735,21 @@
       "path": "system.io.filesystem.primitives/4.3.0",
       "hashPath": "system.io.filesystem.primitives.4.3.0.nupkg.sha512"
     },
+<<<<<<< HEAD
     "System.IO.Pipelines/8.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-FHNOatmUq0sqJOkTx+UF/9YK1f180cnW5FVqnQMvYUN0elp6wFzbtPSiqbo1/ru8ICp43JM1i7kKkk6GsNGHlA==",
       "path": "system.io.pipelines/8.0.0",
       "hashPath": "system.io.pipelines.8.0.0.nupkg.sha512"
+=======
+    "System.IO.Pipelines/6.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ryTgF+iFkpGZY1vRQhfCzX0xTdlV3pyaTTqRu2ETbEv+HlV7O6y7hyQURnghNIXvctl5DuZ//Dpks6HdL/Txgw==",
+      "path": "system.io.pipelines/6.0.3",
+      "hashPath": "system.io.pipelines.6.0.3.nupkg.sha512"
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     },
     "System.Linq/4.3.0": {
       "type": "package",
@@ -5858,6 +6133,7 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+<<<<<<< HEAD
     },
     "Microsoft.AspNetCore.Antiforgery/8.0.0.0": {
       "type": "referenceassembly",
@@ -7278,6 +7554,8 @@
       "type": "referenceassembly",
       "serviceable": false,
       "sha512": ""
+=======
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
     }
   }
 }

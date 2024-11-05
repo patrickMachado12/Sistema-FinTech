@@ -20,7 +20,27 @@ namespace FinTech.Api.Data
             modelBuilder.ApplyConfiguration(new NaturezaLancamentoMap());
             modelBuilder.ApplyConfiguration(new PessoaMap());
             modelBuilder.ApplyConfiguration(new APagarMap());
-            modelBuilder.ApplyConfiguration(new AReceberMap());            
+            modelBuilder.ApplyConfiguration(new AReceberMap());
+
+            modelBuilder.Entity<AReceber>()
+            .HasOne(t => t.Pessoa)
+            .WithMany()
+            .HasForeignKey(t => t.IdPessoa);
+
+            modelBuilder.Entity<AReceber>()
+                .HasOne(t => t.NaturezaLancamento)
+                .WithMany()
+                .HasForeignKey(t => t.IdNaturezaLancamento);
+
+            modelBuilder.Entity<APagar>()
+            .HasOne(t => t.Pessoa)
+            .WithMany()
+            .HasForeignKey(t => t.IdPessoa);
+
+            modelBuilder.Entity<APagar>()
+                .HasOne(t => t.NaturezaLancamento)
+                .WithMany()
+                .HasForeignKey(t => t.IdNaturezaLancamento);            
         }
     }
 }

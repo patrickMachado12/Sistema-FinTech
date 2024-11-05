@@ -15,17 +15,18 @@ namespace FinTech.Api.Contract.AReceber
 
         public double ValorBaixado { get; set; }
 
-        public string Descricao { get; set; } = string.Empty;
+        [Required(ErrorMessage = "O campo Descricao é obrigatório.")]
+        public string Descricao { get; set; }
 
         public string Observacao { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "O campo DataEmissao é obrigatório.")]
         public DateTime DataEmissao { get; set; }
 
+        [Required(ErrorMessage = "O campo DataVencimento é obrigatório.")]
         public DateTime DataVencimento { get; set; }
 
         public DateTime? DataRecebimento { get; set; }
-        
-        public DateTime? DataReferencia { get; set; }
 
     }
 }

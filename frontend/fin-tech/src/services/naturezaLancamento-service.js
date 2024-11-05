@@ -1,49 +1,49 @@
 import api from './api';
 
-function obterTodas(){
-    return new Promise((resolve, reject) => {
-        return api.get('/naturezalancamento/obterTodas')
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+function obterTodas() {
+	return api.get('/naturezaLancamento/obterTodas')
+		.then(response => (response))
+		.catch(error => {
+			throw error;
+		});
 }
 
-function obterPorId(id){
-    return new Promise((resolve, reject) => {
-        return api.get(`/naturezalancamento/${id}`)
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+function obterPorId(id) {
+	return api.get(`/naturezaLancamento/${id}`)
+		.then(response => (response))
+		.catch(error => {
+			throw error;
+		});
 }
 
-function cadastrar(naturezalancamento){
-    return new Promise((resolve, reject) => {
-        return api.post(`/naturezalancamento`, naturezalancamento)
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+function cadastrar(naturezaLancamento) {
+	return api.post(`/naturezaLancamento`, naturezaLancamento)
+		.then(response => (response))
+		.catch(error => {
+			throw error;
+		});
 }
 
-function atualizar(naturezalancamento){
-    return new Promise((resolve, reject) => {
-        return api.put(`/naturezalancamento/${naturezalancamento.id}`, naturezalancamento)
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+function atualizar(naturezaLancamento) {
+	return api.put(`/naturezaLancamento/${naturezaLancamento.id}`, naturezaLancamento)
+		.then(response => (response))
+		.catch(error => {
+			throw error;
+		});
 }
 
-function deletar(id){
-    return new Promise((resolve, reject) => {
-        return api.delete(`/naturezalancamento/${id}`)
-        .then(response => resolve(response))
-        .catch(error => reject(error));
-    });
+function deletar(id) {
+	return api.delete(`/naturezaLancamento/${id}`)
+		.then(response => (response))
+		.catch(error => {
+			throw error;
+		});
 }
 
 export default {
-    obterTodas,
-    obterPorId,
-    cadastrar,
-    atualizar,
-    deletar
+	obterTodas,
+	obterPorId,
+	cadastrar,
+	atualizar,
+	deletar
 }

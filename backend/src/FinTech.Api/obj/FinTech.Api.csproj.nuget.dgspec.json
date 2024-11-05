@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "d:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj": {}
   },
   "projects": {
@@ -12,6 +13,19 @@
         "projectPath": "d:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj",
         "packagesPath": "C:\\Users\\tiko\\.nuget\\packages\\",
         "outputPath": "d:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\obj\\",
+=======
+    "D:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj": {}
+  },
+  "projects": {
+    "D:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj",
+        "projectName": "FinTech.Api",
+        "projectPath": "D:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj",
+        "packagesPath": "C:\\Users\\tiko\\.nuget\\packages\\",
+        "outputPath": "D:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\obj\\",
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -10940,11 +10940,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "d:\\Projeto\\SistemaSaas\\backend\\test\\FinTech.Test\\FinTech.Test.csproj",
       "projectName": "FinTech.Test",
       "projectPath": "d:\\Projeto\\SistemaSaas\\backend\\test\\FinTech.Test\\FinTech.Test.csproj",
       "packagesPath": "C:\\Users\\tiko\\.nuget\\packages\\",
       "outputPath": "d:\\Projeto\\SistemaSaas\\backend\\test\\FinTech.Test\\obj\\",
+=======
+      "projectUniqueName": "D:\\Projeto\\SistemaSaas\\backend\\test\\FinTech.Test\\FinTech.Test.csproj",
+      "projectName": "FinTech.Test",
+      "projectPath": "D:\\Projeto\\SistemaSaas\\backend\\test\\FinTech.Test\\FinTech.Test.csproj",
+      "packagesPath": "C:\\Users\\tiko\\.nuget\\packages\\",
+      "outputPath": "D:\\Projeto\\SistemaSaas\\backend\\test\\FinTech.Test\\obj\\",
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -10966,8 +10974,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
+<<<<<<< HEAD
             "d:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj": {
               "projectPath": "d:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj"
+=======
+            "D:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj": {
+              "projectPath": "D:\\Projeto\\SistemaSaas\\backend\\src\\FinTech.Api\\FinTech.Api.csproj"
+>>>>>>> 9dd898a90b0c5dc121989e8ecb87043f71cf2b9b
             }
           }
         }
