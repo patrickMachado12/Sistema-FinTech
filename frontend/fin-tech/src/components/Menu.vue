@@ -48,6 +48,7 @@
             </v-list-item-icon>
             <v-list-item-title>Usuário</v-list-item-title>
           </v-list-item>
+
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
