@@ -47,9 +47,6 @@ namespace FinTech.Api.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
                     b.HasKey("Id");
 
                     b.ToTable("usuario", (string)null);

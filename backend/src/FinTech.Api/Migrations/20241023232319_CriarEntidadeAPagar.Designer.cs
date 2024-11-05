@@ -127,9 +127,6 @@ namespace FinTech.Api.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("VARCHAR");
@@ -160,10 +157,7 @@ namespace FinTech.Api.Migrations
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("VARCHAR");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("boolean");
-
+                        
                     b.HasKey("Id");
 
                     b.ToTable("Usuario", (string)null);

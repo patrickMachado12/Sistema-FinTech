@@ -22,7 +22,6 @@ namespace FinTech.Api.Migrations
                     Senha = table.Column<string>(type: "VARCHAR", nullable: false),
                     DataCadastro = table.Column<DateTime>(type: "timestamp", nullable: false),
                     DataInativacao = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    Status = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

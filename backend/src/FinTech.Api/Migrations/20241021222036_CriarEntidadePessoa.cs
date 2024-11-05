@@ -43,8 +43,7 @@ namespace FinTech.Api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nome = table.Column<string>(type: "VARCHAR", nullable: false),
                     Telefone = table.Column<string>(type: "VARCHAR", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "timestamp", nullable: false),
-                    Status = table.Column<bool>(type: "boolean", nullable: false)
+                    DataCadastro = table.Column<DateTime>(type: "timestamp", nullable: false)
                 },
                 constraints: table =>
                 {

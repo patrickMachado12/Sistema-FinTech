@@ -1,17 +1,66 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using FinTech.Api.Contract.NaturezaLancamento;
+using FinTech.Api.Domain.Models;
 using Xunit;
 
-namespace FinTech.Test.TesteIntegracao
+namespace FinTech.Test.DataBase
 {
-    public class NaturezaLancamentoServiceIntegracaoTests
+    public class NaturezaLancamentoServiceIntegrationTests : BaseTest
     {
         [Fact]
-        public void Test1()
+        public async Task Deve_Criar_NaturezaLancamento_Com_Sucesso()
         {
-            Assert.True(true);
+            var naturezaRequest = new NaturezaLancamentoRequestContract { Descricao = "Teste de Lançamento" };
+            var resultado = await _naturezaLancamentoService.Adicionar(naturezaRequest, 1);
+            Assert.NotNull(resultado);
+            Assert.Equal("Teste de Lançamento", resultado.Descricao);
+        }
+
+        [Fact]
+        public async Task Deve_Obter_NaturezaLancamento_Por_Id()
+        {
+            // Arrange
+            var naturezaRequest = new NaturezaLancamentoRequestContract { Descricao = "Teste de Lançamento" };
+            var natureza = await _naturezaLancamentoService.Adicionar(naturezaRequest, 1);
+            
+            // Act
+            var resultado = await _naturezaLancamentoService.Obter(natureza.Id, 1);
+            
+            // Assert
+            Assert.NotNull(resultado);
+            Assert.Equal(natureza.Id, resultado.Id);
+            Assert.Equal(natureza.Descricao, resultado.Descricao);
+        }
+
+        [Fact]
+        public async Task Deve_Atualizar_NaturezaLancamento_Com_Sucesso()
+        {
+            // Arrange
+            var naturezaRequest = new NaturezaLancamentoRequestContract { Descricao = "Teste de Lançamento" };
+            var natureza = await _naturezaLancamentoService.Adicionar(naturezaRequest, 1);
+            var naturezaAtualizadaRequest = new NaturezaLancamentoRequestContract { Descricao = "Lançamento Atualizado" };
+
+            // Act
+            var resultado = await _naturezaLancamentoService.Atualizar(natureza.Id, naturezaAtualizadaRequest, 1);
+
+            // Assert
+            Assert.NotNull(resultado);
+            Assert.Equal("Lançamento Atualizado", resultado.Descricao);
+        }
+
+        [Fact]
+        public async Task Deve_Deletar_NaturezaLancamento_Com_Sucesso()
+        {
+            // Arrange
+            var naturezaRequest = new NaturezaLancamentoRequestContract { Descricao = "Teste de Lançamento" };
+            var natureza = await _naturezaLancamentoService.Adicionar(naturezaRequest, 1);
+
+            // Act
+            await _naturezaLancamentoService.Inativar(natureza.Id, 1);
+            var resultado = await _naturezaLancamentoService.Obter(natureza.Id, 1);
+
+            // Assert
+            Assert.Null(resultado);
         }
     }
 }

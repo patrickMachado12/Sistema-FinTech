@@ -14,9 +14,5 @@ namespace FinTech.Api.Domain.Models
 
         [Required]
         public DateTime DataCadastro { get; set; }
-
-        [Required]
-        [Range(0, 1)]
-        public Boolean Status { get; set; }
     }
 }

@@ -30,6 +30,8 @@ namespace FinTech.Test.DataBase
         protected AReceberRepository _aReceberRepository;
         protected INaturezaLancamentoRepository _naturezaLancamentoRepository;
         protected NaturezaLancamentoService _naturezaLancamentoService;
+        protected APagarService _aPagarService;
+        protected AReceberService _aReceberService;
 
 
         protected string emailUsuarioAutenticado = "admin@gmail.com";
@@ -61,9 +63,13 @@ namespace FinTech.Test.DataBase
             _pessoaRepository = new PessoaRepository(_context);
             _pessoaService = new PessoaService(_pessoaRepository, _mapper);
             _aPagarRepository = new APagarRepository(_context);
+            _aPagarService = new APagarService(_aPagarRepository, _mapper, _usuarioRepository, _context);
             _aReceberRepository = new AReceberRepository(_context);
+            _aReceberService = new AReceberService(_aReceberRepository, _mapper, _usuarioRepository, _context);
             _naturezaLancamentoRepository = new NaturezaLancamentoRepository(_context);
             _naturezaLancamentoService = new NaturezaLancamentoService(_naturezaLancamentoRepository, _mapper);
+            
+            
         }
     }
 }

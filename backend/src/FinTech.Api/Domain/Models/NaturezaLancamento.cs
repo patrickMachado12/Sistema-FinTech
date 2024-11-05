@@ -19,7 +19,6 @@ namespace FinTech.Api.Domain.Models
 
         [Required]
         public DateTime DataCadastro { get; set; }
-        
-        public DateTime? DataInativacao { get; set; }
+
     }
 }
