@@ -36,6 +36,9 @@
                 autocomplete="off"
                 required="true"
               ></v-text-field>
+              <v-text class="red-text" v-if="errorMessage" type="error" dismissible>
+                {{ errorMessage }}
+              </v-text>
             </v-form>
           </v-card-text>
 
@@ -65,7 +68,9 @@ export default {
   name: "TelaLogin",
   data() {
     return {
-      usuario: new Usuario()
+      usuario: new Usuario(),
+      valid: true,
+      errorMessage: "",
     };
   },
   mounted() {
@@ -81,19 +86,25 @@ export default {
       }
     },
     login() {
-
-      usuarioService.login(this.usuario.email, this.usuario.senha)
-      .then(response => {
-        this.usuario = new Usuario(response.data.usuario);
-
-        LocalStorage.salvarUsuarioNaStorage(this.usuario);
-        LocalStorage.salvarTokenNaStorage(response.data.token);
-
-        this.$router.push({name: 'FluxoCaixa'});
-      })
-      .catch(error => {
-        console.log(error);
-      })      
+      this.errorMessage = "";
+      usuarioService
+        .login(this.usuario.email, this.usuario.senha)
+        .then((response) => {
+          this.usuario = new Usuario(response.data.usuario);
+          LocalStorage.salvarUsuarioNaStorage(this.usuario);
+          LocalStorage.salvarTokenNaStorage(response.data.token);
+          this.$router.push({ name: "FluxoCaixa" });
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            this.errorMessage = "Usuário ou senha inválidos!";
+          } else {
+            this.errorMessage = "Erro ao tentar fazer login.";
+          }
+          setTimeout(() => {
+            this.errorMessage = "";
+          }, 3000);
+        });
     },
     
   },
@@ -108,7 +119,9 @@ export default {
 }
 
 .row-login {
-  background-color: rgba(78, 192, 160, 0.2);
+  height: 100vh;
+  background: linear-gradient(to bottom right,
+  #295255 30%, black 100%);
 }
 
 .col-logo,
@@ -134,4 +147,9 @@ export default {
 .v-btn {
   width: 100%;
 }
+
+.red-text {
+  color: red;
+}
+
 </style>
