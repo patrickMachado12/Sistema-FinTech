@@ -74,8 +74,8 @@
             </v-date-picker>
           </v-menu>
         </v-col>
-        <v-col cols="12" md="2">
-          <v-btn color="primary" @click="filtrarPeriodo">FILTRAR</v-btn>
+        <v-col class="col-filtro" cols="12" md="2">
+          <v-btn id="btn-filtro" dark @click="filtrarPeriodo">FILTRAR</v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -85,9 +85,6 @@
               <v-icon>mdi-arrow-up-bold</v-icon>
             </v-card-title>
             <v-card-subtitle>Total Recebido (R$)</v-card-subtitle>
-            <!-- <v-card-actions>
-              <v-btn text>Ver detalhes</v-btn>
-            </v-card-actions> -->
           </v-card>
         </v-col>
         <v-col cols="12" md="3">
@@ -96,27 +93,18 @@
               <v-icon>mdi-arrow-down-bold</v-icon>
             </v-card-title>
             <v-card-subtitle>Total Gastos (R$)</v-card-subtitle>
-            <!-- <v-card-actions>
-              <v-btn text>Ver detalhes</v-btn>
-            </v-card-actions> -->
           </v-card>
         </v-col>
         <v-col cols="12" md="3">
           <v-card color="blue lighten-2" class="pa-3">
             <v-card-title class="headline">{{ receitaDespesa | currency }}</v-card-title>
             <v-card-subtitle>Receita - Despesa (R$)</v-card-subtitle>
-            <!-- <v-card-actions>
-              <v-btn text>Ver detalhes</v-btn>
-            </v-card-actions> -->
           </v-card>
         </v-col>
         <v-col cols="12" md="3">
           <v-card color="purple lighten-2" class="pa-3">
             <v-card-title class="headline">{{ saldoFinal | currency }}</v-card-title>
             <v-card-subtitle>Saldo Final (R$)</v-card-subtitle>
-            <!-- <v-card-actions>
-              <v-btn text>Ver detalhes</v-btn>
-            </v-card-actions> -->
           </v-card>
         </v-col>
       </v-row>
@@ -154,6 +142,7 @@
             disable-pagination
             hide-default-footer
             class="elevation-1"
+            :item-class="getRowClass"
           >
             <template v-slot:[`item.dataEmissao`]="{ item }">
               {{ item.dataEmissao | formatarData }}
@@ -326,4 +315,16 @@ export default {
 .negative {
   color: red;
 }
+
+.col-filtro{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#btn-filtro {
+  background-color: var(--cor-primaria);
+  margin-left: 12px;
+}
+
 </style>
