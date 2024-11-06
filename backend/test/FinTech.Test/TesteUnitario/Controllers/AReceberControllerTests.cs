@@ -9,12 +9,12 @@ namespace FinTech.Test.TesteUnitario.Controllers
 {
     public class AReceberControllerTests
     {
-        private readonly Mock<IService<AReceberRequestContract, AReceberResponseContract, long>> _aReceberServiceMock;
+        private readonly Mock<ITituloService<AReceberRequestContract, AReceberResponseContract, long>> _aReceberServiceMock;
         private readonly AReceberController _aReceberController;
 
         public AReceberControllerTests()
         {
-            _aReceberServiceMock = new Mock<IService<AReceberRequestContract, AReceberResponseContract, long>>();
+            _aReceberServiceMock = new Mock<ITituloService<AReceberRequestContract, AReceberResponseContract, long>>();
             _aReceberController = new AReceberController(_aReceberServiceMock.Object);
         }
 

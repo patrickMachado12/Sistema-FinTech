@@ -9,12 +9,12 @@ namespace FinTech.Test.TesteUnitario.Controllers
 {
     public class APagarControllerTests
     {
-        private readonly Mock<IService<APagarRequestContract, APagarResponseContract, long>> _aPagarServiceMock;
+        private readonly Mock<ITituloService<APagarRequestContract, APagarResponseContract, long>> _aPagarServiceMock;
         private readonly APagarController _aPagarController;
 
         public APagarControllerTests()
         {
-            _aPagarServiceMock = new Mock<IService<APagarRequestContract, APagarResponseContract, long>>();
+            _aPagarServiceMock = new Mock<ITituloService<APagarRequestContract, APagarResponseContract, long>>();
             _aPagarController = new APagarController(_aPagarServiceMock.Object);
         }
 
