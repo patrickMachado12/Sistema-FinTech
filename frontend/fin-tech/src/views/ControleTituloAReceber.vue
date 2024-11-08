@@ -36,28 +36,6 @@
           <v-card-text>
             <v-container>
               <v-row>
-
-                <v-col cols="6">
-                  <v-autocomplete
-                    v-model="editedItem.idPessoa"
-                    :items="filteredPessoas"
-                    label="Pessoa*"
-                    placeholder="Nome da Pessoa"
-                    item-text="nome"
-                    item-value="id" 
-                    return-object 
-                    @input="onPessoaSelect" 
-                    :search-input.sync="searchQuey"
-                    no-data-text="Nenhuma pessoa encontrada"
-                  >
-                    <template v-slot:no-data>
-                      <v-list-item>
-                        <v-list-item-title>Nenhuma pessoa encontrada</v-list-item-title>
-                      </v-list-item>
-                    </template>
-                  </v-autocomplete>
-                </v-col>
-
                 <v-col cols="2">
                   <CampoMonetario
                     v-model="editedItem.valorAReceber"
@@ -196,11 +174,9 @@
 
 <script>
 import AReceber from "../models/AReceber.js";
-import aReceberService from "../services/aReceber-service.js";
-import naturezaLacamentoService from "../services/naturezaLancamento-service.js";
+import aReceberService from "../services/areceber-service.js";
+import naturezaLacamentoService from "../services/natureza-lancamento-service.js";
 import NaturezaLancamento from '@/models/NaturezaLancamento.js';
-import Pessoa from '@/models/Pessoa.js';
-import pessoaService from '@/services/pessoa-service.js';
 import moment from "moment";
 import { validarData } from '@/utils/conversorData.js';
 import CampoMonetario from '@/components/monetario/campoMonetario.vue';
@@ -238,12 +214,10 @@ export default {
       ],
       naturezasLancamento: [],
       titulosAReceber: [],
-      pessoas: [],
       searchQuery: '',
       dialog: false,
       editedIndex: -1,
       editedItem: {
-        idPessoa: 0,
         idNaturezaLancamento: 0,
         valorAReceber: 0,
         valorBaixado: 0,
@@ -261,12 +235,6 @@ export default {
           align: "start",
           sortable: true,
           value: "id",
-        },
-        {
-          text: "Pessoa",
-          align: "start",
-          sortable: true,
-          value: "pessoa.nome",
         },
         { text: "Valor", value: "valorAReceber" },
         { text: "Descrição", value: "descricao" },
@@ -286,19 +254,11 @@ export default {
   mounted() {
     this.obterTitulos();
     this.obterNaturezasLacamento();
-    this.obterPessoas();
   },
 
   computed: {
     formTitulo() {
       return this.editedIndex === -1 ? "Cadastro" : "Edição";
-    },
-
-    filteredPessoas() {
-      return this.pessoas.filter(pessoa => {
-        const nome = pessoa.nome || '';
-        return nome.toLowerCase().includes(this.searchQuery.toLowerCase());
-      });
     },
   },
 
@@ -308,24 +268,7 @@ export default {
     },
   },
 
-  methods: {
-    obterPessoas() {
-      pessoaService
-        .obterTodos()
-        .then((response) => {
-          this.pessoas = response.data.map((p) => new Pessoa(p));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-
-    onPessoaSelect(selected) {
-      if (selected) {
-        this.editedItem.idPessoa = selected.id;
-      }
-    },
-  
+  methods: {  
     obterTitulos() {
       aReceberService
         .obterTodos()

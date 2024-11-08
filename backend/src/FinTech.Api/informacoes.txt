@@ -4,7 +4,6 @@ Instalar o dotnet-ef
 Criar migrations
     dotnet ef migrations add CriarEntidadeUsuario
     dotnet ef migrations add CriarEntidadeNaturezaLancamento
-    dotnet ef migrations add CriarEntidadePessoa
     dotnet ef migrations add CriarEntidadeAPagar
     dotnet ef migrations add CriarEntidadeAReceber
 

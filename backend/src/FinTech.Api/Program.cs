@@ -39,7 +39,6 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
         
         cfg.AddProfile<UsuarioProfile>();
         cfg.AddProfile<NaturezaLancamentoProfile>();
-        cfg.AddProfile<PessoaProfile>();
         cfg.AddProfile<APagarProfile>();
         cfg.AddProfile<AReceberProfile>();
         // Aqui colocar outros profiles...
@@ -56,8 +55,6 @@ static void ConfigurarInjecaoDeDependencia(WebApplicationBuilder builder)
     .AddScoped<IUsuarioService, UsuarioService>()
     .AddScoped<INaturezaLancamentoRepository, NaturezaLancamentoRepository>()
     .AddScoped<IService<NaturezaLancamentoRequestContract, NaturezaLancamentoResponseContract, long>, NaturezaLancamentoService>()
-    .AddScoped<IPessoaRepository, PessoaRepository>()
-    .AddScoped<IPessoaService, PessoaService>()
     .AddScoped<IAPagarRepository, APagarRepository>()
     .AddScoped<ITituloService<APagarRequestContract, APagarResponseContract, long>, APagarService>()
     .AddScoped<IAReceberRepository, AReceberRepository>()

@@ -12,7 +12,6 @@ namespace FinTech.Test.TesteUnitario.Services
     public class AReceberServiceTests
     {
         private readonly Mock<IAReceberRepository> _aReceberRepositoryMock;
-        private readonly Mock<IPessoaRepository> _pessoaRepositoryMock;
         private readonly Mock<IUsuarioRepository> _usuarioRepositoryMock;
         private readonly Mock<IMapper> _mapperMock;
         private readonly Mock<ApplicationContext> _applicationContextMock;
@@ -21,7 +20,6 @@ namespace FinTech.Test.TesteUnitario.Services
         public AReceberServiceTests()
         {
             _aReceberRepositoryMock = new Mock<IAReceberRepository>();
-            _pessoaRepositoryMock = new Mock<IPessoaRepository>();
             _usuarioRepositoryMock = new Mock<IUsuarioRepository>();
             _mapperMock = new Mock<IMapper>();
             _applicationContextMock = new Mock<ApplicationContext>();
@@ -31,9 +29,9 @@ namespace FinTech.Test.TesteUnitario.Services
         [Fact(DisplayName = "Deve realizar o cadastro de um novo a receber.")]
         public async Task Adicionar_DeveRetornarAReceberResponseContract_QuandoAReceberEhValido()
         {
-            var aReceberRequestContract = new AReceberRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
-            var aReceber = new AReceber { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
-            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberRequestContract = new AReceberRequestContract { IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceber = new AReceber { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
 
             _mapperMock.Setup(m => m.Map<AReceber>(aReceberRequestContract)).Returns(aReceber);
             _aReceberRepositoryMock.Setup(r => r.Adicionar(aReceber)).Returns(Task.FromResult(aReceber));
@@ -43,7 +41,6 @@ namespace FinTech.Test.TesteUnitario.Services
 
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Id, resultado.Id);
-            Assert.Equal(aReceberResponseContract.IdPessoa, resultado.IdPessoa);
             Assert.Equal(aReceberResponseContract.IdNaturezaLancamento, resultado.IdNaturezaLancamento);
             Assert.Equal(aReceberResponseContract.ValorAReceber, resultado.ValorAReceber);
         }
@@ -52,9 +49,9 @@ namespace FinTech.Test.TesteUnitario.Services
         public async Task Atualizar_DeveRetornarAReceberResponseContract_QuandoAReceberEhValido()
         {
             var id = 1;
-            var aReceberRequestContract = new AReceberRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
-            var aReceber = new AReceber { Id = id, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
-            var aReceberResponseContract = new AReceberResponseContract { Id = id, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberRequestContract = new AReceberRequestContract { IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceber = new AReceber { Id = id, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberResponseContract = new AReceberResponseContract { Id = id, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
 
             _mapperMock.Setup(m => m.Map<AReceber>(aReceberRequestContract)).Returns(aReceber);
             _aReceberRepositoryMock.Setup(r => r.Atualizar(aReceber)).Returns(Task.FromResult(aReceber));
@@ -64,7 +61,6 @@ namespace FinTech.Test.TesteUnitario.Services
 
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Id, resultado.Id);
-            Assert.Equal(aReceberResponseContract.IdPessoa, resultado.IdPessoa);
             Assert.Equal(aReceberResponseContract.IdNaturezaLancamento, resultado.IdNaturezaLancamento);
             Assert.Equal(aReceberResponseContract.ValorAReceber, resultado.ValorAReceber);
         }
@@ -73,8 +69,8 @@ namespace FinTech.Test.TesteUnitario.Services
         public async Task Deletar_DeveRetornarAReceberResponseContract_QuandoAReceberEhValido()
         {
             var id = 1;
-            var aReceber = new AReceber { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
-            var aReceberResponseContract = new AReceberResponseContract { Id = id, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceber = new AReceber { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberResponseContract = new AReceberResponseContract { Id = id, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
 
             _aReceberRepositoryMock.Setup(r => r.ObterPorId(id)).Returns(Task.FromResult(aReceber));
             _aReceberRepositoryMock.Setup(r => r.Deletar(aReceber)).Returns(Task.FromResult(true));
@@ -90,8 +86,8 @@ namespace FinTech.Test.TesteUnitario.Services
         public async Task ObterPorId_DeveRetornarAReceberResponseContract_QuandoAReceberEhValido()
         {
             var id = 1;
-            var aReceber = new AReceber { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
-            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceber = new AReceber { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
 
             _aReceberRepositoryMock.Setup(r => r.ObterPorId(id)).Returns(Task.FromResult(aReceber));
             _mapperMock.Setup(m => m.Map<AReceberResponseContract>(aReceber)).Returns(aReceberResponseContract);
@@ -100,7 +96,6 @@ namespace FinTech.Test.TesteUnitario.Services
 
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Id, resultado.Id);
-            Assert.Equal(aReceberResponseContract.IdPessoa, resultado.IdPessoa);
             Assert.Equal(aReceberResponseContract.IdNaturezaLancamento, resultado.IdNaturezaLancamento);
             Assert.Equal(aReceberResponseContract.ValorAReceber, resultado.ValorAReceber);
         }
@@ -110,13 +105,13 @@ namespace FinTech.Test.TesteUnitario.Services
         {
             var aReceber = new List<AReceber>
             {
-                new AReceber { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 },
-                new AReceber { Id = 2, IdPessoa = 2, IdNaturezaLancamento = 2, ValorAReceber = 200.00 }
+                new AReceber { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 },
+                new AReceber { Id = 2, IdNaturezaLancamento = 2, ValorAReceber = 200.00 }
             };
             var aReceberResponseContract = new List<AReceberResponseContract>
             {
-                new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 },
-                new AReceberResponseContract { Id = 2, IdPessoa = 2, IdNaturezaLancamento = 2, ValorAReceber = 200.00 }
+                new AReceberResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 },
+                new AReceberResponseContract { Id = 2, IdNaturezaLancamento = 2, ValorAReceber = 200.00 }
             };
 
             _aReceberRepositoryMock.Setup(r => r.ObterTodos()).Returns(Task.FromResult((IEnumerable<AReceber>)aReceber));
@@ -127,11 +122,9 @@ namespace FinTech.Test.TesteUnitario.Services
             Assert.NotNull(resultado);
             Assert.Equal(aReceberResponseContract.Count, resultado.Count());
             Assert.Equal(aReceberResponseContract[0].Id, resultado[0].Id);
-            Assert.Equal(aReceberResponseContract[0].IdPessoa, resultado[0].IdPessoa);
             Assert.Equal(aReceberResponseContract[0].IdNaturezaLancamento, resultado[0].IdNaturezaLancamento);
             Assert.Equal(aReceberResponseContract[0].ValorAReceber, resultado[0].ValorAReceber);
             Assert.Equal(aReceberResponseContract[1].Id, resultado[1].Id);
-            Assert.Equal(aReceberResponseContract[1].IdPessoa, resultado[1].IdPessoa);
             Assert.Equal(aReceberResponseContract[1].IdNaturezaLancamento, resultado[1].IdNaturezaLancamento);
             Assert.Equal(aReceberResponseContract[1].ValorAReceber, resultado[1].ValorAReceber);
         }

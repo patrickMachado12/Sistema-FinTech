@@ -166,7 +166,7 @@
 <script>
 import moment from 'moment';
 import AReceber from "../models/AReceber.js";
-import aReceberService from "../services/aReceber-service.js";
+import aReceberService from "../services/areceber-service.js";
 import APagar from "../models/APagar.js";
 import aPagarService from "../services/apagar-service.js";
 

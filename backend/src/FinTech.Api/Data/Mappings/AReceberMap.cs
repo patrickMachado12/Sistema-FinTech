@@ -11,10 +11,6 @@ namespace FinTech.Api.Data.Mappings
             builder.ToTable("AReceber")
             .HasKey(p => p.Id);
 
-            builder.HasOne(p => p.Pessoa)
-            .WithMany()
-            .HasForeignKey(fk => fk.IdPessoa);
-
             builder.HasOne(p => p.Usuario)
             .WithMany()
             .HasForeignKey(fk => fk.IdUsuario);
@@ -43,9 +39,6 @@ namespace FinTech.Api.Data.Mappings
             .IsRequired();           
 
             builder.Property(p => p.DataRecebimento)
-            .HasColumnType("timestamp");
-
-            builder.Property(p => p.DataReferencia)
             .HasColumnType("timestamp");
 
             builder.Property(p => p.Observacao)

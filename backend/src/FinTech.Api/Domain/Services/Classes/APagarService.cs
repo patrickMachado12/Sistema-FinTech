@@ -26,7 +26,7 @@ namespace FinTech.Api.Domain.Services.Classes
             _contexto = contexto;
         }
 
-        public async Task<APagarResponseContract> Adicionar(APagarRequestContract entidade, long idUsuario)
+        public async Task<APagarResponseContract> Adicionar(APagarRequestContract contrato, long idUsuario)
         {
             // Verificar se o Usuário existe
             var usuario = await _usuarioRepository.ObterPorId(idUsuario);
@@ -36,19 +36,9 @@ namespace FinTech.Api.Domain.Services.Classes
                 throw new Exception($"Usuário não encontrado com id {idUsuario}");
             }
 
-            // Verificar se a Pessoa existe
-            var pessoaRepository = new PessoaRepository(_contexto);
+            ValidarCamposObrigatorios(contrato);
 
-            var pessoa = await pessoaRepository.ObterPorId(entidade.IdPessoa);
-
-            if (pessoa == null)
-            {
-                throw new Exception($"Pessoa não encontrada com id {entidade.IdPessoa}");
-            }
-
-            ValidarCamposObrigatorios(entidade);
-
-            APagar aPagar = _mapper.Map<APagar>(entidade);
+            APagar aPagar = _mapper.Map<APagar>(contrato);
             aPagar.IdUsuario = idUsuario;
 
             aPagar = await _aPagarRepository.Adicionar(aPagar);
@@ -56,25 +46,21 @@ namespace FinTech.Api.Domain.Services.Classes
             return _mapper.Map<APagarResponseContract>(aPagar);
         }
 
-        private void ValidarCamposObrigatorios(APagarRequestContract entidade)
+        private void ValidarCamposObrigatorios(APagarRequestContract contrato)
         {
             string mensagemErro = string.Empty;
 
             switch (true)
             {
-                case var _ when entidade.IdPessoa <= 0:
-                    mensagemErro = "O campo IdPessoa é obrigatório.";
-                    break;
-
-                case var _ when entidade.IdNaturezaLancamento <= 0:
+                case var _ when contrato.IdNaturezaLancamento <= 0:
                     mensagemErro = "O campo IdNaturezaLancamento é obrigatório.";
                     break;
 
-                case var _ when entidade.ValorAPagar == null || entidade.ValorAPagar == 0:
+                case var _ when contrato.ValorAPagar == null || contrato.ValorAPagar == 0:
                     mensagemErro = "O campo ValorAPagar é obrigatório e deve ser maior que zero.";
                     break;
 
-                case var _ when entidade.ValorAPagar < 0:
+                case var _ when contrato.ValorAPagar < 0:
                     mensagemErro = "O valor do título não pode ser negativo.";
                     break;
             }
@@ -85,26 +71,16 @@ namespace FinTech.Api.Domain.Services.Classes
             }
         }
 
-        public async Task<APagarResponseContract> Atualizar(long id, APagarRequestContract entidade, long idUsuario)
+        public async Task<APagarResponseContract> Atualizar(long id, APagarRequestContract contrato, long idUsuario)
         {
             APagar aPagar = await _aPagarRepository.ObterPorId(id);
 
             if (aPagar == null)
                 throw new KeyNotFoundException("Título a pagar não encontrado.");
 
-            _mapper.Map(entidade, aPagar);
+            _mapper.Map(contrato, aPagar);
 
-            // Verificar se a Pessoa existe
-            var pessoaRepository = new PessoaRepository(_contexto);
-
-            var pessoa = await pessoaRepository.ObterPorId(entidade.IdPessoa);
-
-            if (pessoa == null)
-            {
-                throw new Exception($"Pessoa não encontrada com id {entidade.IdPessoa}");
-            }
-
-            ValidarCamposObrigatorios(entidade);
+            ValidarCamposObrigatorios(contrato);
 
             aPagar.Id = aPagar.Id;
             aPagar.IdUsuario = aPagar.IdUsuario;
@@ -134,18 +110,6 @@ namespace FinTech.Api.Domain.Services.Classes
             if (aPagar is null)
             {
                 throw new Exception($"Não foi encontrado nenhum título a pagar pelo id {id}");
-            }
-
-            return _mapper.Map<APagarResponseContract>(aPagar);
-        }
-
-        public async Task<APagarResponseContract> ObterPorIdPessoa(long idPessoa)
-        {
-            var aPagar = await _aPagarRepository.ObterPorIdPessoa(idPessoa);
-
-            if (aPagar is null || aPagar.IdUsuario != idPessoa)
-            {
-                throw new Exception($"Não foi encontrado nenhum título a pagar pelo id {idPessoa}");
             }
 
             return _mapper.Map<APagarResponseContract>(aPagar);

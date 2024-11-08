@@ -115,7 +115,7 @@
 
 <script>
 import NaturezaLancamento from "../models/NaturezaLancamento.js";
-import naturezaLancamentoService from "../services/naturezaLancamento-service.js";
+import naturezaLancamentoService from "../services/natureza-lancamento-service.js";
 import moment from "moment";
 
 export default {

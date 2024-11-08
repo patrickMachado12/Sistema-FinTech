@@ -10,10 +10,10 @@ namespace FinTech.Api.Domain.Models
         [Required]
         public long IdUsuario { get; set; }
 
-        public Usuario Usuario { get; set; }
+        public Usuario Usuario { get; set; } = null!;
 
         [Required(ErrorMessage = "O campo de Descrição é obrigatório.")]
-        public string Descricao { get; set; }
+        public string Descricao { get; set; } = null!;
 
         public string? Observacao { get; set; } = string.Empty;
 

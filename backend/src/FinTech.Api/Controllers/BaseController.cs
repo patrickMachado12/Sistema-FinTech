@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinTech.Api.Controllers
 {
-    public class BaseController : ControllerBase
+    public abstract class BaseController : ControllerBase
     {
         protected long _idUsuario; 
         protected long ObterIdUsuarioLogado()

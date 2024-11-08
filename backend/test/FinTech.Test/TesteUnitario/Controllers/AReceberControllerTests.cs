@@ -23,8 +23,8 @@ namespace FinTech.Test.TesteUnitario.Controllers
         {
             var aReceberResponseContract = new List<AReceberResponseContract>
             {
-                new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 },
-                new AReceberResponseContract { Id = 2, IdPessoa = 2, IdNaturezaLancamento = 2, ValorAReceber = 200.00 }
+                new AReceberResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 },
+                new AReceberResponseContract { Id = 2, IdNaturezaLancamento = 2, ValorAReceber = 200.00 }
             };
 
             _aReceberServiceMock.Setup(s => s.ObterTodos(1)).ReturnsAsync(aReceberResponseContract);
@@ -40,7 +40,7 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve retornar um a receber por ID.")]
         public async Task Get_DeveRetornarAReceber_QuandoAReceberExiste()
         {
-            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
 
             _aReceberServiceMock.Setup(s => s.Obter(1, 1)).ReturnsAsync(aReceberResponseContract);
 
@@ -58,8 +58,8 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve criar um novo a receber.")]
         public async Task Post_DeveCriarAReceber_QuandoAReceberEhValida()
         {
-            var aReceberRequestContract = new AReceberRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
-            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberRequestContract = new AReceberRequestContract { IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
 
             _aReceberServiceMock.Setup(s => s.Adicionar(aReceberRequestContract, 1)).ReturnsAsync(aReceberResponseContract);
 
@@ -78,8 +78,8 @@ namespace FinTech.Test.TesteUnitario.Controllers
         public async Task Put_DeveAtualizarAReceber_QuandoAReceberExiste()
         {
             var id = 1;
-            var aReceberRequestContract = new AReceberRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
-            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberRequestContract = new AReceberRequestContract { IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
+            var aReceberResponseContract = new AReceberResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAReceber = 100.00 };
 
              _aReceberServiceMock.Setup(s => s.Atualizar(id, aReceberRequestContract, 1)).ReturnsAsync(aReceberResponseContract);
 

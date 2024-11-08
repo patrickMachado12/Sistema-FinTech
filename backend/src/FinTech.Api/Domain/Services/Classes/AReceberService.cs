@@ -26,7 +26,7 @@ namespace FinTech.Api.Domain.Services.Classes
             _contexto = contexto;
         }
 
-        public async Task<AReceberResponseContract> Adicionar(AReceberRequestContract entidade, long idUsuario)
+        public async Task<AReceberResponseContract> Adicionar(AReceberRequestContract contrato, long idUsuario)
         {
             // Verificar se o Usuário existe
             var usuario = await _usuarioRepository.ObterPorId(idUsuario);
@@ -36,19 +36,9 @@ namespace FinTech.Api.Domain.Services.Classes
                 throw new Exception($"Usuário não encontrado com id {idUsuario}");
             }
 
-            // Verificar se a Pessoa existe
-            var pessoaRepository = new PessoaRepository(_contexto);
+            ValidarCamposObrigatorios(contrato);
 
-            var pessoa = await pessoaRepository.ObterPorId(entidade.IdPessoa);
-
-            if (pessoa == null)
-            {
-                throw new Exception($"Pessoa não encontrada com id {entidade.IdPessoa}");
-            }
-
-            ValidarCamposObrigatorios(entidade);
-
-            AReceber aReceber = _mapper.Map<AReceber>(entidade);
+            AReceber aReceber = _mapper.Map<AReceber>(contrato);
             aReceber.IdUsuario = idUsuario;
 
             aReceber = await _aReceberRepository.Adicionar(aReceber);
@@ -56,25 +46,21 @@ namespace FinTech.Api.Domain.Services.Classes
             return _mapper.Map<AReceberResponseContract>(aReceber);
         }
 
-        private void ValidarCamposObrigatorios(AReceberRequestContract entidade)
+        private void ValidarCamposObrigatorios(AReceberRequestContract contrato)
         {
             string mensagemErro = string.Empty;
 
             switch (true)
             {
-                case var _ when entidade.IdPessoa <= 0:
-                    mensagemErro = "O campo IdPessoa é obrigatório.";
-                    break;
-
-                case var _ when entidade.IdNaturezaLancamento <= 0:
+                case var _ when contrato.IdNaturezaLancamento <= 0:
                     mensagemErro = "O campo IdNaturezaLancamento é obrigatório.";
                     break;
 
-                case var _ when entidade.ValorAReceber == null || entidade.ValorAReceber == 0:
+                case var _ when contrato.ValorAReceber == null || contrato.ValorAReceber == 0:
                     mensagemErro = "O campo ValorAReceber é obrigatório e deve ser maior que zero.";
                     break;
 
-                case var _ when entidade.ValorAReceber < 0:
+                case var _ when contrato.ValorAReceber < 0:
                     mensagemErro = "O valor do título não pode ser negativo.";
                     break;
             }
@@ -85,26 +71,16 @@ namespace FinTech.Api.Domain.Services.Classes
             }
         }
 
-        public async Task<AReceberResponseContract> Atualizar(long id, AReceberRequestContract entidade, long idUsuario)
+        public async Task<AReceberResponseContract> Atualizar(long id, AReceberRequestContract contrato, long idUsuario)
         {
             AReceber aReceber = await _aReceberRepository.ObterPorId(id);
 
             if (aReceber == null)
                 throw new KeyNotFoundException("Título a Receber não encontrado.");
 
-            _mapper.Map(entidade, aReceber);
+            _mapper.Map(contrato, aReceber);
 
-            // Verificar se a Pessoa existe
-            var pessoaRepository = new PessoaRepository(_contexto);
-
-            var pessoa = await pessoaRepository.ObterPorId(entidade.IdPessoa);
-
-            if (pessoa == null)
-            {
-                throw new Exception($"Pessoa não encontrada com id {entidade.IdPessoa}");
-            }
-
-            ValidarCamposObrigatorios(entidade);
+            ValidarCamposObrigatorios(contrato);
 
             aReceber.Id = aReceber.Id;
             aReceber.IdUsuario = aReceber.IdUsuario;
@@ -146,18 +122,6 @@ namespace FinTech.Api.Domain.Services.Classes
             return _mapper.Map<AReceberResponseContract>(aReceber);
         }
 
-        public async Task<AReceberResponseContract> ObterPorIdPessoa(long idPessoa)
-        {
-            var aReceber = await _aReceberRepository.ObterPorIdPessoa(idPessoa);
-
-            if (aReceber is null || aReceber.IdUsuario != idPessoa)
-            {
-                throw new Exception($"Não foi encontrado nenhum título a Receber pelo id {idPessoa}");
-            }
-
-            return _mapper.Map<AReceberResponseContract>(aReceber);
-        }
-
         public async Task<AReceberResponseContract> ObterPorIdUsuario(long idUsuario)
         {
             var aReceber = await _aReceberRepository.ObterPorIdUsuario(idUsuario);
@@ -182,22 +146,5 @@ namespace FinTech.Api.Domain.Services.Classes
             return _mapper.Map<IEnumerable<AReceberResponseContract>>(aReceber);
         }
 
-        // public async Task<AReceberResponseContract> GetAReceberByIdAsync(int id)
-        // {
-        //     var aReceber = await _aReceberRepository.GetByIdAsync(id);
-        //     return _mapper.Map<AReceberResponseContract>(aReceber);
-        // }
-
-        // Task<AReceberResponse> ITituloService<AReceberRequestContract, AReceberResponseContract, long>.GetAReceberByIdAsync(int id)
-        // {
-        //     var aReceber = await _aReceberRepository.GetByIdAsync(id);
-        //     return _mapper.Map<AReceberResponseContract>(aReceber);
-        // }
-
-        // Task<IEnumerable<AReceberResponseContract>> ITituloService<AReceberRequestContract, AReceberResponseContract, long>.GetAReceberByIdAsync(int id)
-        // {
-        //     var aReceber = await _aReceberRepository.GetByIdAsync(id);
-        //     return _mapper.Map<AReceberResponseContract>(aReceber);
-        // }
     }
 }

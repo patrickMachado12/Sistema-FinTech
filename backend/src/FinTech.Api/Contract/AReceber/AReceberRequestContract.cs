@@ -4,9 +4,6 @@ namespace FinTech.Api.Contract.AReceber
 {
     public class AReceberRequestContract
     {
-        [Required(ErrorMessage = "O campo IdPessoa é obrigatório.")]
-        public long IdPessoa { get; set; }
-
         [Required(ErrorMessage = "O campo IdNaturezaLancamento é obrigatório.")]
         public long IdNaturezaLancamento { get; set; }
 

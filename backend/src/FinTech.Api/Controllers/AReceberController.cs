@@ -1,5 +1,6 @@
 using AutoMapper;
 using ControleFacil.Api.Exceptions;
+using FinTech.Api.Contract;
 using FinTech.Api.Contract.AReceber;
 using FinTech.Api.Domain.Services.Classes;
 using FinTech.Api.Domain.Services.Interfaces;
@@ -10,7 +11,7 @@ using Swashbuckle.AspNetCore.Annotations;
 namespace FinTech.Api.Controllers
 {
     [ApiController]
-    [Route("AReceber")]
+    [Route("titulos-areceber")]
     public class AReceberController : BaseController
     {
         private readonly ITituloService<AReceberRequestContract, AReceberResponseContract, long> _aReceberService;
@@ -23,6 +24,8 @@ namespace FinTech.Api.Controllers
 
         [HttpPost]
         [SwaggerOperation(Summary = "Cadastra um título a receber.", Description = "Este endpoint efetua o cadastro de título a receber.")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type=typeof(ModelErrorContract))]
         [Authorize]
         public async Task<IActionResult> Adicionar(AReceberRequestContract contrato)
         {
@@ -47,8 +50,10 @@ namespace FinTech.Api.Controllers
             }
         }
 
-        [HttpGet("obterTodos")]
+        [HttpGet("")]
         [SwaggerOperation(Summary = "Obtém uma lista de títulos a Receber.", Description = "Este endpoint retorna todos os títulos a Receber cadastradas.")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type=typeof(ModelErrorContract))]
         [Authorize]
         public async Task<IActionResult> ObterTodos(long id)
         {
@@ -64,7 +69,9 @@ namespace FinTech.Api.Controllers
 
         [HttpGet]
         [SwaggerOperation(Summary = "Obtém um título a Receber pelo identificador.", Description = "Este endpoint retorna um título a Receber pelo seu identificador.")]
-        [Route("id/{id}")]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type=typeof(ModelErrorContract))]
         [Authorize]
         public async Task<IActionResult> Obter(long id, long idUsuario)
         {
@@ -85,6 +92,9 @@ namespace FinTech.Api.Controllers
         [HttpPut]
         [SwaggerOperation(Summary = "Atualiza um título a Receber pelo identificador.", Description = "Este endpoint atualiza um título a Receber pelo seu identificador.")]
         [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type=typeof(ModelErrorContract))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type=typeof(ModelErrorContract))]
         [Authorize]
         public async Task<IActionResult> Atualizar(long id, AReceberRequestContract contrato)
         {
@@ -116,6 +126,9 @@ namespace FinTech.Api.Controllers
         [HttpDelete]
         [SwaggerOperation(Summary = "Deleta um título pelo identificador.", Description = "Este endpoint deleta um título a Receber pelo seu identificador.")]
         [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type=typeof(ModelErrorContract))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type=typeof(ModelErrorContract))]  
         [Authorize]
         public async Task<IActionResult> Deletar(long id)
         {
@@ -125,7 +138,7 @@ namespace FinTech.Api.Controllers
 
                 await _aReceberService.Inativar(id, _idUsuario);
 
-                return NoContent(); // ou outro valor de retorno adequado
+                return NoContent();
             }
             catch (NotFoundException ex)
             {
@@ -139,6 +152,9 @@ namespace FinTech.Api.Controllers
 
         [HttpGet("periodo")]
         [SwaggerOperation(Summary = "Consulta títulos a receber por período de emissão.", Description = "Este endpoint retorna os títulos a receber dentro de um período de emissão específico.")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type=typeof(ModelErrorContract))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type=typeof(ModelErrorContract))]
         [Authorize]
         public async Task<IActionResult> ObterPorPeriodo([FromQuery] DateTime dataInicial, [FromQuery] DateTime dataFinal)
         {
@@ -149,7 +165,7 @@ namespace FinTech.Api.Controllers
                     return BadRequest("A data inicial não pode ser maior que a data final.");
                 }
 
-                _idUsuario = ObterIdUsuarioLogado(); // Obter ID do usuário logado
+                _idUsuario = ObterIdUsuarioLogado();
                 var aReceber = await _aReceberService.ObterPorPeriodo(dataInicial, dataFinal, _idUsuario);
 
                 return Ok(aReceber);

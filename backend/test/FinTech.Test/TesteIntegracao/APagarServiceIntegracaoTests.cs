@@ -2,7 +2,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using FinTech.Api.Contract.APagar;
 using FinTech.Api.Contract.NaturezaLancamento;
-using FinTech.Api.Contract.Pessoa;
 using FinTech.Api.Domain.Models;
 using Xunit;
 
@@ -13,24 +12,19 @@ namespace FinTech.Test.DataBase
         [Fact]
         public async Task Deve_Criar_APagar_Com_Sucesso()
         {
-            var pessoa = new Pessoa { Nome = "Pessoa Teste", Telefone = "12345678901" };
             var naturezaLancamento = new NaturezaLancamento { Descricao = "Natureza de Lançamento Teste" };
 
-            var pessoaRequestContract = _mapper.Map<PessoaRequestContract>(pessoa);
-            var pessoaCriada = await _pessoaService.Adicionar(pessoaRequestContract);
             var naturezaLancamentoRequestContract = _mapper.Map<NaturezaLancamentoRequestContract>(naturezaLancamento);
             var naturezaLancamentoCriada = await _naturezaLancamentoService.Adicionar(naturezaLancamentoRequestContract, 1);
 
             var titulo = new APagar
             {
-                IdPessoa = pessoaCriada.Id,
                 IdNaturezaLancamento = naturezaLancamentoCriada.Id,
                 ValorAPagar = 100.50,
                 Descricao = "Teste Título a Pagar",
                 Observacao = "Teste Observação",
                 DataEmissao = DateTime.Now,
                 DataVencimento = DateTime.Now.AddDays(30),
-                DataReferencia = DateTime.Now
             };
 
             var aPagarRequestContract = _mapper.Map<APagarRequestContract>(titulo);
@@ -41,7 +35,6 @@ namespace FinTech.Test.DataBase
             Assert.True(resultado.Id > 0, "O Id do título a Pagar deve ser maior que 0.");
             Assert.Equal(100.50, resultado.ValorAPagar);
             Assert.Equal("Teste Título a Pagar", resultado.Descricao);
-            Assert.Equal(pessoaCriada.Id, resultado.IdPessoa);
             Assert.Equal(naturezaLancamentoCriada.Id, resultado.IdNaturezaLancamento);
             Assert.Equal("Teste Observação", resultado.Observacao);
             Assert.InRange(resultado.DataEmissao, DateTime.Now.AddMinutes(-1), DateTime.Now.AddMinutes(1));
@@ -51,24 +44,19 @@ namespace FinTech.Test.DataBase
         [Fact]
         public async Task Deve_Obtereber_Por_Id_Com_Sucesso()
         {
-            var pessoa = new Pessoa { Nome = "Pessoa Teste", Telefone = "12345678901" };
             var naturezaLancamento = new NaturezaLancamento { Descricao = "Natureza de Lançamento Teste" };
 
-            var pessoaRequestContract = _mapper.Map<PessoaRequestContract>(pessoa);
-            var pessoaCriada = await _pessoaService.Adicionar(pessoaRequestContract);
             var naturezaLancamentoRequestContract = _mapper.Map<NaturezaLancamentoRequestContract>(naturezaLancamento);
             var naturezaLancamentoCriada = await _naturezaLancamentoService.Adicionar(naturezaLancamentoRequestContract, 1);
 
             var titulo = new APagar
             {
-                IdPessoa = pessoaCriada.Id,
                 IdNaturezaLancamento = naturezaLancamentoCriada.Id,
                 ValorAPagar = 100.50,
                 Descricao = "Teste Título a Pagar",
                 Observacao = "Teste Observação",
                 DataEmissao = DateTime.Now,
                 DataVencimento = DateTime.Now.AddDays(30),
-                DataReferencia = DateTime.Now
             };
 
             var aPagarRequestContract = _mapper.Map<APagarRequestContract>(titulo);
@@ -85,11 +73,7 @@ namespace FinTech.Test.DataBase
         [Fact]
         public async Task Deve_Atualizar_APagar_Com_Sucesso()
         {
-            var pessoa = new Pessoa { Nome = "Pessoa Teste", Telefone = "12345678901" };
             var naturezaLancamento = new NaturezaLancamento { Descricao = "Natureza de Lançamento Teste" };
-
-            var pessoaRequestContract = _mapper.Map<PessoaRequestContract>(pessoa);
-            var pessoaCriada = await _pessoaService.Adicionar(pessoaRequestContract);  
 
             var naturezaLancamentoRequestContract = _mapper.Map<NaturezaLancamentoRequestContract>(naturezaLancamento);
             var usuarioCriado = await _usuarioRepository.ObterPorId(1);
@@ -97,14 +81,12 @@ namespace FinTech.Test.DataBase
 
             var titulo = new APagar
             {
-                IdPessoa = pessoaCriada.Id,
                 IdNaturezaLancamento = naturezaLancamentoCriada.Id,
                 ValorAPagar = 100.50,
                 Descricao = "Teste Título a Pagar",
                 Observacao = "Teste Observação",
                 DataEmissao = DateTime.Now,
                 DataVencimento = DateTime.Now.AddDays(30),
-                DataReferencia = DateTime.Now
             };
 
             var aPagarRequestContract = _mapper.Map<APagarRequestContract>(titulo);
@@ -121,24 +103,19 @@ namespace FinTech.Test.DataBase
         [Fact]
         public async Task Deve_Excluir_APagar_Com_Sucesso()
         {
-            var pessoa = new Pessoa { Nome = "Pessoa Teste", Telefone = "12345678901" };
             var naturezaLancamento = new NaturezaLancamento { Descricao = "Natureza de Lançamento Teste" };
 
-            var pessoaRequestContract = _mapper.Map<PessoaRequestContract>(pessoa);
-            var pessoaCriada = await _pessoaService.Adicionar(pessoaRequestContract);
             var naturezaLancamentoRequestContract = _mapper.Map<NaturezaLancamentoRequestContract>(naturezaLancamento);
             var naturezaLancamentoCriada = await _naturezaLancamentoService.Adicionar(naturezaLancamentoRequestContract, 1);
 
             var titulo = new APagar
             {
-                IdPessoa = pessoaCriada.Id,
                 IdNaturezaLancamento = naturezaLancamentoCriada.Id,
                 ValorAPagar = 100.50,
                 Descricao = "Teste Título a Pagar",
                 Observacao = "Teste Observação",
                 DataEmissao = DateTime.Now,
                 DataVencimento = DateTime.Now.AddDays(30),
-                DataReferencia = DateTime.Now
             };
 
             var aPagarRequestContract = _mapper.Map<APagarRequestContract>(titulo);

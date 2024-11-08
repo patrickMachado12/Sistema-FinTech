@@ -23,8 +23,8 @@ namespace FinTech.Test.TesteUnitario.Controllers
         {
             var aPagarResponseContract = new List<APagarResponseContract>
             {
-                new APagarResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 },
-                new APagarResponseContract { Id = 2, IdPessoa = 2, IdNaturezaLancamento = 2, ValorAPagar = 200.00 }
+                new APagarResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 },
+                new APagarResponseContract { Id = 2, IdNaturezaLancamento = 2, ValorAPagar = 200.00 }
             };
 
             _aPagarServiceMock.Setup(s => s.ObterTodos(1)).ReturnsAsync(aPagarResponseContract);
@@ -40,7 +40,7 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve retornar um a Pagar por ID.")]
         public async Task Get_DeveRetornarAPagar_QuandoAPagarExiste()
         {
-            var aPagarResponseContract = new APagarResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
+            var aPagarResponseContract = new APagarResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
 
             _aPagarServiceMock.Setup(s => s.Obter(1, 1)).ReturnsAsync(aPagarResponseContract);
 
@@ -58,8 +58,8 @@ namespace FinTech.Test.TesteUnitario.Controllers
         [Fact(DisplayName = "Deve criar um novo a Pagar.")]
         public async Task Post_DeveCriarAPagar_QuandoAPagarEhValida()
         {
-            var aPagarRequestContract = new APagarRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
-            var aPagarResponseContract = new APagarResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
+            var aPagarRequestContract = new APagarRequestContract { IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
+            var aPagarResponseContract = new APagarResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
 
             _aPagarServiceMock.Setup(s => s.Adicionar(aPagarRequestContract, 1)).ReturnsAsync(aPagarResponseContract);
 
@@ -78,8 +78,8 @@ namespace FinTech.Test.TesteUnitario.Controllers
         public async Task Put_DeveAtualizarAPagar_QuandoAPagarExiste()
         {
             var id = 1;
-            var aPagarRequestContract = new APagarRequestContract { IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
-            var aPagarResponseContract = new APagarResponseContract { Id = 1, IdPessoa = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
+            var aPagarRequestContract = new APagarRequestContract { IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
+            var aPagarResponseContract = new APagarResponseContract { Id = 1, IdNaturezaLancamento = 1, ValorAPagar = 100.00 };
 
             _aPagarServiceMock.Setup(s => s.Atualizar(id, aPagarRequestContract, 1)).ReturnsAsync(aPagarResponseContract);
 
