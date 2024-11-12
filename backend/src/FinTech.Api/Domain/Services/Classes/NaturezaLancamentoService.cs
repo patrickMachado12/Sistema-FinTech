@@ -19,9 +19,9 @@ namespace FinTech.Api.Domain.Services.Classes
             _mapper = mapper;
         }
 
-        public async Task<NaturezaLancamentoResponseContract> Adicionar(NaturezaLancamentoRequestContract entidade, long idUsuario)
+        public async Task<NaturezaLancamentoResponseContract> Adicionar(NaturezaLancamentoRequestContract contrato, long idUsuario)
         {
-            NaturezaLancamento naturezaLancamento = _mapper.Map<NaturezaLancamento>(entidade);
+            NaturezaLancamento naturezaLancamento = _mapper.Map<NaturezaLancamento>(contrato);
 
             naturezaLancamento.IdUsuario = idUsuario;
             naturezaLancamento.DataCadastro = DateTime.Now;
@@ -31,13 +31,13 @@ namespace FinTech.Api.Domain.Services.Classes
             return _mapper.Map<NaturezaLancamentoResponseContract>(naturezaLancamento);
         }
 
-        public async Task<NaturezaLancamentoResponseContract> Atualizar(long id, NaturezaLancamentoRequestContract entidade, long idUsuario)
+        public async Task<NaturezaLancamentoResponseContract> Atualizar(long id, NaturezaLancamentoRequestContract contrato, long idUsuario)
         {
             
             NaturezaLancamento naturezaLancamento = await ObterPorIdVinculadoAoIdUsuario(id, idUsuario);
 
-            naturezaLancamento.Descricao = entidade.Descricao;
-            naturezaLancamento.Observacao = entidade.Observacao;
+            naturezaLancamento.Descricao = contrato.Descricao;
+            naturezaLancamento.Observacao = contrato.Observacao;
 
             naturezaLancamento = await _naturezaLancamentoRepository.Atualizar(naturezaLancamento);
 
@@ -47,7 +47,6 @@ namespace FinTech.Api.Domain.Services.Classes
         public async Task Inativar(long id, long idUsuario)
         {
             NaturezaLancamento naturezaLancamento = await ObterPorIdVinculadoAoIdUsuario(id, idUsuario);
-
             await _naturezaLancamentoRepository.Deletar(naturezaLancamento);
         }
 

@@ -1,21 +1,11 @@
 <template>
   <v-container fluid>
-    <!-- Mensagem de sucesso./ -->
-    <v-snackbar v-model="snackbar" :color="color">
-      {{ messagem }}
-      <v-btn dark text absolute @click="snackbarAlter(false)"> 
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-snackbar> 
-
-    
+    <MensagemSucesso ref="successMessage" :message="messagem"/>
     <v-row>
-      <!-- Título da pagina./ -->
       <v-col cols="12" sm="12" md="12">
         <h2 class="titulo">Cadastro de Usuários</h2>
         <v-divider></v-divider>
       </v-col>
-
       <!-- Tela de formulário do cadastro / edição./ -->
       <v-dialog
       v-model="dialog"
@@ -44,7 +34,6 @@
                     label="E-mail*"
                   ></v-text-field>
                 </v-col>
-                  
                 <v-col cols="12">
                   <v-text-field
                     type="password"
@@ -52,7 +41,6 @@
                     label="Senha*"
                   ></v-text-field>
                 </v-col>
-                
               </v-row>
             </v-container>
             <small>*Indica campos obrigatórios</small>
@@ -77,7 +65,6 @@
         </v-card>
       </v-dialog>
     </v-row>
-    
     <!-- lista de usuarios./ -->
     <v-row>
       <v-col cols="12" sm="12" md="12">
@@ -109,7 +96,6 @@
         </template>
       </v-col>
     </v-row>  
-    
   </v-container>
 </template>
 
@@ -117,11 +103,14 @@
 import Usuario from "../models/Usuario.js";
 import usuarioService from "../services/usuario-service.js";
 import moment from "moment";
+import MensagemSucesso from "../components/alerts/MensagemSucesso.vue";
 
 export default {
   name: "ControleUsuarios",
 
-  components: {},
+  components: {
+    MensagemSucesso
+  },
 
   filters: {
     dataFormatada(data) {
@@ -146,7 +135,6 @@ export default {
         email: "",
         senha: ""
       },
-
       headers: [
         {
           text: "Id",
@@ -159,6 +147,7 @@ export default {
         { text: "Data Exclusão", value: "dataInativacao" },
         { text: "Ações", value: "actions", sortable: false },
       ],
+      messagem: "",
     };
   },
 
@@ -197,8 +186,8 @@ export default {
           .then(() => {
             Object.assign(this.usuarios[this.editedIndex], this.editedItem);
             this.snackbar = true;
-            this.messagem = "Usuario editada com sucesso!";
-            this.color = "success";
+            this.messagem = "Usuario editado com sucesso!";
+            this.$refs.successMessage.show();
           })
           .catch((error) => {
             console.log(error);
@@ -209,9 +198,8 @@ export default {
           .then((response) => {
             this.snackbar = true;
             this.usuarios.push(response.data);
-            this.messagem = "Usuario cadastrada com sucesso!";
-            this.color = "success";
-            this.close();
+            this.messagem = "Usuario cadastrado com sucesso!";
+            this.$refs.successMessage.show();
           })
           .catch((error) => {
             console.log(error);
@@ -247,9 +235,8 @@ export default {
         .deletar(item.id)
         .then(() => {
           this.snackbar = true;
-          this.messagem = "Usuario excluída com sucesso!";
-          this.color = "success";
-          this.close();
+          this.messagem = "Usuario excluído com sucesso!";
+          this.$refs.successMessage.show();
         })
         .catch((error) => {
           console.log(error);

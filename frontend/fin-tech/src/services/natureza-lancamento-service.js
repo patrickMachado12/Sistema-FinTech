@@ -1,7 +1,7 @@
 import api from './api';
 
-function obterTodos() {
-	return api.get('/pessoa/obterTodos')
+function obterTodas() {
+	return api.get('/naturezas-lancamento')
 		.then(response => (response))
 		.catch(error => {
 			throw error;
@@ -9,23 +9,23 @@ function obterTodos() {
 }
 
 function obterPorId(id) {
-	return api.get(`/pessoa/${id}`)
+	return api.get(`/naturezas-lancamento/${id}`)
 		.then(response => (response))
 		.catch(error => {
 			throw error;
 		});
 }
 
-function cadastrar(pessoa) {
-	return api.post(`/pessoa`, pessoa)
+function cadastrar(naturezaLancamento) {
+	return api.post(`/naturezas-lancamento`, naturezaLancamento)
 		.then(response => (response))
 		.catch(error => {
 			throw error;
 		});
 }
 
-function atualizar(pessoa) {
-	return api.put(`/pessoa/${pessoa.id}`, pessoa)
+function atualizar(naturezaLancamento) {
+	return api.put(`/naturezas-lancamento/${naturezaLancamento.id}`, naturezaLancamento)
 		.then(response => (response))
 		.catch(error => {
 			throw error;
@@ -33,7 +33,7 @@ function atualizar(pessoa) {
 }
 
 function deletar(id) {
-	return api.delete(`/pessoa/${id}`)
+	return api.delete(`/naturezas-lancamento/${id}`)
 		.then(response => (response))
 		.catch(error => {
 			throw error;
@@ -41,7 +41,7 @@ function deletar(id) {
 }
 
 export default {
-	obterTodos,
+	obterTodas,
 	obterPorId,
 	cadastrar,
 	atualizar,

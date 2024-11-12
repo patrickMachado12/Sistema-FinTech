@@ -30,12 +30,6 @@
             </v-list-item-icon>
             <v-list-item-title>A Pagar</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="navegarParaPessoas">
-            <v-list-item-icon>
-              <v-icon>mdi-account-multiple</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Pessoas</v-list-item-title>
-          </v-list-item>
           <v-list-item @click="navegarParaNaturezaLancamento">
             <v-list-item-icon>
               <v-icon>mdi-account-file</v-icon>
@@ -73,9 +67,6 @@ export default {
     },
     navegarParaAPagar() {
       this.$router.push({ name: "ControleAPagar" });
-    },
-    navegarParaPessoas() {
-      this.$router.push({ name: "ControleDePessoas" });
     },
     navegarParaNaturezaLancamento() {
       this.$router.push({ name: "ControleNaturezaLancamento" });

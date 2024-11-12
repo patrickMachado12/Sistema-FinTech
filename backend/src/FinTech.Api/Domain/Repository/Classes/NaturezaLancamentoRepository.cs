@@ -24,28 +24,26 @@ namespace FinTech.Api.Domain.Repository.Classes
 
         public async Task<NaturezaLancamento> Atualizar(NaturezaLancamento entidade)
         {
-            NaturezaLancamento entidadeBanco = await _contexto.NaturezaLancamento
-                .Where(u => u.Id == entidade.Id)
-                .FirstOrDefaultAsync();
+            NaturezaLancamento? entidadeBanco = await _contexto.NaturezaLancamento
+                                                .Where(p => p.Id == entidade.Id)
+                                                .FirstOrDefaultAsync();
 
             _contexto.Entry(entidadeBanco).CurrentValues.SetValues(entidade);
             _contexto.Update<NaturezaLancamento>(entidadeBanco);
 
             await _contexto.SaveChangesAsync();
-
+            
             return entidadeBanco;
         }
 
         public async Task Deletar(NaturezaLancamento entidade)
         {   
-            // Deletar fisicamente
             _contexto.Entry(entidade).State = EntityState.Deleted;
             await _contexto.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<NaturezaLancamento>> Obter()
         {
-            // Aqui verificar uma lógica para fazer uma consulta paginada.
             return await _contexto.NaturezaLancamento.AsNoTracking()
                                             .OrderBy(u => u.Id)
                                             .ToListAsync();
@@ -64,6 +62,11 @@ namespace FinTech.Api.Domain.Repository.Classes
                                                         .Where(n => n.IdUsuario == idUsuario)
                                                         .OrderBy(n => n.Id)
                                                         .ToListAsync();
+        }
+
+        public async Task SalvarAlteracoes()
+        {
+            await _contexto.SaveChangesAsync();
         }
     }
 }

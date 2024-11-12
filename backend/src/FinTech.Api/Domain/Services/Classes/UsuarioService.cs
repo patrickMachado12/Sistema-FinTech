@@ -51,14 +51,14 @@ namespace FinTech.Api.Domain.Services.Classes
             };        
         }
 
-        public async Task<UsuarioResponseContract> Adicionar(UsuarioRequestContract entidade, long idUsuario)
+        public async Task<UsuarioResponseContract> Adicionar(UsuarioRequestContract contrato, long idUsuario)
         {
-            if (!IsEmail(entidade.Email))
+            if (!IsEmail(contrato.Email))
             {
                 throw new ArgumentException("O e-mail fornecido é inválido.");
             }
             
-            var usuario = _mapper.Map<Usuario>(entidade);
+            var usuario = _mapper.Map<Usuario>(contrato);
 
             usuario.Senha = GerarHashSenha(usuario.Senha);
             usuario.DataCadastro = DateTime.Now;
@@ -81,30 +81,26 @@ namespace FinTech.Api.Domain.Services.Classes
             }
         }
 
-        public async Task<UsuarioResponseContract> Atualizar(long id, UsuarioRequestContract entidade, long idUsuario)
+        public async Task<UsuarioResponseContract> Atualizar(long id, UsuarioRequestContract contrato, long idUsuario)
         {
-            _ = await Obter(id, idUsuario) ?? throw new Exception("Usuario não encontrado para atualização.");
+            var usuario = await _usuarioRepository.Obter(idUsuario) ?? throw new Exception("Usuario não encontrado para atualização.");
 
-            var usuario = _mapper.Map<Usuario>(entidade);
-            usuario.Id = id;
-            usuario.Senha = GerarHashSenha(entidade.Senha);
-
-            usuario = await _usuarioRepository.Atualizar(usuario);
-
+            _mapper.Map(contrato, usuario);
+            usuario.Senha = GerarHashSenha(contrato.Senha);
+            await _usuarioRepository.SalvarAlteracoes();
+            
             return _mapper.Map<UsuarioResponseContract>(usuario);
         }
 
         public async Task Inativar(long id, long idUsuario)
         {
             var usuario = await _usuarioRepository.Obter(id) ?? throw new Exception("Usuario não encontrado para inativação.");
-            
-            await _usuarioRepository.Deletar(_mapper.Map<Usuario>(usuario));
+            await _usuarioRepository.Deletar(usuario);
         }
 
         public async Task<IEnumerable<UsuarioResponseContract>> ObterTodos(long idUsuario)
         {
             var usuarios = await _usuarioRepository.Obter();
-
             return usuarios.Select(usuario => _mapper.Map<UsuarioResponseContract>(usuario));
         }
 

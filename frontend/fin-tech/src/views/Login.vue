@@ -44,13 +44,20 @@
 
           <v-card-actions class="justify-center">
             <v-btn 
-              value="Entrar" 
               color="primary" 
               @click="login"
-              @keydown.enter="login" 
-              :disabled="!valid"
-              :callback="disparar">
-              Entrar
+              :disabled="!valid || loading"
+            >
+              <template v-if="loading">
+                <v-progress-circular
+                  indeterminate
+                  color="primary"
+                  size="20"
+                ></v-progress-circular>
+              </template>
+              <template v-else>
+                Entrar
+              </template>
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -71,6 +78,7 @@ export default {
       usuario: new Usuario(),
       valid: true,
       errorMessage: "",
+      loading: false,
     };
   },
   mounted() {
@@ -86,6 +94,7 @@ export default {
       }
     },
     login() {
+      this.loading = true;
       this.errorMessage = "";
       usuarioService
         .login(this.usuario.email, this.usuario.senha)
@@ -104,7 +113,10 @@ export default {
           setTimeout(() => {
             this.errorMessage = "";
           }, 3000);
-        });
+        })
+        .finally(() => {
+        this.loading = false;
+      });
     },
     
   },

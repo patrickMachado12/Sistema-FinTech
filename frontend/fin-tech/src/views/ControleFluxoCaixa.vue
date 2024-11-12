@@ -166,7 +166,7 @@
 <script>
 import moment from 'moment';
 import AReceber from "../models/AReceber.js";
-import aReceberService from "../services/aReceber-service.js";
+import aReceberService from "../services/areceber-service.js";
 import APagar from "../models/APagar.js";
 import aPagarService from "../services/apagar-service.js";
 
@@ -185,16 +185,16 @@ export default {
       entradas: [],
       saidas: [],
       headersEntradas: [
-        { text: 'Descrição', value: 'descricao' },
-        { text: 'Valor', value: 'valorAReceber' },
-        { text: 'Data Emissão', value: 'dataEmissao' },
-        { text: 'Natureza de lançamento', value: 'naturezaLancamento.descricao' },
+        { text: 'Descrição', value: 'descricao', width:'35%' },
+        { text: 'Valor', value: 'valorAReceber', width:'15%' },
+        { text: 'Data Emissão', value: 'dataEmissao', width:'20%' },
+        { text: 'Natureza de lançamento', value: 'naturezaLancamento.descricao', width:'35%' },
       ],
       headersSaidas: [
-        { text: 'Descrição', value: 'descricao' },
-        { text: 'Valor', value: 'valorAPagar' },
-        { text: 'Data Emissão', value: 'dataEmissao' },
-        { text: 'Natureza de lançamento', value: 'naturezaLancamento.descricao' },
+        { text: 'Descrição', value: 'descricao', width:'35%' },
+        { text: 'Valor', value: 'valorAPagar', width:'15%' },
+        { text: 'Data Emissão', value: 'dataEmissao', width:'20%' },
+        { text: 'Natureza de lançamento', value: 'naturezaLancamento.descricao', width:'35%' },
       ],
       formatarDataInicial: '',
       formatarDataFinal: '',
@@ -213,7 +213,6 @@ export default {
     },
 
     filtrarPeriodo() {
-      // Verifica se as datas foram definidas antes de realizar a consulta
       if (!this.filters.dataInicial || !this.filters.dataFinal) {
         console.warn("Defina as datas inicial e final para consultar por período.");
         return;
@@ -229,7 +228,6 @@ export default {
           .then((response) => {
             this[target] = response.data.map((p) => new mapper(p));
             
-            // Chama os métodos de cálculo de total recebido e total gastos
             if (target === 'entradas') {
               this.calcularTotalRecebido();
             } else if (target === 'saidas') {
@@ -247,14 +245,14 @@ export default {
     // Calcula o total recebido somando os valores de entradas
     calcularTotalRecebido() {
       this.totalRecebido = this.entradas.reduce((total, entrada) => {
-        return total + (entrada.valorAReceber || 0); // Adiciona 0 para evitar NaN
+        return total + (entrada.valorAReceber || 0);
       }, 0);
     },
 
     // Calcula o total gastos somando os valores de saídas
     calcularTotalGastos() {
       this.totalGastos = this.saidas.reduce((total, saida) => {
-        return total + (saida.valorAPagar || 0); // Adiciona 0 para evitar NaN
+        return total + (saida.valorAPagar || 0);
       }, 0);
     },
 

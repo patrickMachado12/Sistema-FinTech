@@ -4,9 +4,6 @@ namespace FinTech.Api.Contract.APagar
 {
     public class APagarRequestContract
     {
-        [Required(ErrorMessage = "O campo IdPessoa é obrigatório.")]
-        public long IdPessoa { get; set; }
-
         [Required(ErrorMessage = "O campo IdNaturezaLancamento é obrigatório.")]
         public long IdNaturezaLancamento { get; set; }
 
@@ -27,7 +24,5 @@ namespace FinTech.Api.Contract.APagar
 
         public DateTime? DataPagamento { get; set; }
         
-        public DateTime? DataReferencia { get; set; }
-
     }
 }
