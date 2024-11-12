@@ -60,23 +60,35 @@ export default {
 
   methods: {
     navegarParaFluxoCaixa() {
-      this.$router.push({ name: "FluxoCaixa" });
+      if (this.$route.name !== "FluxoCaixa") {
+        this.$router.push({ name: "FluxoCaixa" });
+      }
     },
     navegarParaAReceber() {
-      this.$router.push({ name: "ControleAReceber" });
+      if (this.$route.name !== "ControleAReceber") {
+        this.$router.push({ name: "ControleAReceber" });
+      }
     },
     navegarParaAPagar() {
-      this.$router.push({ name: "ControleAPagar" });
+      if (this.$route.name !== "ControleAPagar") {
+        this.$router.push({ name: "ControleAPagar" });
+      }
     },
     navegarParaNaturezaLancamento() {
-      this.$router.push({ name: "ControleNaturezaLancamento" });
+      if (this.$route.name !== "ControleNaturezaLancamento") {
+        this.$router.push({ name: "ControleNaturezaLancamento" });
+      }
     },
     navegarParaUsuario() {
-      this.$router.push({ name: "ControleUsuario" });
+      if (this.$route.name !== "ControleUsuario") {
+        this.$router.push({ name: "ControleUsuario" });
+      }
     },
     logOff() {
       localStorage.clear();
-      this.$router.push({ name: "Login" });
+      if (this.$route.name !== "Login") {
+        this.$router.push({ name: "Login" });
+      }
     },
   },
 };
