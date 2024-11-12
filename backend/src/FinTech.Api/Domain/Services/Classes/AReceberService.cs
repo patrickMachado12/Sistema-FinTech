@@ -28,7 +28,6 @@ namespace FinTech.Api.Domain.Services.Classes
 
         public async Task<AReceberResponseContract> Adicionar(AReceberRequestContract contrato, long idUsuario)
         {
-            // Verificar se o Usuário existe
             var usuario = await _usuarioRepository.ObterPorId(idUsuario);
 
             if (usuario == null)
@@ -106,7 +105,6 @@ namespace FinTech.Api.Domain.Services.Classes
         public async Task<IEnumerable<AReceberResponseContract>> ObterTodos(long idUsuario)
         {
             var aReceber = await _aReceberRepository.ObterTodos();
-
             return _mapper.Map<List<AReceberResponseContract>>(aReceber);
         }
 

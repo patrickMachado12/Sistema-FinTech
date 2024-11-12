@@ -1,36 +1,36 @@
 import Usuario from "../models/Usuario";
 
-function salvarUsuarioNaStorage(usuario){
-    let usuarioString = JSON.stringify(usuario);
-    localStorage.setItem('usuario', usuarioString);
+function salvarUsuarioNaStorage(usuario) {
+	let usuarioString = JSON.stringify(usuario);
+	localStorage.setItem('usuario', usuarioString);
 }
 
-function obterUsuarioNaStorage(){
-    let usuarioString = localStorage.getItem('usuario');
-    return new Usuario(JSON.parse(usuarioString));
+function obterUsuarioNaStorage() {
+	let usuarioString = localStorage.getItem('usuario');
+	return new Usuario(JSON.parse(usuarioString));
 }
 
 function salvarTokenNaStorage(token) {
-    localStorage.setItem('token', `Bearer ${token}`);
+	localStorage.setItem('token', `Bearer ${token}`);
 }
 
-function obterTokenNaStorage(){
-    return localStorage.getItem('token');
+function obterTokenNaStorage() {
+	return localStorage.getItem('token');
 }
 
-function removerTokenNaStorage(){
-    localStorage.removeItem('token');
+function removerTokenNaStorage() {
+	localStorage.removeItem('token');
 }
 
-function removerUsuarioNaStorage(){
-    localStorage.removeItem('usuario');
+function removerUsuarioNaStorage() {
+	localStorage.removeItem('usuario');
 }
 
 export default {
-    salvarUsuarioNaStorage,
-    obterUsuarioNaStorage,
-    salvarTokenNaStorage,
-    obterTokenNaStorage,
-    removerTokenNaStorage,
-    removerUsuarioNaStorage
+	salvarUsuarioNaStorage,
+	obterUsuarioNaStorage,
+	salvarTokenNaStorage,
+	obterTokenNaStorage,
+	removerTokenNaStorage,
+	removerUsuarioNaStorage
 }

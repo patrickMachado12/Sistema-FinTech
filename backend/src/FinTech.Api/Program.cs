@@ -99,6 +99,7 @@ static void ConfigurarServices(WebApplicationBuilder builder)
         });
 
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "FinTech.Api", Version = "v1" });
+        c.CustomSchemaIds(type => type.FullName);
         
         c.EnableAnnotations();
     });

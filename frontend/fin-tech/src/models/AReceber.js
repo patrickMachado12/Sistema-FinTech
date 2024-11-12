@@ -10,8 +10,8 @@ export default class AReceber {
     this.descricao = obj.descricao;
     this.dataEmissao = obj.dataEmissao;
     this.dataVencimento = obj.dataVencimento;
-    this.dataRecebimento = obj.dataRecebimento || null;
-    this.dataReferencia = obj.dataReferencia || null;
+    this.dataRecebimento = obj.dataRecebimento;
+    this.dataReferencia = obj.dataReferencia;
     this.observacao = obj.observacao || "";
     this.naturezaLancamento = obj.naturezaLancamento ? {
       id: obj.naturezaLancamento.id,

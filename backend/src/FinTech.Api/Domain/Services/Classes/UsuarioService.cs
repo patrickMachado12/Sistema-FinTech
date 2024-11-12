@@ -89,21 +89,18 @@ namespace FinTech.Api.Domain.Services.Classes
             usuario.Senha = GerarHashSenha(contrato.Senha);
             await _usuarioRepository.SalvarAlteracoes();
             
-
             return _mapper.Map<UsuarioResponseContract>(usuario);
         }
 
         public async Task Inativar(long id, long idUsuario)
         {
             var usuario = await _usuarioRepository.Obter(id) ?? throw new Exception("Usuario não encontrado para inativação.");
-            
             await _usuarioRepository.Deletar(usuario);
         }
 
         public async Task<IEnumerable<UsuarioResponseContract>> ObterTodos(long idUsuario)
         {
             var usuarios = await _usuarioRepository.Obter();
-
             return usuarios.Select(usuario => _mapper.Map<UsuarioResponseContract>(usuario));
         }
 

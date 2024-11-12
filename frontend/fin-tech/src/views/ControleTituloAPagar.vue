@@ -1,19 +1,11 @@
 <template>
   <v-container fluid>
-    <!-- Mensagem de sucesso./ -->
-    <v-snackbar v-model="snackbar" :color="color">
-      {{ messagem }}
-      <v-btn dark text absolute @click="snackbarAlter(false)"> 
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-snackbar> 
-
+    <MensagemSucesso ref="successMessage" :message="messagem"/>
     <v-row>
       <v-col cols="12" sm="12" md="12">
         <h2 class="titulo">Contas a Pagar</h2>
         <v-divider></v-divider>
       </v-col>
-
       <!-- Tela de formulário do cadastro / edição./ -->
       <v-dialog
       v-model="dialog"
@@ -35,7 +27,13 @@
           </v-card-title>
           <v-card-text>
             <v-container>
-              <v-row>                  
+              <v-row>
+                <v-col cols="6">
+                  <v-text-field
+                    v-model="editedItem.descricao"
+                    label="Descrição*"
+                  ></v-text-field>
+                </v-col>
                 <v-col cols="2">
                   <CampoMonetario
                     v-model="editedItem.valorAPagar"
@@ -44,7 +42,6 @@
                     @input="formatarValor('valorAPagar')"
                   />
                 </v-col>
-
                 <v-col cols="2">
                   <CampoData
                     v-model="editedItem.dataEmissao"
@@ -53,7 +50,6 @@
                     :rules="[dataRegra]"
                   />
                 </v-col>
-
                 <v-col cols="2">
                   <CampoData
                     v-model="editedItem.dataVencimento"
@@ -62,14 +58,6 @@
                     :rules="[dataRegra]"
                   />
                 </v-col>
-
-                <v-col cols="6">
-                  <v-text-field
-                    v-model="editedItem.descricao"
-                    label="Descrição*"
-                  ></v-text-field>
-                </v-col>
-
                 <v-col cols="4">
                   <v-select id="select-natureza-lancamento"
                     :items="naturezasLancamento"
@@ -78,7 +66,6 @@
                     required
                   ></v-select>
                 </v-col>
-                
                 <v-col cols="2">
                   <CampoData
                     v-model="editedItem.dataReferencia"
@@ -87,14 +74,6 @@
                     :rules="[dataRegra]"
                   />
                 </v-col>
-
-                <v-col cols="8">
-                  <v-text-field
-                    v-model="editedItem.observacao"
-                    label="Observação"
-                  ></v-text-field>
-                </v-col>
-
                 <v-col cols="2">
                   <CampoMonetario
                     v-model="editedItem.valorPago"
@@ -103,7 +82,6 @@
                     @input="formatarValor('valorPago')"
                   />
                 </v-col>
-
                 <v-col cols="2">
                   <CampoData
                     v-model="editedItem.dataPagamento"
@@ -112,7 +90,12 @@
                     :rules="[dataRegra]"
                   />
                 </v-col>
-
+                <v-col cols="8">
+                  <v-text-field
+                    v-model="editedItem.observacao"
+                    label="Observação"
+                  ></v-text-field>
+                </v-col>
               </v-row>
             </v-container>
             <small>* Indica campos obrigatórios</small>
@@ -137,7 +120,6 @@
         </v-card>
       </v-dialog>
     </v-row>
-
     <v-row>
       <v-col cols="12" sm="12" md="12">
         <v-data-table
@@ -178,15 +160,17 @@ import aPagarService from "@/services/apagar-service.js";
 import naturezaLacamentoService from "@/services/natureza-lancamento-service.js";
 import NaturezaLancamento from '@/models/NaturezaLancamento.js';
 import moment from "moment";
-import { validarData } from '@/utils/conversorData.js';
-import CampoMonetario from '@/components/monetario/campoMonetario.vue';
+import conversorData  from '@/utils/conversor-data.js';
+import CampoMonetario from '@/components/monetario/CampoMonetario.vue';
 import CampoData from '@/components/date/CampoData.vue';
+import MensagemSucesso from "../components/alerts/MensagemSucesso.vue";
 
 export default {
   name: "ControleAPagar",
   components: {
     CampoMonetario,
     CampoData,
+    MensagemSucesso,
   },
 
   filters: {
@@ -229,7 +213,6 @@ export default {
         dataReferencia: "",
         observacao: "",
       },
-
       headers: [
         {
           text: "Id",
@@ -249,6 +232,7 @@ export default {
         { text: "Data vencimento", value: "dataVencimento" },
         { text: "Ações", value: "actions", sortable: false },        
       ],
+      messagem: "",
     };
   },
 
@@ -285,31 +269,32 @@ export default {
       const sucessoHandler = (mensagem) => {
         this.snackbar = true;
         this.messagem = mensagem;
-        this.color = "success";
         this.fechar();
         this.atualizarListaTitulosAPagar();
       };
 
       const erroHandler = (erro) => {
-          console.error(erro);
+        console.error(erro);
       };
 
       if (this.editedIndex > -1) {
-          // Atualizar item existente
-          aPagarService.atualizar(this.editedItem)
-              .then(() => {
-                  Object.assign(this.titulosAPagar[this.editedIndex], this.editedItem);
-                  sucessoHandler("Título a Pagar editado com sucesso!");
-              })
-              .catch(erroHandler);
+        // Atualizar item existente
+        aPagarService.atualizar(this.editedItem)
+          .then(() => {
+            Object.assign(this.titulosAPagar[this.editedIndex], this.editedItem);
+            sucessoHandler("Título editado com sucesso!");
+            this.$refs.successMessage.show();
+          })
+        .catch(erroHandler);
       } else {
-          // Cadastrar novo item
-          aPagarService.cadastrar(this.editedItem)
-              .then((response) => {
-                  this.titulosAPagar.push(response.data);
-                  sucessoHandler("Título a Pagar cadastrado com sucesso!");
-              })
-              .catch(erroHandler);
+        // Cadastrar novo item
+        aPagarService.cadastrar(this.editedItem)
+          .then((response) => {
+            this.titulosAPagar.push(response.data);
+            sucessoHandler("Título cadastrado com sucesso!");
+            this.$refs.successMessage.show();
+          })
+        .catch(erroHandler);
       }
     },
 
@@ -333,7 +318,6 @@ export default {
         });
     },
 
-    //Fechar tela dialog 
     fechar() {
       this.dialog = false;
       setTimeout(() => {
@@ -348,7 +332,7 @@ export default {
 
     excluirItem(item) {
       const index = this.titulosAPagar.indexOf(item);
-      confirm("Deseja excluir este título a Pagar?") &&
+      confirm("Deseja excluir este título a pagar?") &&
         this.titulosAPagar.splice(index, 1);
 
       aPagarService
@@ -356,8 +340,7 @@ export default {
         .then(() => {
           this.snackbar = true;
           this.messagem = "Título excluído com sucesso!";
-          this.color = "success";
-          this.fechar();
+          this.$refs.successMessage.show();
         })
         .catch((error) => {
           console.log(error);
@@ -382,14 +365,14 @@ export default {
     formatarData(event, campo) {
       this.editedItem[campo] = event;
 
-      this.date = validarData(this.editedItem[campo]) 
+      this.date = conversorData.validarData(this.editedItem[campo]) 
         ? new Date(`${this.editedItem[campo].substring(6, 10)}-${this.editedItem[campo].substring(3, 5)}-${this.editedItem[campo].substring(0, 2)}`) 
         : null;
     },
 
     dataRegra(value) {
       if (!value) return true;
-      return validarData(value) || 'Data inválida';
+      return conversorData.validarData(value) || 'Data inválida';
     },    
   },
 };

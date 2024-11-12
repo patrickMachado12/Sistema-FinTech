@@ -28,7 +28,6 @@ namespace FinTech.Api.Domain.Services.Classes
 
         public async Task<APagarResponseContract> Adicionar(APagarRequestContract contrato, long idUsuario)
         {
-            // Verificar se o Usuário existe
             var usuario = await _usuarioRepository.ObterPorId(idUsuario);
             
             if (usuario == null)
@@ -130,7 +129,6 @@ namespace FinTech.Api.Domain.Services.Classes
         public async Task<IEnumerable<APagarResponseContract>> ObterTodos(long idUsuario)
         {
             var aPagar = await _aPagarRepository.ObterTodos();
-
             return _mapper.Map<List<APagarResponseContract>>(aPagar);
         }
 

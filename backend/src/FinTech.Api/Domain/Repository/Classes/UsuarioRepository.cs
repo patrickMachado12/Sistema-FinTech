@@ -38,7 +38,6 @@ namespace FinTech.Api.Domain.Repository.Classes
 
         public async Task Deletar(Usuario entidade)
         {  
-           // Deletar logíco, só altero a data de inativação.
             entidade.DataInativacao = DateTime.Now;
             await _contexto.SaveChangesAsync();
         }

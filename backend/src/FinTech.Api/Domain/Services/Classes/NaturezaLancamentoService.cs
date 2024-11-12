@@ -47,7 +47,6 @@ namespace FinTech.Api.Domain.Services.Classes
         public async Task Inativar(long id, long idUsuario)
         {
             NaturezaLancamento naturezaLancamento = await ObterPorIdVinculadoAoIdUsuario(id, idUsuario);
-
             await _naturezaLancamentoRepository.Deletar(naturezaLancamento);
         }
 

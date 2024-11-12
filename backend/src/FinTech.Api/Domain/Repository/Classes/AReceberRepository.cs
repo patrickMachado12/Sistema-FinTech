@@ -75,10 +75,16 @@ namespace FinTech.Api.Domain.Repository.Classes
         }
 
 
-        public async Task<IEnumerable<AReceber>> ObterPorPeriodo(DateTime dataInicial, DateTime dataFinal, long idUsuario)
+        public async Task<IEnumerable<AReceber>> ObterPorPeriodo(
+            DateTime dataInicial, 
+            DateTime dataFinal, 
+            long idUsuario
+        )
         {
             return await _contexto.AReceber
-                .Where(a => a.DataEmissao >= dataInicial && a.DataEmissao <= dataFinal && a.IdUsuario == idUsuario)
+                .Where(a => a.DataEmissao >= dataInicial && 
+                            a.DataEmissao <= dataFinal && 
+                            a.IdUsuario == idUsuario)
                 .Include(a => a.NaturezaLancamento)
                 .ToListAsync();
         }

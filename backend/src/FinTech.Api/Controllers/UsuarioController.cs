@@ -22,138 +22,86 @@ namespace FinTech.Api.Controllers
         }
 
         [HttpPost]
-        [SwaggerOperation(Summary = "Efetua o login do usuário.", Description = "Este endpoint retorna o token de autenticação do usuário.")]
+        [SwaggerOperation(
+            Summary = "Efetua o login do usuário.", 
+            Description = "Este endpoint retorna o token de autenticação do usuário."
+        )]
         [Route("login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Autenticar(UsuarioLoginRequestContract contrato)
-        {
-            try
-            {
-                return Ok(await _usuarioService.Autenticar(contrato));
-            }
-            catch (AuthenticationException ex)
-            {
-                return Unauthorized(RetornarModelUnauthorized(ex));
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
+        public async Task<ActionResult<UsuarioLoginResponseContract>> Autenticar(UsuarioLoginRequestContract contrato)
+        {           
+            return await ProcessarTarefa(_usuarioService.Autenticar(contrato), false);
         }
 
         [HttpPost]
-        [SwaggerOperation(Summary = "Cadastra um usuário.", Description = "Este endpoint cadastra um usuários na base de dados.")]
-        [AllowAnonymous]
+        [SwaggerOperation(
+            Summary = "Cadastra um usuário.", 
+            Description = "Este endpoint cadastra um usuários na base de dados."
+        )]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type=typeof(ModelErrorContract))]
-        [Authorize]
-        public async Task<IActionResult> Adicionar(UsuarioRequestContract contrato)
+        [AllowAnonymous]
+        public async Task<ActionResult<UsuarioResponseContract>> Adicionar(UsuarioRequestContract contrato)
         {
-            try
-            {
-                return Created("", await _usuarioService.Adicionar(contrato, 0));
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(RetornarModelNotFound(ex));
-            }
-            catch (BadRequestException ex)
-            {
-                return BadRequest(RetornarModelBadRequest(ex));
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
+            return await ProcessarTarefa(_usuarioService.Adicionar(contrato, 0), true);            
         }
 
         [HttpGet("")]
-        [SwaggerOperation(Summary = "Obtém uma lista de usuários.", Description = "Este endpoint retorna todos os usuários disponíveis.")]
+        [SwaggerOperation(
+            Summary = "Obtém uma lista de usuários.", 
+            Description = "Este endpoint retorna todos os usuários disponíveis."
+        )]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [AllowAnonymous]
-        public async Task<IActionResult> ObterTodos()
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<UsuarioResponseContract>>> ObterTodos()
         {
-             try
-            {
-                return Ok(await _usuarioService.ObterTodos(0));
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
+           return await ProcessarTarefa(_usuarioService.ObterTodos(0), false);
+            
         }
 
         [HttpGet]
-        [SwaggerOperation(Summary = "Obtém um usuário pelo identificador.", Description = "Este endpoint retorna um usuário pelo seu identificador.")]
+        [SwaggerOperation(
+            Summary = "Obtém um usuário pelo identificador.", 
+            Description = "Este endpoint retorna um usuário pelo seu identificador."
+        )]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type=typeof(ModelErrorContract))]
         [Authorize]
-        public async Task<IActionResult> Obter(long id)
+        public async Task<ActionResult<UsuarioResponseContract>> Obter(long id)
         {
-            try
-            {
-                return Ok(await _usuarioService.Obter(id, 0));
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(RetornarModelNotFound(ex));
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
+            return await ProcessarTarefa(_usuarioService.Obter(id, 0), false);
         }
 
         [HttpPut]
-        [SwaggerOperation(Summary = "Atualiza um usuário pelo identificador.", Description = "Este endpoint atualiza um usuário pelo seu identificador.")]
+        [SwaggerOperation(
+            Summary = "Atualiza um usuário pelo identificador.", 
+            Description = "Este endpoint atualiza um usuário pelo seu identificador."
+        )]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type=typeof(ModelErrorContract))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type=typeof(ModelErrorContract))]   
         [Authorize]
-        public async Task<IActionResult> Atualizar(long id, UsuarioRequestContract contrato)
+        public async Task<ActionResult<UsuarioResponseContract>> Atualizar(long id, UsuarioRequestContract contrato)
         {
-            try
-            {
-                return Ok(await _usuarioService.Atualizar(id, contrato, 0));
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(RetornarModelNotFound(ex));
-            }
-            catch (BadRequestException ex)
-            {
-                return BadRequest(RetornarModelBadRequest(ex));
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
+            return await ProcessarTarefa(_usuarioService.Atualizar(id, contrato, id), false);
         }
 
         [HttpDelete]
-        [SwaggerOperation(Summary = "Deleta um usuário pelo identificador.", Description = "Este endpoint deleta um usuário pelo seu identificador.")]
+        [SwaggerOperation(
+            Summary = "Deleta um usuário pelo identificador.", 
+            Description = "Este endpoint deleta um usuário pelo seu identificador."
+        )]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type=typeof(ModelErrorContract))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type=typeof(ModelErrorContract))]   
         [Authorize]
-        public async Task<IActionResult> Deletar(long id)
+        public async Task<ActionResult<UsuarioResponseContract>> Deletar(long id)
         {
-            try
-            {
-                await _usuarioService.Inativar(id, 0);
-                return NoContent();
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(RetornarModelNotFound(ex));
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
+            await _usuarioService.Inativar(id, 0);
+            return NoContent();
         }
     }
 }

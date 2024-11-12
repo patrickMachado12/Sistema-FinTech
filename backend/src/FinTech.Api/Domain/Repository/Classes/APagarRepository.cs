@@ -42,7 +42,6 @@ namespace FinTech.Api.Domain.Repository.Classes
 
         public async Task Deletar(APagar entidade)
         {
-            // Deletar fisicalemente
             _contexto.Entry(entidade).State = EntityState.Deleted;
             await _contexto.SaveChangesAsync();
         }
@@ -73,10 +72,16 @@ namespace FinTech.Api.Domain.Repository.Classes
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<APagar>> ObterPorPeriodo(DateTime dataInicial, DateTime dataFinal, long idUsuario)
+        public async Task<IEnumerable<APagar>> ObterPorPeriodo(
+            DateTime dataInicial, 
+            DateTime dataFinal, 
+            long idUsuario
+        )
         {
             return await _contexto.APagar
-                .Where(a => a.DataEmissao >= dataInicial && a.DataEmissao <= dataFinal && a.IdUsuario == idUsuario)
+                .Where(a => a.DataEmissao >= dataInicial && 
+                            a.DataEmissao <= dataFinal && 
+                            a.IdUsuario == idUsuario)
                 .Include(a => a.NaturezaLancamento)
                 .ToListAsync();
         }
