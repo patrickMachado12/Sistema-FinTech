@@ -1,7 +1,7 @@
 import api from './api';
 
 function obterTodos() {
-	return api.get('/AReceber/obterTodos')
+	return api.get('/titulos-areceber')
 		.then(response => (response))
 		.catch(error => {
 			throw error;
@@ -9,7 +9,7 @@ function obterTodos() {
 }
 
 function obterPorId(id) {
-	return api.get(`/AReceber/id/${id}`)
+	return api.get(`/titulos-areceber/${id}`)
 		.then(response => (response))
 		.catch(error => {
 			throw error;
@@ -17,7 +17,7 @@ function obterPorId(id) {
 }
 
 function cadastrar(aReceber) {
-	return api.post(`/AReceber`, aReceber)
+	return api.post(`/titulos-areceber`, aReceber)
 		.then(response => response.data)
 		.catch(error => {
 			throw error;
@@ -25,7 +25,7 @@ function cadastrar(aReceber) {
 }
 
 function atualizar(aReceber) {
-	return api.put(`/AReceber/${aReceber.id}`, aReceber)
+	return api.put(`/titulos-areceber/${aReceber.id}`, aReceber)
 		.then(response => response.data)
 		.catch(error => {
 			throw error;
@@ -33,7 +33,7 @@ function atualizar(aReceber) {
 }
 
 function deletar(id) {
-	return api.delete(`/AReceber/${id}`)
+	return api.delete(`/titulos-areceber/${id}`)
 		.then(response => (response))
 		.catch(error => {
 			throw error;
@@ -41,7 +41,7 @@ function deletar(id) {
 }
 
 function obterPorPeriodo(dataInicial, datafinal) {
-	return api.get(`/AReceber/periodo?dataInicial=${dataInicial}&dataFinal=${datafinal}`)
+	return api.get(`/titulos-areceber/periodo?dataInicial=${dataInicial}&dataFinal=${datafinal}`)
 		.then(response => (response))
 		.catch(error => {
 			throw error;

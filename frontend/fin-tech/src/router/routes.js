@@ -1,7 +1,6 @@
 import Login from '@/views/Login.vue'
 import ControleTituloAPagar from '@/views/ControleTituloAPagar.vue';
 import ControleTituloAReceber from '@/views/ControleTituloAReceber.vue';
-import ControleDePessoas from '@/views/ControlePessoas.vue';
 import ControleNaturezaLancamento from '@/views/ControleNaturezaLancamento.vue';
 import ControleUsuario from '@/views/ControleUsuario.vue';
 import ControleFluxoCaixa from '@/views/ControleFluxoCaixa.vue';
@@ -40,13 +39,6 @@ const routes = [
 		name: 'ControleAPagar',
 		component: ControleTituloAPagar,
 		title: 'A pagar',
-		meta: { requiredAuth: true }
-	},
-	{
-		path: '/pessoas',
-		name: 'ControleDePessoas',
-		component: ControleDePessoas,
-		title: 'Cadastro de Pessoas',
 		meta: { requiredAuth: true }
 	},
 	{

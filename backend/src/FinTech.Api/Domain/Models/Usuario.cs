@@ -8,10 +8,10 @@ namespace FinTech.Api.Domain.Models
         public long Id { get; set; }
 
         [Required(ErrorMessage = "O campo de E-mail é obrigatório.")]
-        public string Email { get; set; }
+        public string Email { get; set; } = null!;
 
         [Required(ErrorMessage = "O campo de Senha é obrigatório.")]
-        public string Senha { get; set; }
+        public string Senha { get; set; } = null!;
 
         [Required]
         public DateTime DataCadastro { get; set; }

@@ -1,21 +1,11 @@
 <template>
   <v-container fluid>
-    <!-- Mensagem de sucesso./ -->
-    <v-snackbar v-model="snackbar" :color="color">
-      {{ messagem }}
-      <v-btn dark text absolute @click="snackbarAlter(false)"> 
-        <v-icon>mdi-close</v-icon>
-      </v-btn>
-    </v-snackbar> 
-
-    
+    <MensagemSucesso ref="successMessage" :message="messagem"/> 
     <v-row>
-      <!-- Título da pagina./ -->
       <v-col cols="12" sm="12" md="12">
         <h2 class="titulo">Natureza de Lançamento</h2>
         <v-divider></v-divider>
       </v-col>
-
       <!-- Tela de formulário do cadastro / edição./ -->
       <v-dialog
       v-model="dialog"
@@ -45,14 +35,12 @@
                     :rules="[descricaoError]"
                   ></v-text-field>
                 </v-col>
-                  
                 <v-col cols="12">
                   <v-text-field
                     v-model="editedItem.observacao"
                     label="Observação"
                   ></v-text-field>
                 </v-col>                
-                
               </v-row>
             </v-container>
             <small>*Indica campos obrigatórios</small>
@@ -60,14 +48,14 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-secundaria)"
               text
               @click="dialog = false"
             >
               Fechar
             </v-btn>
             <v-btn
-              color="blue darken-1"
+              color="var(--cor-secundaria)"
               text
               @click="gravar"
             >
@@ -77,7 +65,6 @@
         </v-card>
       </v-dialog>
     </v-row>
-    
     <!-- lista de naturezas./ -->
     <v-row>
       <v-col cols="12" sm="12" md="12">
@@ -109,19 +96,21 @@
         </template>
       </v-col>
     </v-row>  
-    
   </v-container>
 </template>
 
 <script>
 import NaturezaLancamento from "../models/NaturezaLancamento.js";
-import naturezaLancamentoService from "../services/naturezaLancamento-service.js";
+import naturezaLancamentoService from "../services/natureza-lancamento-service.js";
 import moment from "moment";
+import MensagemSucesso from "../components/alerts/MensagemSucesso.vue";
 
 export default {
   name: "ControleNaturezaLancamento",
 
-  components: {},
+  components: {
+    MensagemSucesso,
+  },
 
   filters: {
     dataFormatada(data) {
@@ -155,17 +144,12 @@ export default {
           sortable: true,
           value: "id",
         },
-        {
-          text: "Usuário",
-          align: "start",
-          sortable: true,
-          value: "idUsuario",
-        },
         { text: "Descrição", value: "descricao" },
         { text: "Observação", value: "observacao" },
         { text: "Data Cadastro", value: "dataCadastro" },
         { text: "Ações", value: "actions", sortable: false },
       ],
+      messagem: "",
     };
   },
 
@@ -205,7 +189,7 @@ export default {
             Object.assign(this.naturezas[this.editedIndex], this.editedItem);
             this.snackbar = true;
             this.messagem = "Natureza editada com sucesso!";
-            this.color = "success";
+            this.$refs.successMessage.show();
           })
           .catch((error) => {
             console.log(error);
@@ -217,8 +201,7 @@ export default {
             this.snackbar = true;
             this.naturezas.push(response.data);
             this.messagem = "Natureza cadastrada com sucesso!";
-            this.color = "success";
-            this.close();
+            this.$refs.successMessage.show();
           })
           .catch((error) => {
             console.log(error);
@@ -255,8 +238,7 @@ export default {
         .then(() => {
           this.snackbar = true;
           this.messagem = "Natureza excluída com sucesso!";
-          this.color = "success";
-          this.close();
+          this.$refs.successMessage.show();
         })
         .catch((error) => {
           console.log(error);

@@ -19,8 +19,6 @@ namespace FinTech.Test.DataBase
         protected TokenService _tokenService;
         protected IUsuarioRepository _usuarioRepository;
         protected IUsuarioService _usuarioService;
-        protected IPessoaRepository _pessoaRepository;
-        protected IPessoaService _pessoaService;
         protected IAPagarRepository _aPagarRepository;
         protected AReceberRepository _aReceberRepository;
         protected INaturezaLancamentoRepository _naturezaLancamentoRepository;
@@ -38,7 +36,6 @@ namespace FinTech.Test.DataBase
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<UsuarioProfile>();
-                cfg.AddProfile<PessoaProfile>();
                 cfg.AddProfile<APagarProfile>();
                 cfg.AddProfile<AReceberProfile>();
                 cfg.AddProfile<NaturezaLancamentoProfile>();
@@ -55,8 +52,6 @@ namespace FinTech.Test.DataBase
             _tokenService = new TokenService(configuration);
             _usuarioRepository = new UsuarioRepository(_context);
             _usuarioService = new UsuarioService(_usuarioRepository, _tokenService, _mapper);
-            _pessoaRepository = new PessoaRepository(_context);
-            _pessoaService = new PessoaService(_pessoaRepository, _mapper);
             _aPagarRepository = new APagarRepository(_context);
             _aPagarService = new APagarService(_aPagarRepository, _mapper, _usuarioRepository, _context);
             _aReceberRepository = new AReceberRepository(_context);

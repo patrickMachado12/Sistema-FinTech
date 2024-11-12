@@ -24,9 +24,9 @@ namespace FinTech.Api.Domain.Repository.Classes
 
         public async Task<Usuario> Atualizar(Usuario entidade)
         {
-            Usuario entidadeBanco = _contexto.Usuario
-                                                .Where(u => u.Id == entidade.Id)
-                                                .FirstOrDefault();
+            Usuario? entidadeBanco = await _contexto.Usuario
+                                                .Where(p => p.Id == entidade.Id)
+                                                .FirstOrDefaultAsync();
 
             _contexto.Entry(entidadeBanco).CurrentValues.SetValues(entidade);
             _contexto.Update<Usuario>(entidadeBanco);
@@ -38,12 +38,7 @@ namespace FinTech.Api.Domain.Repository.Classes
 
         public async Task Deletar(Usuario entidade)
         {  
-           // Deletar logíco, só altero a data de inativação.
             entidade.DataInativacao = DateTime.Now;
-
-            _contexto.Attach(entidade);
-            _contexto.Entry(entidade).Property(e => e.DataInativacao).IsModified = true;
-
             await _contexto.SaveChangesAsync();
         }
 
@@ -63,8 +58,7 @@ namespace FinTech.Api.Domain.Repository.Classes
 
         public async Task<Usuario?> Obter(long id)
         {
-            return await _contexto.Usuario.AsNoTracking()
-                                            .Where(u => u.Id == id)
+            return await _contexto.Usuario.Where(u => u.Id == id)
                                             .FirstOrDefaultAsync();
         }
 
@@ -73,6 +67,11 @@ namespace FinTech.Api.Domain.Repository.Classes
             return await _contexto.Usuario.AsNoTracking()
                                             .Where(u => u.Id == id)
                                             .FirstOrDefaultAsync();
+        }
+
+        public async Task SalvarAlteracoes()
+        {
+            await _contexto.SaveChangesAsync();
         }
     }
 }

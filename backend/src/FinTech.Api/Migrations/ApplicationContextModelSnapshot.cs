@@ -36,9 +36,6 @@ namespace FinTech.Api.Migrations
                     b.Property<DateTime?>("DataPagamento")
                         .HasColumnType("timestamp");
 
-                    b.Property<DateTime?>("DataReferencia")
-                        .HasColumnType("timestamp");
-
                     b.Property<DateTime>("DataVencimento")
                         .HasColumnType("timestamp");
 
@@ -47,9 +44,6 @@ namespace FinTech.Api.Migrations
                         .HasColumnType("VARCHAR");
 
                     b.Property<long>("IdNaturezaLancamento")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("IdPessoa")
                         .HasColumnType("bigint");
 
                     b.Property<long>("IdUsuario")
@@ -67,8 +61,6 @@ namespace FinTech.Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdNaturezaLancamento");
-
-                    b.HasIndex("IdPessoa");
 
                     b.HasIndex("IdUsuario");
 
@@ -89,9 +81,6 @@ namespace FinTech.Api.Migrations
                     b.Property<DateTime?>("DataRecebimento")
                         .HasColumnType("timestamp");
 
-                    b.Property<DateTime?>("DataReferencia")
-                        .HasColumnType("timestamp");
-
                     b.Property<DateTime>("DataVencimento")
                         .HasColumnType("timestamp");
 
@@ -100,9 +89,6 @@ namespace FinTech.Api.Migrations
                         .HasColumnType("VARCHAR");
 
                     b.Property<long>("IdNaturezaLancamento")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("IdPessoa")
                         .HasColumnType("bigint");
 
                     b.Property<long>("IdUsuario")
@@ -120,8 +106,6 @@ namespace FinTech.Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdNaturezaLancamento");
-
-                    b.HasIndex("IdPessoa");
 
                     b.HasIndex("IdUsuario");
 
@@ -154,30 +138,6 @@ namespace FinTech.Api.Migrations
                     b.HasIndex("IdUsuario");
 
                     b.ToTable("NaturezaLancamento", (string)null);
-                });
-
-            modelBuilder.Entity("FinTech.Api.Domain.Models.Pessoa", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("DataCadastro")
-                        .HasColumnType("timestamp");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Pessoa", (string)null);
                 });
 
             modelBuilder.Entity("FinTech.Api.Domain.Models.Usuario", b =>
@@ -215,12 +175,6 @@ namespace FinTech.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FinTech.Api.Domain.Models.Pessoa", "Pessoa")
-                        .WithMany()
-                        .HasForeignKey("IdPessoa")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FinTech.Api.Domain.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
@@ -228,8 +182,6 @@ namespace FinTech.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("NaturezaLancamento");
-
-                    b.Navigation("Pessoa");
 
                     b.Navigation("Usuario");
                 });
@@ -242,12 +194,6 @@ namespace FinTech.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FinTech.Api.Domain.Models.Pessoa", "Pessoa")
-                        .WithMany()
-                        .HasForeignKey("IdPessoa")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FinTech.Api.Domain.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("IdUsuario")
@@ -255,8 +201,6 @@ namespace FinTech.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("NaturezaLancamento");
-
-                    b.Navigation("Pessoa");
 
                     b.Navigation("Usuario");
                 });

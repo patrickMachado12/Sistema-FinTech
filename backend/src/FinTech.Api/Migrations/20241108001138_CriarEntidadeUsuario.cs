@@ -13,21 +13,6 @@ namespace FinTech.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Pessoa",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nome = table.Column<string>(type: "VARCHAR", nullable: false),
-                    Telefone = table.Column<string>(type: "VARCHAR", nullable: false),
-                    DataCadastro = table.Column<DateTime>(type: "timestamp", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pessoa", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Usuario",
                 columns: table => new
                 {
@@ -71,16 +56,14 @@ namespace FinTech.Api.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdPessoa = table.Column<long>(type: "bigint", nullable: false),
-                    IdUsuario = table.Column<long>(type: "bigint", nullable: false),
-                    IdNaturezaLancamento = table.Column<long>(type: "bigint", nullable: false),
                     ValorAPagar = table.Column<double>(type: "double precision", nullable: false),
                     ValorPago = table.Column<double>(type: "double precision", nullable: false),
+                    DataPagamento = table.Column<DateTime>(type: "timestamp", nullable: true),
+                    IdUsuario = table.Column<long>(type: "bigint", nullable: false),
+                    IdNaturezaLancamento = table.Column<long>(type: "bigint", nullable: false),
                     Descricao = table.Column<string>(type: "VARCHAR", nullable: false),
                     DataEmissao = table.Column<DateTime>(type: "timestamp", nullable: false),
                     DataVencimento = table.Column<DateTime>(type: "timestamp", nullable: false),
-                    DataPagamento = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    DataReferencia = table.Column<DateTime>(type: "timestamp", nullable: true),
                     Observacao = table.Column<string>(type: "VARCHAR", nullable: true)
                 },
                 constraints: table =>
@@ -90,12 +73,6 @@ namespace FinTech.Api.Migrations
                         name: "FK_APagar_NaturezaLancamento_IdNaturezaLancamento",
                         column: x => x.IdNaturezaLancamento,
                         principalTable: "NaturezaLancamento",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_APagar_Pessoa_IdPessoa",
-                        column: x => x.IdPessoa,
-                        principalTable: "Pessoa",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -112,16 +89,14 @@ namespace FinTech.Api.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    IdPessoa = table.Column<long>(type: "bigint", nullable: false),
-                    IdUsuario = table.Column<long>(type: "bigint", nullable: false),
-                    IdNaturezaLancamento = table.Column<long>(type: "bigint", nullable: false),
                     ValorAReceber = table.Column<double>(type: "double precision", nullable: false),
                     ValorBaixado = table.Column<double>(type: "double precision", nullable: false),
+                    DataRecebimento = table.Column<DateTime>(type: "timestamp", nullable: true),
+                    IdUsuario = table.Column<long>(type: "bigint", nullable: false),
+                    IdNaturezaLancamento = table.Column<long>(type: "bigint", nullable: false),
                     Descricao = table.Column<string>(type: "VARCHAR", nullable: false),
                     DataEmissao = table.Column<DateTime>(type: "timestamp", nullable: false),
                     DataVencimento = table.Column<DateTime>(type: "timestamp", nullable: false),
-                    DataRecebimento = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    DataReferencia = table.Column<DateTime>(type: "timestamp", nullable: true),
                     Observacao = table.Column<string>(type: "VARCHAR", nullable: true)
                 },
                 constraints: table =>
@@ -131,12 +106,6 @@ namespace FinTech.Api.Migrations
                         name: "FK_AReceber_NaturezaLancamento_IdNaturezaLancamento",
                         column: x => x.IdNaturezaLancamento,
                         principalTable: "NaturezaLancamento",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AReceber_Pessoa_IdPessoa",
-                        column: x => x.IdPessoa,
-                        principalTable: "Pessoa",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -153,11 +122,6 @@ namespace FinTech.Api.Migrations
                 column: "IdNaturezaLancamento");
 
             migrationBuilder.CreateIndex(
-                name: "IX_APagar_IdPessoa",
-                table: "APagar",
-                column: "IdPessoa");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_APagar_IdUsuario",
                 table: "APagar",
                 column: "IdUsuario");
@@ -166,11 +130,6 @@ namespace FinTech.Api.Migrations
                 name: "IX_AReceber_IdNaturezaLancamento",
                 table: "AReceber",
                 column: "IdNaturezaLancamento");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AReceber_IdPessoa",
-                table: "AReceber",
-                column: "IdPessoa");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AReceber_IdUsuario",
@@ -194,9 +153,6 @@ namespace FinTech.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "NaturezaLancamento");
-
-            migrationBuilder.DropTable(
-                name: "Pessoa");
 
             migrationBuilder.DropTable(
                 name: "Usuario");

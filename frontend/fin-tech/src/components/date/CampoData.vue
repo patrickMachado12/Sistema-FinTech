@@ -45,7 +45,3 @@ export default {
 
 };
 </script>
-
-<style scoped>
-/* Customize o estilo do campo conforme necessário */
-</style>

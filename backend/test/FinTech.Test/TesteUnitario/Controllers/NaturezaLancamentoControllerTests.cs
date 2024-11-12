@@ -33,7 +33,7 @@ namespace FinTech.Test.TesteUnitario.Controllers
 
             Assert.NotNull(resultado);
             Assert.IsType<OkObjectResult>(resultado);
-            var okResult = resultado as OkObjectResult;
+            var okResult = resultado;
             Assert.Equal(naturezasDeLancamentoResponseContract, okResult.Value);
         }
 
@@ -48,7 +48,7 @@ namespace FinTech.Test.TesteUnitario.Controllers
 
             Assert.NotNull(resultado);
             Assert.IsType<OkObjectResult>(resultado);
-            var okResult = resultado as OkObjectResult;
+            var okResult = resultado;
             var naturezaDeLancamentoRetornada = okResult.Value as NaturezaLancamentoResponseContract;
             Assert.Equal(naturezaLancamentoResponseContract.Id, naturezaDeLancamentoRetornada.Id);
             Assert.Equal(naturezaLancamentoResponseContract.Descricao, naturezaDeLancamentoRetornada.Descricao);
@@ -67,7 +67,7 @@ namespace FinTech.Test.TesteUnitario.Controllers
             Assert.NotNull(resultado);
             Assert.IsType<OkObjectResult>(resultado);
 
-            var okResult = resultado as OkObjectResult;
+            var okResult = resultado;
             var naturezaDeLancamentoRetornada = okResult.Value as NaturezaLancamentoResponseContract;
 
             Assert.Equal(naturezaLancamentoResponseContract.Id, naturezaDeLancamentoRetornada.Id);
@@ -88,7 +88,7 @@ namespace FinTech.Test.TesteUnitario.Controllers
             Assert.NotNull(resultado);
             Assert.IsType<OkObjectResult>(resultado);
 
-            var okResult = resultado as OkObjectResult;
+            var okResult = resultado;
             var naturezaDeLancamentoRetornada = okResult.Value as NaturezaLancamentoResponseContract;
             
             Assert.Equal(naturezaLancamentoResponseContract.Id, naturezaDeLancamentoRetornada.Id);
