@@ -39,7 +39,8 @@
                     v-model="editedItem.valorAReceber"
                     label="Valor a Receber*"
                     type="number"
-                    @input="formatarValor('valorAReceber')"/>
+                    @input="'valorAReceber'"
+                  />
                 </v-col>
                 <v-col cols="2">
                   <CampoData
@@ -78,7 +79,7 @@
                     v-model="editedItem.valorBaixado"
                     label="Valor Baixa*"
                     type="number"
-                    @input="formatarValor('valorBaixado')"
+                    @input="'valorBaixado'"
                   />
                 </v-col>
                 <v-col cols="2">
@@ -128,10 +129,10 @@
           :items-per-page="5"
           class="elevation-1">
           <template #[`item.valorAReceber`]="{ item: { valorAReceber } }">
-            {{ valorAReceber | currency }}
+            {{ valorAReceber | formatarPreco }}
           </template>
           <template #[`item.valorBaixado`]="{ item: { valorBaixado } }">
-            {{ valorBaixado | currency }}
+            {{ valorBaixado | formatarPreco }}
           </template>
           <template #[`item.dataRecebimento`]="{ item: { dataRecebimento } }">
             {{dataRecebimento | dataFormatada}}
@@ -174,17 +175,18 @@ export default {
   },
 
   filters: {
-    currency(value) {
-      if (value == null) return '-';
+    dataFormatada(data) {
+      if (!data) return '';
+      return moment(data).format("DD/MM/YYYY");
+    },
+
+    formatarPreco(valor) {
+      if (valor == null) return '-';
       return new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL',
-      }).format(value);
-    },
-    dataFormatada(value) {
-      if (!value) return '';
-      return moment(value).format("DD/MM/YYYY");
-    },
+      }).format(valor);
+    }
   },
 
   data() {
