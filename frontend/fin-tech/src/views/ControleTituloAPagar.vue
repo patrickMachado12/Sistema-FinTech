@@ -39,7 +39,7 @@
                     v-model="editedItem.valorAPagar"
                     label="Valor a Pagar*"
                     type="number"
-                    @input="formatarValor('valorAPagar')"
+                    @input="'valorAPagar'"
                   />
                 </v-col>
                 <v-col cols="2">
@@ -79,7 +79,7 @@
                     v-model="editedItem.valorPago"
                     label="Valor Baixa"
                     type="number"
-                    @input="formatarValor('valorPago')"
+                    @input="'valorPago'"
                   />
                 </v-col>
                 <v-col cols="2">
