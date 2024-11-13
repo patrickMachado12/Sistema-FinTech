@@ -10,8 +10,8 @@
       <v-row justify="end">
         <v-col cols="12" md="3">
           <v-menu
-            ref="menu1"
-            v-model="menu1"
+            ref="menuDataInicial"
+            v-model="menuDataInicial"
             :close-on-content-click="false"
             :nudge-right="40"
             transition="scale-transition"
@@ -36,15 +36,15 @@
               @change="onDataInicialChange"
             >
               <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu1 = false">Cancelar</v-btn>
-              <v-btn text color="primary" @click="$refs.menu1.save(filters.dataInicial)">OK</v-btn>
+              <v-btn text color="primary" @click="menuDataInicial = false">Cancelar</v-btn>
+              <v-btn text color="primary" @click="$refs.menuDataInicial.save(filters.dataInicial)">OK</v-btn>
             </v-date-picker>
           </v-menu>
         </v-col>
         <v-col cols="12" md="3">
           <v-menu
-            ref="menu2"
-            v-model="menu2"
+            ref="menuDataFinal"
+            v-model="menuDataFinal"
             :close-on-content-click="false"
             :nudge-right="40"
             transition="scale-transition"
@@ -69,8 +69,8 @@
               @change="onDataFinalChange"
             >
               <v-spacer></v-spacer>
-              <v-btn text color="primary" @click="menu2 = false">Cancelar</v-btn>
-              <v-btn text color="primary" @click="$refs.menu2.save(filters.dataFinal)">OK</v-btn>
+              <v-btn text color="primary" @click="menuDataFinal = false">Cancelar</v-btn>
+              <v-btn text color="primary" @click="$refs.menuDataFinal.save(filters.dataFinal)">OK</v-btn>
             </v-date-picker>
           </v-menu>
         </v-col>
@@ -198,18 +198,25 @@ export default {
       ],
       formatarDataInicial: '',
       formatarDataFinal: '',
+      menuDataInicial: false,
+      menuDataFinal: false,
+      
     };
   },
   computed: {
     saldoClass() {
       return this.saldoFinal >= 0 ? 'positive' : 'negative';
-    }
+    },
   },
   methods: {
     onDateChange() {
       // Configura o período, ajustando data inicial e final
       this.filters.dataInicial = moment(this.filters.date).startOf('month').format('YYYY-MM-DD');
       this.filters.dataFinal = moment(this.filters.date).endOf('month').format('YYYY-MM-DD');
+    },
+
+    getRowClass(item) {
+      return item.valorAPagar > 0 ? 'classe-negativa' : 'classe-positiva';
     },
 
     filtrarPeriodo() {

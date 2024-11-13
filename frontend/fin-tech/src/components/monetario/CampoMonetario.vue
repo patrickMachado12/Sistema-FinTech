@@ -6,8 +6,6 @@
       v-money="formatoMonetario"
       v-model.lazy="valor"
       @change="emitirAlteracoes"
-      @input="onInput"
-      @blur="formatarValor"
       clearable
     />
   </div>

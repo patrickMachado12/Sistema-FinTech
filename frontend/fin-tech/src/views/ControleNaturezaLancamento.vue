@@ -32,7 +32,7 @@
                   <v-text-field
                     v-model="editedItem.descricao"
                     label="Descrição*"
-                    :rules="[descricaoError]"
+                    :rules="descricaoError"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="12">
@@ -150,6 +150,7 @@ export default {
         { text: "Ações", value: "actions", sortable: false },
       ],
       messagem: "",
+      descricaoError: [(v) => !!v || 'A descrição é obrigatória'],
     };
   },
 
