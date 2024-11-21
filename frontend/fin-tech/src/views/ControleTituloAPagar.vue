@@ -37,7 +37,7 @@
                 <v-col cols="2">
                   <CampoMonetario
                     v-model="editedItem.valorAPagar"
-                    label="Valor a Pagar*"
+                    label="Valor*"
                     type="number"
                     @input="'valorAPagar'"
                   />
@@ -45,7 +45,7 @@
                 <v-col cols="2">
                   <CampoData
                     v-model="editedItem.dataEmissao"
-                    label="Data Emissão*"
+                    label="Data emissão*"
                     @input="formatarData($event, 'dataEmissao')"
                     :rules="[dataRegra]"
                   />
@@ -53,23 +53,23 @@
                 <v-col cols="2">
                   <CampoData
                     v-model="editedItem.dataVencimento"
-                    label="Data Vencimento*"
+                    label="Data vencimento*"
                     @input="formatarData($event, 'dataVencimento')"
                     :rules="[dataRegra]"
                   />
                 </v-col>
                 <v-col cols="4">
-                  <v-select id="select-natureza-lancamento"
+                  <v-autocomplete id="select-natureza-lancamento"
                     :items="naturezasLancamento"
                     v-model="editedItem.idNaturezaLancamento"
-                    label="Natureza de Lançamento*"
+                    label="Natureza de lançamento*"
                     required
-                  ></v-select>
+                  ></v-autocomplete>
                 </v-col>
                 <v-col cols="2">
                   <CampoData
                     v-model="editedItem.dataReferencia"
-                    label="Data Referência"
+                    label="Data referência"
                     @input="formatarData($event, 'dataReferencia')"
                     :rules="[dataRegra]"
                   />
@@ -77,7 +77,7 @@
                 <v-col cols="2">
                   <CampoMonetario
                     v-model="editedItem.valorPago"
-                    label="Valor Baixa"
+                    label="Valor pago"
                     type="number"
                     @input="'valorPago'"
                   />
@@ -85,7 +85,7 @@
                 <v-col cols="2">
                   <CampoData
                     v-model="editedItem.dataPagamento"
-                    label="Data Baixa"
+                    label="Data pagamento"
                     @input="formatarData($event, 'dataPagamento')"
                     :rules="[dataRegra]"
                   />
@@ -103,18 +103,19 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
+              id="btn-gravar"
+              text
+              @click="gravar"
+            >
+              Gravar
+            </v-btn>
+            <v-btn
+              id="btn-fechar"
               color="var(--cor-primaria)"
               text
               @click="dialog = false"
             >
               Fechar
-            </v-btn>
-            <v-btn
-              color="var(--cor-primaria)"
-              text
-              @click="gravar"
-            >
-              Gravar
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -222,9 +223,9 @@ export default {
         },
         { text: "Valor", value: "valorAPagar" },
         { text: "Descrição", value: "descricao" },
-        { text: "Data Emissão", value: "dataEmissao" },
+        { text: "Data emissão", value: "dataEmissao" },
         {
-          text: "Natureza de Lançamento",
+          text: "Natureza de lançamento",
           align: "start",
           sortable: true,
           value: "naturezaLancamento.descricao",
@@ -382,5 +383,14 @@ export default {
   #btn-cadastrar {
     background-color: var(--cor-primaria);
     margin-left: 12px;
+  }
+
+  #btn-gravar {
+    background-color: var(--cor-primaria);
+    color:#ffffff;
+  }
+
+  .v-btn{
+    text-transform: none;
   }
 </style>
