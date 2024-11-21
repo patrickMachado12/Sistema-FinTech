@@ -21,7 +21,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="formatarDataInicial"
-                label="Data Inicial"
+                label="Data inicial"
                 prepend-icon="mdi-calendar"
                 readonly
                 v-bind="attrs"
@@ -54,7 +54,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="formatarDataFinal"
-                label="Data Final"
+                label="Data final"
                 prepend-icon="mdi-calendar"
                 readonly
                 v-bind="attrs"
@@ -75,7 +75,7 @@
           </v-menu>
         </v-col>
         <v-col class="col-filtro" cols="12" md="2">
-          <v-btn id="btn-filtro" dark @click="filtrarPeriodo">FILTRAR</v-btn>
+          <v-btn id="btn-filtro" dark @click="filtrarPeriodo">Filtrar</v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -187,13 +187,13 @@ export default {
       headersEntradas: [
         { text: 'Descrição', value: 'descricao', width:'35%' },
         { text: 'Valor', value: 'valorAReceber', width:'15%' },
-        { text: 'Data Emissão', value: 'dataEmissao', width:'20%' },
+        { text: 'Data emissão', value: 'dataEmissao', width:'20%' },
         { text: 'Natureza de lançamento', value: 'naturezaLancamento.descricao', width:'35%' },
       ],
       headersSaidas: [
         { text: 'Descrição', value: 'descricao', width:'35%' },
         { text: 'Valor', value: 'valorAPagar', width:'15%' },
-        { text: 'Data Emissão', value: 'dataEmissao', width:'20%' },
+        { text: 'Data emissão', value: 'dataEmissao', width:'20%' },
         { text: 'Natureza de lançamento', value: 'naturezaLancamento.descricao', width:'35%' },
       ],
       formatarDataInicial: '',
@@ -330,6 +330,10 @@ export default {
 #btn-filtro {
   background-color: var(--cor-primaria);
   margin-left: 12px;
+}
+
+.v-btn {
+  text-transform: none;
 }
 
 </style>
