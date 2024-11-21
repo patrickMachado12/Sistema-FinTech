@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinTech.Api.Domain.Models
 {
-    public class Titulo
+    public abstract class Titulo
     {
         [Key]
         public long Id { get; set; }
