@@ -2,7 +2,7 @@ import axios from "axios";
 import utilsStorage from '../utils/storage'
 
 const api = axios.create({
-	baseURL: 'https://localhost:5000'
+	baseURL: 'https://fintech-asb6bhe4eyetevgw.brazilsouth-01.azurewebsites.net'
 });
 
 api.interceptors.request.use((config) => {
