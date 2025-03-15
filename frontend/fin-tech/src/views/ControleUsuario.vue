@@ -48,18 +48,19 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn
-              color="var(--cor-secundaria)"
-              text
-              @click="dialog = false"
-            >
-              Fechar
-            </v-btn>
-            <v-btn
-              color="var(--cor-secundaria)"
+              id="btn-gravar"
               text
               @click="gravar"
             >
               Gravar
+            </v-btn>
+            <v-btn
+              id="btn-fechar"
+              color="var(--cor-primaria)"
+              text
+              @click="dialog = false"
+            >
+              Fechar
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -250,5 +251,14 @@ export default {
   #btn-cadastrar {
     background-color: var(--cor-primaria);
     margin-left: 12px;
+  }
+
+  #btn-gravar {
+    background-color: var(--cor-primaria);
+    color:#ffffff;
+  }
+
+  .v-btn{
+    text-transform: none;
   }
 </style>
